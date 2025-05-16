@@ -8,6 +8,8 @@ def weather_view(request):
     url = "https://apihub.kma.go.kr/api/typ01/url/kma_sfcdd3.php"
     params = {
         'tm': '20250512',
+        'tm1': '20250514',
+        'tm2': '20250520',
         'stn': '108',
         'obs': 'TA, RN, WS',
         'help': '1',

@@ -29,13 +29,13 @@ def signup(request):
         if request.POST['password'] == request.POST['confirm']:
             user = User.objects.create_user(
                 username=request.POST['username'],
-                password=request.POST['password']
+                password=request.POST['password'],
+                email=request.POST['email'],
             )
             nickname=request.POST['nickname']
             gender=request.POST['gender']
-            email=request.POST['email']
 
-            profile = Profile(user=user, nickname=nickname, gender=gender, email=email)
+            profile = Profile(user=user, nickname=nickname, gender=gender)
             profile.save()
 
             auth.login(request, user)
