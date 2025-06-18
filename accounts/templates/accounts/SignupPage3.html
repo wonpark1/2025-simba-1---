@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- 일단 백엔드에서 기본 구조 잡아놨어용 :> -->
+
+<form action="{% url 'accounts:signup_step3' %}" method="POST">
+    {% csrf_token %}
+
+    <p>nickname</p>
+    <input type="text" name="nickname">
+    <br>
+
+    <p>image</p>
+    <input type="file" name="pfp">
+    <br>
+
+    <button type="submit">회원가입 완료</button>
+</form>
+
+{% endblock %}
