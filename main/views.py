@@ -7,7 +7,8 @@ def mainpage(request):
     return render(request, 'main/mainpage.html')
 
 def comentpage(request):
-    return render(request, 'main/commentpage.html')
+    comments = Comment.objects.all().order_by('-create_at')
+    return render(request, 'main/commentpage.html', {'comments': comments})
 
 def create(request):
     if request.user.is_authenticated:

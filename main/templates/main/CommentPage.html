@@ -3,7 +3,8 @@
 {% block content %}
 
     <a></a>
-    <h3>{{post.objname}}</h3>
+    {% for comment in comments %}
+    <h3>{{comment.writer}}</h3>
         <p>작성자 : {{ comment.writer }} </p>
         <p>날짜 : {{ comment.create_at }}</p>
 
@@ -17,6 +18,7 @@
         <a href="{% url 'main:delete' comment.id %}">삭제</a>
         {% endif %}
     <br>
+    {% endfor %}
 
     <form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
