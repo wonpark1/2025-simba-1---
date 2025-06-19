@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <a></a>
+    {% for comment in comments %}
+    <h3>{{comment.writer}}</h3>
+        <p>작성자 : {{ comment.writer }} </p>
+        <p>날짜 : {{ comment.create_at }}</p>
+
+        <hr/>
+        {% if comment.image %}
+            <p><img src="{{ comment.image.url }}" alt="사진" width="100px"></p>
+        {% endif %}
+        <p>{{ comment.content|linebreaksbr }}</p>
+        {% if comment.writer == user %}
+        <a href="{% url 'main:edit' comment.id %}">글 수정하기</a>
+        <a href="{% url 'main:delete' comment.id %}">삭제</a>
+        {% endif %}
+    <br>
+    {% endfor %}
+
+    <form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <p>작성자 : <input type="text" name="writer"></p>
+        <p>사진 : <input type="file" name="image"></p>
+        <p>내용 : <textarea type="text" name="content" id="" cols="30" rows="10"></textarea></p>
+        <button type="submit">제출</button>
+    </form>
+    <a href="{% url 'main:mainpage' %}">메인 페이지로 돌아가기</a>
+    <hr>
+    </div>
+{% endblock %}
