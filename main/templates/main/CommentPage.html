@@ -1,33 +1,50 @@
+{# main/commentpage.html #}
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-    <a></a>
-    {% for comment in comments %}
-    <h3>{{comment.writer}}</h3>
-        <p>작성자 : {{ comment.writer }} </p>
-        <p>날짜 : {{ comment.create_at }}</p>
+<div class="sort-tabs" style="margin: 12px 0;">
+    <a href="?sort=latest" class="{% if cur_sort == 'latest' or not cur_sort %}active{% endif %}">최신순 | </a>
+    <a href="?sort=likes"  class="{% if cur_sort == 'likes' %}active{% endif %}">좋아요순</a>
+</div>
 
-        <hr/>
-        {% if comment.image %}
-            <p><img src="{{ comment.image.url }}" alt="사진" width="100px"></p>
-        {% endif %}
-        <p>{{ comment.content|linebreaksbr }}</p>
-        {% if comment.writer == user %}
-        <a href="{% url 'main:edit' comment.id %}">글 수정하기</a>
-        <a href="{% url 'main:delete' comment.id %}">삭제</a>
-        {% endif %}
-    <br>
-    {% endfor %}
 
-    <form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-        <p>작성자 : <input type="text" name="writer"></p>
-        <p>사진 : <input type="file" name="image"></p>
-        <p>내용 : <textarea type="text" name="content" id="" cols="30" rows="10"></textarea></p>
-        <button type="submit">제출</button>
-    </form>
-    <a href="{% url 'main:mainpage' %}">메인 페이지로 돌아가기</a>
-    <hr>
-    </div>
+{% for comment in comments %}
+<p>작성자 : {{ comment.writer }} </p>
+<p>날짜 : {{ comment.create_at }}</p>
+<a href="{% url 'main:likes' comment.id %}">
+    {% if user in comment.like.all %} ❤️좋아요 {% else %} 🤍좋아요 {% endif %}
+</a>
+{{comment.like.count}}개
+<a href="{% url 'main:dislikes' comment.id %}">
+    {% if user in comment.dislike.all %} 😅아쉬워요 {% else %} 🫥아쉬워요 {% endif %}
+</a>
+{{comment.dislike.count}}개
+
+
+{% if comment.image %}
+<p><img src="{{ comment.image.url }}" alt="사진" width="100px"></p>
+{% endif %}
+<p>{{ comment.content|linebreaksbr }}</p>
+
+{% if comment.writer == user %}
+<a href="{% url 'main:edit' comment.id %}">수정</a>
+<a href="{% url 'main:delete' comment.id %}">삭제</a>
+{% endif %}
+<br>
+
+<hr/>
+<hr/>
+{% endfor %}
+<form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    <p>사진 : <input type="file" name="image"></p>
+    <p>내용 : <textarea type="text" name="content" id="" cols="30" rows="10"></textarea></p>
+    <button type="submit">제출</button>
+</form>
+
+<br>
+<hr>
+<a href="{% url 'main:mainpage' %}">메인 페이지로 돌아가기</a>
+</div>
 {% endblock %}
