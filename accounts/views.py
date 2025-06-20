@@ -4,10 +4,13 @@ from django.contrib.auth.models import User #sign up을 위해 필요
 from .models import Profile
 import random
 
+def accountpage(request):
+    return render(request, 'accounts/accounts.html')
+
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip() #strip: 사용자가 띄어쓰기를 실수로 넣어도 앞뒤 공백 제거 후 인증 시도
+        password = request.POST.get('password', '').strip()
 
         user = auth.authenticate(request, username=username, password=password)
 
@@ -15,7 +18,7 @@ def login(request):
             auth.login(request, user)
             return redirect('main:mainpage')
         else:
-            return render(request, 'accounts/login.html')
+            return render(request, 'accounts/login.html', {'error': '아이디 또는 비밀번호를 확인하세요.'})
         
     elif request.method == 'GET':
         return render(request, 'accounts/login.html')
@@ -25,65 +28,38 @@ def logout(request):
     return redirect('main:mainpage')
 
 def Signup1(request):
-    
-
     if request.method == 'POST':
-        if request.POST['password'] == request.POST['confirm']:
-            request.session['username'] = request.POST['username']
-            request.session['password'] = request.POST['password']
-            request.session['confirm'] = request.POST['confirm']
-            return redirect('accounts:signup2')
-        
-        else:
-            return render(request, 'accounts/SignupPage1.html', {'error'})
-        
-    username = request.session.get('username')
-    password = request.session.get('password')
-    email = request.session.get('email')
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+        confirm  = request.POST.get('confirm', '')
 
+        if password != confirm:
+            return render(request, 'accounts/SignupPage1.html',
+                        {'error': '비밀번호가 일치하지 않습니다.'})
         
+        #세션에 임시 보관
+        request.session['signup_username'] = username     
+        request.session['signup_password'] = password     
+        return redirect('accounts:signup2')
+    
+    #GET
     return render(request, 'accounts/SignupPage1.html')
 
 def Signup2(request):
     if request.method == 'POST':
-        request.session['gender'] = request.POST['gender']
-        request.session['email'] = request.POST['email']
-        
-        return redirect('accounts:signup3')
-    
+        nickname = request.POST.get('nickname', '').strip()
+
+        # 1단계 세션값
+        username = request.session.get('signup_username')
+        password = request.session.get('signup_password')
+        if not (username and password):
+            return redirect('accounts:signup1')   # 세션 만료 대비
+
+        # User&Profile 생성
+        user = User.objects.create_user(username=username, password=password)
+        Profile.objects.create(user=user, nickname=nickname)
+
+        request.session.flush() # 세션 정리
+
+        return redirect('accounts:login')
     return render(request, 'accounts/SignupPage2.html')
-
-def Signup3(request):
-    default_image = [
-        '/media/profile/pfp1.png',
-        '/media/profile/pfp2.png',
-        '/media/profile/pfp3.png'
-    ]
-
-    if request.method == 'POST':
-        
-        username = request.session.get('username')
-        password = request.session.get('password')
-        confirm = request.session.get('confirm')
-        email = request.session.get('email')
-        nickname = request.POST['nickname']
-        gender = request.session.get('gender')
-
-        user = User.objects.create_user(
-            username=username,
-            password=password,
-            email=email
-        )
-        pfp = request.FILES.get('pfp')
-        if pfp:
-            profile = Profile(user=user, nickname=nickname, gender=gender, pfp=pfp)
-
-        else:
-            pfp = random.choice(default_image)
-            profile = Profile(user=user, nickname=nickname, gender=gender, pfp=pfp)
-           
-        profile.save()
-        auth.login(request, user)
-        return redirect('/')
-
-    return render(request, 'accounts/SignupPage3.html')
