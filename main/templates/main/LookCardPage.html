@@ -10,19 +10,18 @@
 </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+
+      <main class="screen">
+
         <!--top-->
         <div>
-          <div class="statusbar"></div>
+          <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <div class="icon_container">
-                <!--label 태그로 고치기-->
-                <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow"/>
-              </div>
+              <button class="icon_container">
+              <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left"/>
+              </button>
               <p class="title">{{ lookcard.event.title }}가이드</p>
-              <!--여기에 반복문?-->
               <div class="icon_container"></div>
             </div>
           </div>
@@ -55,98 +54,32 @@
                 
                 <div class="lookmention_container">
                 <div class="lookmention">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
-  <path d="M3.63632 10.4577C3.42955 9.52631 3.4613 8.55776 3.72863 7.64188C3.99596 6.726 4.49022 5.89245 5.16557 5.21851C5.84093 4.54457 6.67551 4.05206 7.59195 3.78664C8.50839 3.52123 9.47701 3.49151 10.408 3.70024C10.9204 2.89883 11.6263 2.23931 12.4607 1.78247C13.295 1.32564 14.2309 1.08618 15.1822 1.08618C16.1334 1.08618 17.0693 1.32564 17.9036 1.78247C18.738 2.23931 19.4439 2.89883 19.9563 3.70024C20.8887 3.4906 21.859 3.52019 22.7769 3.78625C23.6948 4.0523 24.5305 4.54619 25.2063 5.22195C25.882 5.89772 26.3759 6.73342 26.642 7.65132C26.908 8.56922 26.9376 9.5395 26.728 10.4719C27.5294 10.9843 28.1889 11.6902 28.6458 12.5246C29.1026 13.3589 29.342 14.2948 29.342 15.2461C29.342 16.1973 29.1026 17.1332 28.6458 17.9676C28.1889 18.8019 27.5294 19.5078 26.728 20.0202C26.9367 20.9512 26.907 21.9198 26.6416 22.8363C26.3762 23.7527 25.8837 24.5873 25.2097 25.2627C24.5358 25.938 23.7022 26.4323 22.7863 26.6996C21.8705 26.9669 20.9019 26.9987 19.9705 26.7919C19.4587 27.5964 18.7523 28.2587 17.9165 28.7176C17.0807 29.1765 16.1427 29.4171 15.1892 29.4171C14.2358 29.4171 13.2977 29.1765 12.462 28.7176C11.6262 28.2587 10.9197 27.5964 10.408 26.7919C9.47701 27.0006 8.50839 26.9709 7.59195 26.7055C6.67551 26.4401 5.84093 25.9476 5.16557 25.2736C4.49022 24.5997 3.99596 23.7661 3.72863 22.8503C3.4613 21.9344 3.42955 20.9658 3.63632 20.0344C2.82876 19.5233 2.16358 18.8163 1.70264 17.9791C1.24171 17.1419 1 16.2018 1 15.2461C1 14.2904 1.24171 13.3502 1.70264 12.513C2.16358 11.6758 2.82876 10.9688 3.63632 10.4577Z" fill="#FF5722"/>
-  <path d="M10.9322 15.2461L13.7655 18.0794L19.4322 12.4127" fill="#FF5722"/>
-  <path d="M10.9322 15.2461L13.7655 18.0794L19.4322 12.4127M3.63632 10.4577C3.42955 9.52631 3.4613 8.55776 3.72863 7.64188C3.99596 6.726 4.49022 5.89245 5.16557 5.21851C5.84093 4.54457 6.67551 4.05206 7.59195 3.78664C8.50839 3.52123 9.477 3.49151 10.408 3.70024C10.9204 2.89883 11.6263 2.23931 12.4607 1.78247C13.295 1.32564 14.2309 1.08618 15.1822 1.08618C16.1334 1.08618 17.0693 1.32564 17.9036 1.78247C18.738 2.23931 19.4439 2.89883 19.9563 3.70024C20.8887 3.4906 21.859 3.52019 22.7769 3.78625C23.6948 4.0523 24.5305 4.54619 25.2063 5.22195C25.882 5.89772 26.3759 6.73342 26.642 7.65132C26.908 8.56922 26.9376 9.5395 26.728 10.4719C27.5294 10.9843 28.1889 11.6902 28.6458 12.5246C29.1026 13.3589 29.342 14.2948 29.342 15.2461C29.342 16.1973 29.1026 17.1332 28.6458 17.9676C28.1889 18.8019 27.5294 19.5078 26.728 20.0202C26.9367 20.9512 26.907 21.9198 26.6416 22.8363C26.3762 23.7527 25.8837 24.5873 25.2097 25.2627C24.5358 25.938 23.7022 26.4323 22.7863 26.6996C21.8705 26.9669 20.9019 26.9987 19.9705 26.7919C19.4587 27.5964 18.7523 28.2587 17.9165 28.7176C17.0807 29.1765 16.1427 29.4171 15.1892 29.4171C14.2358 29.4171 13.2977 29.1765 12.462 28.7176C11.6262 28.2587 10.9197 27.5964 10.408 26.7919C9.477 27.0006 8.50839 26.9709 7.59195 26.7055C6.67551 26.4401 5.84093 25.9476 5.16557 25.2736C4.49022 24.5997 3.99596 23.7661 3.72863 22.8503C3.4613 21.9344 3.42955 20.9658 3.63632 20.0344C2.82876 19.5233 2.16358 18.8163 1.70264 17.9791C1.24171 17.1419 1 16.2018 1 15.2461C1 14.2904 1.24171 13.3502 1.70264 12.513C2.16358 11.6758 2.82876 10.9688 3.63632 10.4577Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>{{ lookcard.is_recommend }}</div>
+                    <img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />
+                    {{ lookcard.is_recommend }}
+                </div>
                 <div class="lookmention">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
-  <path d="M21.2475 7.49951L7.08252 21.6645M7.08252 7.49951L21.2475 21.6645" stroke="#FF4D4F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-<div class="nonrecommend_container"><span id="nonrecommend1">{{ lookcard.is_avoid }}</span><span id="nonrecommend2">{{ lookcard.avoid_reason }}</span></div>
-</div></div>
+                    <img src="{% static 'icons/nonrecommend.svg' %}" height="28.33" width="28.33" alt="비추천" />
+                    <div class="nonrecommend_container"><span id="nonrecommend1">{{ lookcard.is_avoid }}</span><span id="nonrecommend2">{{ lookcard.avoid_reason }}</span></div>
+                </div>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="container2">
             <div class="neoguri_comment">
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="256"
-              height="52"
-              viewBox="0 0 256 52"
-              fill="none"
-            >
-              <g filter="url(#filter0_g_297_24)">
-                <path
-                  d="M212.84 4.87109C223.244 4.87109 231.91 12.3044 233.822 22.1494L251.261 26.248L233.822 30.3467C231.91 40.1918 223.244 47.625 212.84 47.625H25.377C13.571 47.6249 4 38.054 4 26.248C4.00008 14.4422 13.5711 4.87122 25.377 4.87109H212.84Z"
-                  fill="#FFE272"
-                />
-              </g>
-              <defs>
-                <filter
-                  id="filter0_g_297_24"
-                  x="0"
-                  y="0.871094"
-                  width="255.261"
-                  height="50.7539"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="BackgroundImageFix"
-                    result="shape"
-                  />
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.016778523102402687 0.016778523102402687"
-                    numOctaves="3"
-                    seed="7759"
-                  />
-                  <feDisplacementMap
-                    in="shape"
-                    scale="8"
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                    result="displacedImage"
-                    width="100%"
-                    height="100%"
-                  />
-                  <feMerge result="effect1_texture_297_24">
-                    <feMergeNode in="displacedImage" />
-                  </feMerge>
-                </filter>
-              </defs>
-            </svg>
-            <div id="neoguri_comment">neoguri comment</div>
+              <img src="{% static 'icons/Union.svg' %}" height="42.754" width="247.261" alt="말풍선" />
+              <div id="neoguri_comment">neoguri comment</div>
             </div>
-            
-            <div class="neoguri">너구리 이미지</div>
+            <div class="neoguri">
+              <img src="{% static 'img/2.3raccoon.png' %}" height="42.754" width="247.261" alt="너구리" /></div>
           </div>
         </div>
 
           <button class="button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 25 25"
-              fill="none"
-            >
-              <path
-                d="M8.5 10.832H8.51M12.5 10.832H12.51M16.5 10.832H16.51M21.5 15.832C21.5 16.3625 21.2893 16.8712 20.9142 17.2462C20.5391 17.6213 20.0304 17.832 19.5 17.832H7.5L3.5 21.832V5.83203C3.5 5.3016 3.71071 4.79289 4.08579 4.41782C4.46086 4.04274 4.96957 3.83203 5.5 3.83203H19.5C20.0304 3.83203 20.5391 4.04274 20.9142 4.41782C21.2893 4.79289 21.5 5.3016 21.5 5.83203V15.832Z"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              /></svg>의견 남기기
+            <img src="{% static 'icons/comment.svg' %}" height="42.754" width="247.261" alt="댓글" />의견 남기기
           </button>
-    </div>
-    </div>
+        </main>
+
   </body>
 </html>
