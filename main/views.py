@@ -3,10 +3,13 @@ from django.utils import timezone
 from .models import *
 import re
 from django.db.models import Count
+from datetime import datetime
 
 # Create your views here.
 def mainpage(request):
-    return render(request, 'main/mainpage.html')
+    now = datetime.now()
+    current_month = now.month
+    return render(request, 'main/mainpage.html', {'month': current_month})
 
 def commentpage(request, lookcard_id):
     sort = request.GET.get('sort','latest')
