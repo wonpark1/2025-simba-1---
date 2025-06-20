@@ -1,0 +1,57 @@
+{% load static %}
+{% csrf_token %}
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ active_semester }}학기 홈 화면</title>
+    <link rel="stylesheet" href="{% static 'main/CalendarPage.css' %}" />
+  </head>
+  <body>
+    <main class="wrapper">
+      <section class="top-banner">
+        <div class="space">
+          <p class="guide-title">학사일정별 룩 가이드</p>
+          <p class="guide-sub">
+            올해 일정 한눈에 보고,필요한 조언만 골라보세요
+          </p>
+        </div>
+      </section>
+      <!-- ▼ ① 상단 배너 바로 아래에 새로 삽입 ------------------------- -->
+      <section class="semester-box">
+        <!-- 탭 바 -->
+        <form class="form" action="{% url 'main:calendar' %}" method="post">
+        <div class="tab-bar">
+          <a href="{% url 'main:calendar' %}?semester=1" class="tab {% if active_semester == 1%}active{% endif %}">1학기</a>
+          <a href="{% url 'main:calendar' %}?semester=2" class="tab {% if active_semester == 2%}active{% endif %}">2학기</a>
+        </div>
+
+        <!-- 달별 일정 -->
+         {% for item in month_events %}
+          <div class="month-row">
+            <span class="month-label">{{ item.month }}</span>
+            <div class="events">
+              {% for event in item.events %}
+                <a href="{% url 'main:lookcard_detail' event.id %}" class="pill">
+                  <img
+                    src="../static/img/{{ event.image }}"
+                    alt="{{ event.title }}"
+                    width="29"
+                    height="29"
+                  />{{ event.title }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+
+      </section>
+      <!-- ▲ ① -------------------------------------------------------- -->
+
+      <!-- 하단 내비게이션 -->
+      {% include "shared/_footer.html" with activate="calendar" %}
+    </main>
+  </body>
+</html>
