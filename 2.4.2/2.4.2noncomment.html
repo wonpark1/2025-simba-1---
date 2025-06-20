@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.4.2 댓글 없음</title>
+    <link rel="stylesheet" href="2.4.2noncomment.css" />
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="screen">
+        <!--top-->
+        <div>
+          <div class="statusbar"></div>
+          <div class="topnav">
+            <div class="topnav_inframe">
+              <div class="icon_container">
+                <!--label 태그로 고치기-->
+                <img src="icons/arrow_left.svg" height="39" width="39" alt="arrow"/>
+              </div>
+              <p class="title">댓글 쓰기</p>
+              <!--여기에 반복문?-->
+              <div class="icon_container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!--bottom-->
+        
+        <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
+
+
+        <!--input-->
+        <div class="input_container">
+          <button class="input_button">icon1</button>
+          <input id="message" placeholder="메시지를 입력하세요"></input>
+          <button class="input_button">icon2</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
