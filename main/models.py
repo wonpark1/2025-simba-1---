@@ -24,6 +24,9 @@ class Event(models.Model):
 class LookCard(models.Model):
     event = models.ForeignKey(Event, related_name='lookcards', on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
+    is_recommend = models.TextField(blank=False)
+    is_avoid = models.TextField(blank=False)
+    avoid_reason = models.TextField(blank=False)
 
     def __str__(self):
         return self.event.title
@@ -39,16 +42,14 @@ class LookItem(models.Model):
     look_card = models.ForeignKey(LookCard, related_name='items', on_delete=models.CASCADE)
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
     name = models.CharField(max_length=100)
-    hashtags = models.CharField(max_length=200)
+    tags = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    is_recommend = models.TextField(blank=False)
-    is_avoid = models.TextField(blank=False)
-    avoid_reason = models.TextField(blank=False)
 
     def __str__(self):
         return self.name
 
 class Comment(models.Model):
+    look_card = models.ForeignKey(LookCard, related_name='comments', on_delete=models.CASCADE)
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     content = models.TextField()
     image = models.ImageField(upload_to='comment_images/', blank=True, null=True)
