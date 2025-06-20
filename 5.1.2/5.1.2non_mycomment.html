@@ -8,19 +8,17 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+
+      <main class="screen">
         <!--top-->
         <div>
-          <div class="statusbar"></div>
+          <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <div class="icon_container">
-                <!--label 태그로 고치기-->
-              <img src="icons/arrow_left.svg" height="39" width="39" alt="arrow"/>
-              </div>
+              <button class="icon_container">
+                <img src="{% static 'assets/icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </button>
               <p class="title">내가 쓴 댓글 보기</p>
-              <!--여기에 반복문?-->
               <div class="icon_container"></div>
             </div>
           </div>
@@ -34,7 +32,7 @@
         
         <div class="bottom-nav">하단바</div>
          
-      </div>
-    </div>
+      </main>
+
   </body>
 </html>

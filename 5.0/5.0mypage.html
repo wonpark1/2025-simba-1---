@@ -8,27 +8,29 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+
+      <main class="screen">
 
         <div class="top-banner"></div>
         <div class="profile-circle">
-            <img src="icons/logo.svg" width="117" height="117" flex-shrink="0" alt="프로필 이미지" />
-        </div>  
+            <img src="{% static 'assets/icons/logo.svg' %}" width="117" height="117" flex-shrink="0" alt="프로필 이미지" />
+        </div>
+
         <div class="username">너굴</div>
 
         <div class="menu">
-            <button class="menu-item"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-  <path d="M8.4 20.2554C10.3086 21.2345 12.5041 21.4997 14.5909 21.0032C16.6777 20.5067 18.5186 19.2812 19.7818 17.5476C21.045 15.8139 21.6474 13.6861 21.4806 11.5476C21.3137 9.40903 20.3886 7.40039 18.8718 5.88361C17.355 4.36683 15.3464 3.44167 13.2078 3.27483C11.0693 3.108 8.94147 3.71046 7.20782 4.97366C5.47417 6.23686 4.24869 8.07773 3.75222 10.1645C3.25575 12.2513 3.52094 14.4468 4.5 16.3554L2.5 22.2554L8.4 20.2554Z" fill="#FF5722" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>내가 쓴 댓글 보기</button>
-            <button class="menu-item"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-  <path d="M12.5 2.25537V12.2554M18.9 6.85537C20.1566 8.11248 21.0129 9.71354 21.3608 11.4567C21.7087 13.1998 21.5326 15.0069 20.8549 16.6501C20.1771 18.2932 19.0279 19.6989 17.5522 20.6899C16.0766 21.6808 14.3405 22.2125 12.5631 22.2181C10.7856 22.2237 9.04625 21.7028 7.56442 20.7211C6.08259 19.7395 4.92462 18.341 4.23655 16.7021C3.54847 15.0632 3.3611 13.2572 3.69807 11.512C4.03504 9.76672 4.88126 8.16033 6.13 6.89537" stroke="#FF5722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>로그아웃</button>
+            <button class="menu-item">
+              <img src="{% static 'assets/icons/mycomment.svg' %}" width="24" height="24" alt="내 댓글" />
+              내가 쓴 댓글 보기
+            </button>
+            <button class="menu-item">
+              <img src="{% static 'assets/icons/logout.svg' %}" width="24" height="24" flex-shrink="0" alt="로그아웃" />
+              로그아웃</button>
         </div>
 
         <div class="bottom-nav">하단바</div>
 
-      </div>
-    </div>
+      </main>
+
   </body>
 </html>

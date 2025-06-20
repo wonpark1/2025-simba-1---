@@ -8,17 +8,15 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+      <main class="screen">
         <!--top-->
         <div>
-          <div class="statusbar"></div>
+          <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <div class="icon_container">
-                <!--label 태그로 고치기-->
-                <img src="icons/arrow_left.svg" height="39" width="39" alt="arrow"/>
-              </div>
+              <button class="icon_container">
+                <img src="{% static 'assets/icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </button>
               <p class="title">회원가입</p>
               <div class="icon_container"></div>
             </div>
@@ -43,7 +41,8 @@
                 class="input"
                 placeholder="아이디를 입력하세요"
               />
-              <img src="icons/account_chdeck.svg" height="24" width="24" alt="chdeck"/>
+
+              <img src="{% static 'assets/icons/account_chdeck.svg' %}" height="24" width="24" alt="chdeck"/>
             </div>
             <div id="username_textcontainer">좋은 아이디네요!</div>
             <!--js작업 필요-->
@@ -60,7 +59,7 @@
                 placeholder="비밀번호를 입력하세요"
                 style="outline: none"
               />
-              <img src="icons/account_default.svg" height="24" width="24" alt="default"/>
+              <img src="{% static 'assets/icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
             <div id="password_textcontainer">
               영어,숫자,특수문자로 8-20자 이내로 작성해주세요.
@@ -78,7 +77,7 @@
                 class="input"
                 placeholder="비밀번호를 한번 더 입력하세요"
               />
-              <img src="icons/account_default.svg" height="24" width="24" alt="default"/>
+              <img src="{% static 'assets/icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
             <div id="password_textcontainer"></div>
             <!--빈공간..-->
@@ -86,7 +85,6 @@
 
           <button class="button" type="submit" disabled>다음</button>
         </form>
-      </div>
-    </div>
+      </main>
   </body>
 </html>
