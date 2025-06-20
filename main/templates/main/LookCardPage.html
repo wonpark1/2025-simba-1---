@@ -39,11 +39,17 @@
                 <div class="looktitle">{{ lookcard.sub_title }}</div>
                 
                 <div class="lookguide">
-                  <ul>
-                    {% for item in lookcard.items.all %}
-                      <li>{{ item.category }} : {{ item.name }} {{ item.tags }}</li>
-                    {% endfor %}
-                  </ul>
+                    <div id="lookguide1">
+                      {% for item in lookcard.items.all %}
+                      <span>{{ item.category }}:{{ item.name }}</span>
+                      {% endfor %}
+                    </div>
+                    <div id="lookguide2">
+                      {% for item in lookcard.items.all %}
+                      <span>{{ item.tags }}</span>
+                      <span>{{ item.description }}</span>
+                      {% endfor %}
+                    </div>
                     
                 </div>
                 
