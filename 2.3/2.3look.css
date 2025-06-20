@@ -239,11 +239,9 @@
   align-items: center;
   align-self: stretch;
   margin-bottom: auto;
-  border: 1px solid blue;
 }
 
 .neoguri_comment {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   position: relative;
