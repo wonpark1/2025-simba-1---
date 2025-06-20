@@ -36,7 +36,7 @@
 <hr/>
 <hr/>
 {% endfor %}
-<form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
 {% csrf_token %}
     <p>사진 : <input type="file" name="image"></p>
     <p>내용 : <textarea type="text" name="content" id="" cols="30" rows="10"></textarea></p>
