@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: "Pretendard", sans-serif;
+}
+
+@font-face {
+  font-family: "Jalnan2";
+  src: url("fonts/Jalnan2.otf") format("opentype"),
+    url("fonts/Jalnan2TTF.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #000000;
+}
+
+.wrapper {
+  display: flex;
+  width: 375px;
+  height: 812px;
+  padding: 220px 60px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 256px;
+  height: auto;
+  text-align: center;
+  gap: 20px;
+  animation: splash 2.8s ease-in-out forwards;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.title .orange,
+.orange {
+  color: #ff5722;
+}
+
+.brandname {
+  font-family: "Jalnan2", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ff5722;
+  text-align: center;
+  line-height: normal;
+}
+
+.brandname .brand {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ff5722;
+}
+
+.mascot {
+  width: 256px;
+  height: 256px;
+}
+
+@keyframes splash {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
