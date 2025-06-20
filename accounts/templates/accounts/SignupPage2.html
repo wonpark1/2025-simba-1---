@@ -1,23 +1,59 @@
-{% extends 'base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.3.2 회원가입</title>
 
-{% block content %}
+    {% load static %}
 
-<!-- 일단 백엔드에서 기본 구조 잡아놨어용 :> -->
+    <link rel="stylesheet" href="{% static 'accounts/css/signup2.css' %}" />
+  </head>
 
-<form action="{% url 'accounts:signup2' %}" method="POST">
-    {% csrf_token %}
+  <body>
     
-    <p>성별</p>
-    <input type="radio" name="gender" value="M" checked> 남성
-    <input type="radio" name="gender" value="F"> 여성
-    <br>
+      <main class="screen">
+        <!--top-->
+        <div>
+          <div class="statusbar">statusbar</div>
+          <div class="topnav">
+            <div class="topnav_inframe">
+              <button class="icon_container">
+                <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </button>
+              <p class="title">회원가입</p>
+              <div class="icon_container"></div>
+            </div>
+          </div>
+        </div>
 
-    <p>이메일</p>
-    <input type="email" name="email">
-    <br>
+        <div class="mention">
+          <span id="mention1">벌써 끝이에요! 곧 너굴선배를 만나요</span>
+          <span id="mention2">닉네임을 입력해주세요 :D</span>
+        </div>
 
-    <button type="submit">다음</button>
-</form>
+        <form class="form" action="{% url 'accounts:signup2' %}" method="post">
+          {% csrf_token %}
 
-{% endblock %}
+          <div class="input_container">
+            <label class="label" for="nickname">닉네임</label>
+            <div class="input_frame">
+              <input
+                id="nickname"
+                type="text"
+                name="nickname"
+                class="input"
+                placeholder="닉네임을 입력하세요"
+              />
+              <img src="{% static 'icons/account_default.svg' %}" height="24" width="24" alt="default"/>
+            </div>
+            <div id="username_textcontainer"></div>
+            <!--빈칸?-->
+          </div>
+
+          <button class="button" type="submit">완료</button> <!-- disabled 일단 뺐어용 JS추가하면 다시 넣으셔용-->
+        </form>
+      </main>
+
+  </body>
+</html>
