@@ -1,3 +1,45 @@
-<footer class="footer-container">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}" />
 
-</footer>
+<nav class="bottom-nav">
+    <div class="nav-item {% if activate == 'mainpage' %}active{% endif %}">
+        <a href="{% url 'main:mainpage' %}" class="footer-link">
+            {% if activate == 'mainpage' %}
+            <img src="{% static 'img/home_c.png' %}" alt="홈" width="25" height="25" />
+            {% else %}
+            <img src="{% static 'img/home.png' %}" alt="홈" width="25" height="25" />
+            {% endif %}
+            <p>홈</p>
+        </a>
+    </div>
+    <div class="nav-item {% if activate == 'allevents' %}active{% endif %}">
+        <a href="{% url 'main:allevents' %}" class="footer-link">
+            {% if activate == 'allevents' %}
+            <img src="{% static 'img/raccon_c.png' %}" alt="너굴팁" width="25" height="26" />
+            {% else %}
+            <img src="{% static 'img/raccon.png' %}" alt="너굴팁" width="25" height="26" />
+            {% endif %}
+            <p>너굴팁</p>
+        </a>
+    </div>
+    <div class="nav-item {% if activate == 'calendar' %}active{% endif %}">
+        <a href="{% url 'main:calendar' %}" class="footer-link">
+            {% if activate == 'calendar' %}
+            <img src="{% static 'img/calander_c.png' %}" alt="학사일정" width="25" height="24" />
+            {% else %}
+            <img src="{% static 'img/calander.png' %}" alt="학사일정" width="25" height="24" />
+            {% endif %}
+            <p>학사일정</p>
+        </a>
+    </div>
+    <div class="nav-item {% if activate == 'mypage' %}active{% endif %}">
+        <a href="{% url 'users:mypage' %}" class="footer-link">
+            {% if activate == 'mypage' %}
+            <img src="{% static 'img/my_c.png' %}" alt="마이페이지" width="24" height="24" />
+            {% else %}
+            <img src="{% static 'img/my.png' %}" alt="마이페이지" width="24" height="24" />
+            {% endif %}
+            <p>마이페이지</p>
+        </a>
+    </div>
+</nav>

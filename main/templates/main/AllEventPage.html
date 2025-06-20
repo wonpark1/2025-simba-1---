@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2월 홈 화면</title>
+    <link rel="stylesheet" href="{% static '/main/AllEventPage.css' %}" />
+  </head>
+  <body>
+    <main class="wrapper">
+      <!-- 상단 배너 -->
+      <section class="top-banner">
+        <div class="space">
+          <p class="guide-title">너굴선배가 알려주는 TPO별 실수 방지 가이드</p>
+          <p class="guide-sub">
+            처음 겪는 상황에 옷까지 낯설다면, 여기서 답 찾아
+          </p>
+
+          <!-- 마스코트는 배너에 겹쳐 보이도록 그대로 둡니다 -->
+          <img src="{% static 'img/3.0.png' %}" class="guide-mascot" alt="너굴선배" />
+        </div>
+      </section>
+
+      <!-- ───────── pill 버튼 영역 (배너 아래) ───────── -->
+      <section class="pill-wrapper">
+        <div class="pill-grid">
+          {% for event in events %}
+          <a class="pill" href="{% url 'main:lookcard_detail' event.id %}">
+            <img src="{{ event.image_url }}" alt="{{ event.title }}" width="28" height="29" />
+            {{ event.title }}
+          </a>
+          {% endfor %}
+        </div>
+      </section>
+      <!-- ▲ guide-area 끝 ---------------------------------------------- -->
+
+      <!-- 하단 내비게이션 -->
+      {% include 'shared/_footer.html' with activate='allevents' %}
+    </main>
+  </body>
+</html>
