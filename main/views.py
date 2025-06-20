@@ -42,7 +42,7 @@ def create(request, lookcard_id):
         new_comment.create_at = timezone.now()
         new_comment.save()
 
-        return redirect('main:lookcard_detail', lookcard_id=lookcard_id)
+        return redirect('main:comment_page', lookcard_id=lookcard_id)
     else:
         return redirect('accounts:login')
 
@@ -69,29 +69,29 @@ def delete(request, id):
 
 def likes(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
-    
-    if request.user in comment.like.all():
-        comment.like.remove(request.user)
-    else:
-        comment.like.add(request.user)
-        if request.user in comment.dislike.all():
-            comment.dislike.remove(request.user)
 
-    return redirect('main:comment_page')
+    if request.user in comment.likes.all():
+        comment.likes.remove(request.user)
+    else:
+        comment.likes.add(request.user)
+        if request.user in comment.dislikes.all():
+            comment.dislikes.remove(request.user)
+
+    return redirect('main:comment_page', lookcard_id=comment.look_card.id)
 
 def dislikes(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
 
-    if request.user in comment.dislike.all():
-        comment.dislike.remove(request.user)
+    if request.user in comment.dislikes.all():
+        comment.dislikes.remove(request.user)
     else:
-        comment.dislike.add(request.user)
+        comment.dislikes.add(request.user)
 
-        if request.user in comment.like.all():
-            comment.like.remove(request.user)
+        if request.user in comment.likes.all():
+            comment.likes.remove(request.user)
 
     comment.save()
-    return redirect('main:comment_page')
+    return redirect('main:comment_page', lookcard_id=comment.look_card.id)
 
 def lookcard(request, lookcard_id):
     lookcard = get_object_or_404(LookCard, id=lookcard_id)

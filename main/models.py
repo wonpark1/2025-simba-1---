@@ -57,8 +57,8 @@ class Comment(models.Model):
 
     tags = models.ManyToManyField(Tag, related_name='tags', blank=True)
 
-    like = models.ManyToManyField(User, related_name='likes', blank=True)
-    dislike = models.ManyToManyField(User, related_name='dislike', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='dislikes', blank=True)
 
     def __str__(self):
         return f"{self.content[:20]} by {self.writer.username}"

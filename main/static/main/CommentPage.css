@@ -14,6 +14,7 @@ body {
 }
 
 .screen {
+  position: relative;
   display: flex;
   width: 375px;
   height: 812px;
@@ -21,6 +22,7 @@ body {
   align-items: center;
   flex-shrink: 0;
   border: 1px solid black;
+  overflow: hidden;
 }
 
 /*top*/
@@ -98,7 +100,7 @@ body {
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: normal;`
   letter-spacing: -0.5px;
 }
 
@@ -108,22 +110,21 @@ body {
   display: flex;
   flex-direction: column;
   width: 318px;
-  gap: 20px;
   padding: 5px;
-  flex-grow: 1;
   overflow-y: scroll;
+  margin-bottom: 10px;
+  height: auto;
 }
 
+/*comment_card 동적 크기 조정*/
 .comment_card {
   display: flex;
   padding: 15px;
   box-sizing: border-box;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px;
   align-self: stretch;
-  height: 230px;
-
+  min-height: 100px;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
@@ -155,7 +156,7 @@ body {
 }
 
 .editbutton {
-  display: flex;
+  display: inline-flex;
   height: 18.213px;
   padding: 3px 9px;
 
@@ -184,12 +185,14 @@ body {
   gap: 11px;
 }
 
+/*image 테두리 지웠음 + border-radius 추가*/
 .image {
   width: 100px;
   height: 100px;
-  border: 1px solid gray;
+  border-radius: 10px;
 }
 
+/*comment 테두리 지웠음 */
 .comment {
   align-self: stretch;
   color: #000;
@@ -199,8 +202,6 @@ body {
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
-  border: 1px solid gray;
 }
 
 .container3 {
@@ -208,7 +209,7 @@ body {
   gap: 15px;
 }
 
-.reactbutton {
+a.reactbutton {
   display: flex;
   padding: 4px 7px;
   box-sizing: border-box;
@@ -229,11 +230,20 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  margin-top: 8px;
+  margin-bottom: 5px;
 }
 
 /*input*/
 
 .input_container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
   width: 375px;
   height: 70px;
@@ -280,4 +290,19 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+/*가운데 정렬*/
+#mention {
+  display: flex;
+  margin: auto;
+  color: #000;
+  text-align: center;
+
+  /* Body/18 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  justify-items: center;
 }

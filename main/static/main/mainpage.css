@@ -101,7 +101,7 @@ body {
   font-weight: 400;
   line-height: normal;
 }
-.guide-btn {
+a.guide-btn {
   width: 100%;
   height: 36px;
   padding: 1px 63px;
@@ -119,7 +119,9 @@ body {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none !important;
 }
+
 .guide-btn img {
   width: 24px;
   height: 24px;
@@ -187,4 +189,14 @@ body {
 
 .nav-item:nth-child(2) svg {
   transform: translateY(2px);
+}
+
+.like_count{
+  color: black;
+  font-size: 8px;
+}
+
+.dislike_count{
+  color: black;
+  font-size: 8px;
 }
