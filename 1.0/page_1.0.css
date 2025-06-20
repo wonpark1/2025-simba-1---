@@ -9,9 +9,9 @@ html {
 
 @font-face {
   font-family: "Jalnan2";
-  src: url("fonts/Jalnan2.otf") format("opentype"),
-    url("fonts/Jalnan2TTF.ttf") format("truetype");
-  font-weight: normal;
+  src: url("./fonts/Jalnan2.otf") format("opentype"),
+    url("./fonts/Jalnan2.ttf") format("truetype");
+  font-weight: 700px;
   font-style: normal;
 }
 
@@ -59,7 +59,7 @@ body {
 .brandname {
   font-family: "Jalnan2", sans-serif;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 700px;
   color: #ff5722;
   text-align: center;
   line-height: normal;
@@ -67,7 +67,7 @@ body {
 
 .brandname .brand {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 700px;
   color: #ff5722;
 }
 
