@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+}
+
+.wrapper {
+  width: 375px;
+  height: 812px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-banner {
+  background: linear-gradient(180deg, #ff916e -27.26%, #ff5722 100%);
+  border-radius: 0 0 60px 60px;
+  height: 166.745px; /* Figma 고정 높이 */
+  display: flex;
+  color: #fff;
+}
+
+.space {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 47px 26px 26px;
+  width: 100%;
+}
+
+.space h1 {
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+}
+
+.space h2 {
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  color: #fff;
+}
+
+.intro-text {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #212121;
+  line-height: 1.4;
+  font-family: "Pretendard Variable";
+}
+.intro-text strong {
+  font-weight: 700;
+}
+
+.cards {
+  padding: 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.card {
+  background: white;
+  border: 2px solid #ff5722;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.card .tag {
+  font-size: 12px;
+  color: #666;
+}
+.card h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.card .desc {
+  color: var(--text-002, #757575);
+
+  font-family: "Pretendard Variable";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.guide-btn {
+  width: 100%;
+  height: 36px;
+  padding: 1px 63px;
+  background: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.guide-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.end-label {
+  width: fit-content;
+  margin: 50px auto 0;
+
+  height: 26px;
+  padding: 6px 21px;
+
+  background: #fdf2e5; /* back/004 */
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Pretendard Variable";
+  color: var(--text-001, #212121);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 66px;
+  padding: 4px 32px;
+  border-top: 1px solid #eee;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  color: #aaa;
+  justify-content: center;
+  flex: 1;
+  gap: 4px;
+}
+.nav-item.active {
+  color: #ff5722;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.nav-item svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.nav-item:nth-child(2) svg {
+  transform: translateY(2px);
+}
