@@ -111,3 +111,35 @@ def lookcard(request, lookcard_id):
             return redirect('main:lookcard', lookcard_id=lookcard.id)
 
     return render(request, 'main/LookCardPage.html', {'lookcard': lookcard, 'items': items, 'comments': comments})
+
+def allevents(request):
+    user = request.user
+    profile = request.user.profile
+    events = Event.objects.all().order_by('title')
+    now = datetime.now()
+    current_month = now.month
+    month_obj = Month.objects.get(number=current_month)
+    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
+
+    return render(request, 'main/AllEventPage.html', {
+        'user': user,
+        'profile': profile,
+        'events': events,
+        'event_lookcards': event_lookcards,
+        'month': current_month
+    })
+
+def calendar(request):
+    user = request.user
+    profile = request.user.profile
+    now = datetime.now()
+    current_month = now.month
+    month_obj = Month.objects.get(number=current_month)
+    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
+
+    return render(request, 'main/CalendarPage.html', {
+        'user': user,
+        'profile': profile,
+        'event_lookcards': event_lookcards,
+        'month': current_month
+    })
