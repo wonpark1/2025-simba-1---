@@ -130,19 +130,30 @@ def allevents(request):
     })
 
 def calendar(request):
-    user = request.user
-    profile = request.user.profile
-    now = datetime.now()
-    event_lookcards = LookCard.objects.filter(event__month=month_obj)
+    semester = request.GET.get('semester', '1')
+    months = []
+    events = []
+    month_events = []
     
-    if activate == '1학기':
-        for month in (0, 8):
-            month_obj = Month.objects.get(number=month)
-            event_lookcards += LookCard.objects.filter(event__month=month_obj)
+    if semester == '1':
+        for i in range(1, 8):
+            months.append(i)
+    else:
+        for i in range(9, 12):
+            months.append(i)
+
+    for month in months:
+        month_num = Month.objects.get(number=month)
+        events = Event.objects.filter(month=month_num)
+        if events.exists():
+            month_events.append({
+                'month': month_num,
+                'events': events
+            })
 
     return render(request, 'main/CalendarPage.html', {
-        'user': user,
-        'profile': profile,
-        'event_lookcards': event_lookcards,
-        'month': current_month
+        'months': months,
+        'events': events,
+        'month_events': month_events,
+        'active_semester': int(semester)
     })

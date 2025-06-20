@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+a, a:visited, a.pill, a.pill:visited {
+  text-decoration: none;
+  color: inherit;
+
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -112,7 +119,7 @@ body {
   gap: 20px 16px;
 }
 
-.pill {
+a.pill {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -123,7 +130,10 @@ body {
   box-shadow: 0 1px 7.8px rgba(63, 63, 63, 0.3);
   font: 500 13px/1 "Pretendard Variable";
   cursor: pointer;
+  text-decoration: none !important;
+  color:black;
 }
+
 .pill img {
   width: 24px;
   height: 24px;
