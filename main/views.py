@@ -115,11 +115,11 @@ def lookcard(request, lookcard_id):
 def allevents(request):
     user = request.user
     profile = request.user.profile
-    events = Event.objects.all().order_by('title')
+    events = Event.objects.all()
     now = datetime.now()
     current_month = now.month
     month_obj = Month.objects.get(number=current_month)
-    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
+    event_lookcards = LookCard.objects.filter(event__month=month_obj)
 
     return render(request, 'main/AllEventPage.html', {
         'user': user,
@@ -133,9 +133,12 @@ def calendar(request):
     user = request.user
     profile = request.user.profile
     now = datetime.now()
-    current_month = now.month
-    month_obj = Month.objects.get(number=current_month)
-    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
+    event_lookcards = LookCard.objects.filter(event__month=month_obj)
+    
+    if activate == '1학기':
+        for month in (0, 8):
+            month_obj = Month.objects.get(number=month)
+            event_lookcards += LookCard.objects.filter(event__month=month_obj)
 
     return render(request, 'main/CalendarPage.html', {
         'user': user,

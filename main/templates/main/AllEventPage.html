@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2월 홈 화면</title>
-    <link rel="stylesheet" href="{% static 'main/AllEventPage.css' %}" />
+    <link rel="stylesheet" href="{% static '/main/AllEventPage.css' %}" />
   </head>
   <body>
     <main class="wrapper">
@@ -19,53 +19,19 @@
           </p>
 
           <!-- 마스코트는 배너에 겹쳐 보이도록 그대로 둡니다 -->
-          <img src="3.0.png" class="guide-mascot" alt="너굴선배" />
+          <img src="{% static 'img/3.0.png' %}" class="guide-mascot" alt="너굴선배" />
         </div>
       </section>
 
       <!-- ───────── pill 버튼 영역 (배너 아래) ───────── -->
       <section class="pill-wrapper">
         <div class="pill-grid">
-          <button class="pill">
-            <img src="../static/img/hat.png" alt="홈" width="28" height="29" />
-            입학식
-          </button>
-          <button class="pill">
-            <img src="../static/img/bus.png" alt="새내기배움터" width="28" height="29" />새내기배움터
-          </button>
-
-          <button class="pill">
-            <img src="../static/img/pc.png" alt="OT" width="28" height="29" />OT
-          </button>
-          <button class="pill">
-            <img src="../static/img/ticket.png" alt="동아리박람회" width="28" height="29" /></svg
-            >동아리박람회
-          </button>
-
-          <button class="pill">
-            <img src="../static/img/presentation.png" alt="발표" width="28" height="29" />발표
-          </button>
-          <button class="pill">
-           <img src="../static/img/book.png" alt="시험기간" width="28" height="29" />시험기간
-          </button>
-
-          <button class="pill">
-            <img src="../static/img/tent.png" alt="MT" width="28" height="29" />MT
-          </button>
-          <button class="pill">
-            <img src="../static/img/moon.png" alt="00인의 밤" width="28" height="29" />00인의 밤
-          </button>
-
-          <button class="pill">
-           <img src="../static/img/pc.png" alt="개강" width="28" height="29" />개강
-          </button>
-          <button class="pill">
-            <img src="../static/img/heart.png" alt="과팅,미팅" width="28" height="29" />과팅·미팅
-          </button>
-
-          <button class="pill">
-            <img src="../static/img/party.png" alt="홈" width="28" height="29" />축제
-          </button>
+          {% for event in events %}
+          <a class="pill" href="{% url 'main:lookcard_detail' event.id %}">
+            <img src="{{ event.image_url }}" alt="{{ event.title }}" width="28" height="29" />
+            {{ event.title }}
+          </a>
+          {% endfor %}
         </div>
       </section>
       <!-- ▲ guide-area 끝 ---------------------------------------------- -->

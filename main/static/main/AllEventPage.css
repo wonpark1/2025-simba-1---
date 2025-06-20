@@ -92,6 +92,8 @@ body {
   border: 2px solid var(--text-003, #bbb);
   background: #fff;
   box-shadow: 0px 1px 7.8px 0px rgba(63, 63, 63, 0.3);
+  text-decoration: none;
+  color: black
 }
 .pill img {
   width: 24px;
