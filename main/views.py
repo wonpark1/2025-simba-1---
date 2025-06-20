@@ -7,9 +7,14 @@ from datetime import datetime
 
 # Create your views here.
 def mainpage(request):
+    user = request.user
+    profile = request.user.profile
     now = datetime.now()
     current_month = now.month
-    return render(request, 'main/mainpage.html', {'month': current_month})
+    month_obj = Month.objects.get(number=current_month)
+    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
+
+    return render(request, 'main/mainpage.html', {'month': current_month, 'user': user, 'profile': profile, 'event': event_lookcards})
 
 def commentpage(request, lookcard_id):
     sort = request.GET.get('sort','latest')
