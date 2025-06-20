@@ -4,6 +4,15 @@
   border: 1px solid black;
 }*/
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+}
+
 .page {
   display: flex;
   justify-content: center;

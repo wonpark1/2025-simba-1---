@@ -8,24 +8,20 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+      <main class="screen">
         <!--top-->
         <div>
-          <div class="statusbar"></div>
+          <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <div class="icon_container">
-                <!--label 태그로 고치기-->
-              <img src="icons/arrow_left.svg" height="39" width="39" alt="arrow"/>
-              </div>
+              <button class="icon_container">
+                <img src="{% static 'assets/icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </button>
               <p class="title">내가 쓴 댓글 보기</p>
-              <!--여기에 반복문?-->
               <div class="icon_container"></div>
             </div>
           </div>
         </div>
-
 
         <!--bottom-->
 
@@ -44,55 +40,10 @@
             </div>
             <div class="container3">
               <button class="reactbutton">
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="11"
-                  viewBox="0 0 10 11"
-                  fill="none">
-                  <g clip-path="url(#clip0_355_961)">
-                    <path
-                      d="M2.91659 4.37972V9.37972M6.24992 2.66305L5.83325 4.37972H8.26242C8.39179 4.37972 8.51938 4.40984 8.6351 4.4677C8.75081 4.52555 8.85146 4.60956 8.92909 4.71305C9.00671 4.81655 9.05917 4.9367 9.08231 5.06398C9.10545 5.19127 9.09864 5.32219 9.06242 5.44639L8.09159 8.77972C8.0411 8.95282 7.93583 9.10487 7.79159 9.21305C7.64734 9.32124 7.47189 9.37972 7.29159 9.37972H1.66659C1.44557 9.37972 1.23361 9.29192 1.07733 9.13564C0.921049 8.97936 0.833252 8.7674 0.833252 8.54639V5.21305C0.833252 4.99204 0.921049 4.78008 1.07733 4.6238C1.23361 4.46752 1.44557 4.37972 1.66659 4.37972H2.81659C2.97162 4.37964 3.12356 4.33631 3.25532 4.2546C3.38707 4.1729 3.49343 4.05606 3.56242 3.91722L4.99992 1.04639C5.19641 1.04882 5.38981 1.09562 5.56567 1.1833C5.74153 1.27098 5.89531 1.39726 6.0155 1.55272C6.1357 1.70818 6.21922 1.88879 6.25981 2.08105C6.3004 2.27332 6.29702 2.47228 6.24992 2.66305Z"
-                      stroke="#FF5722"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_355_961">
-                      <rect
-                        width="10"
-                        height="10"
-                        fill="white"
-                        transform="translate(0 0.213135)"
-                      />
-                    </clipPath>
-                  </defs></svg>좋아요
+                  <img src="{% static 'assets/icons/good.svg' %}" width="10" height="10" alt="좋아요" />좋아요
               </button>
               <button class="reactbutton">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="11"
-                  viewBox="0 0 10 11"
-                  fill="none">
-                  <g clip-path="url(#clip0_355_966)">
-                    <path
-                      d="M6.66659 6.87972C6.66659 6.87972 6.04159 6.04639 4.99992 6.04639C3.95825 6.04639 3.33325 6.87972 3.33325 6.87972M3.74992 3.96305H3.75409M6.24992 3.96305H6.25409M9.16659 5.21305C9.16659 7.51424 7.30111 9.37972 4.99992 9.37972C2.69873 9.37972 0.833252 7.51424 0.833252 5.21305C0.833252 2.91187 2.69873 1.04639 4.99992 1.04639C7.30111 1.04639 9.16659 2.91187 9.16659 5.21305Z"
-                      stroke="#FF5722"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_355_966">
-                      <rect
-                        width="10"
-                        height="10"
-                        fill="white"
-                        transform="translate(0 0.213135)"
-                      />
-                    </clipPath>
-                  </defs></svg>아쉬워요
+                 <img src="{% static 'assets/icons/bad.svg' %}" width="10" height="10" alt="아쉬워요" />아쉬워요
               </button>
             </div>
         </div>
@@ -100,7 +51,6 @@
 
          <div class="bottom-nav">하단바</div>
          
-      </div>
-    </div>
+      </main>
   </body>
 </html>

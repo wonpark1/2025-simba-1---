@@ -8,16 +8,16 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="screen">
+
+      <main class="screen">
         <!--top-->
         <div>
-          <div class="statusbar"></div>
+          <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <div class="icon_container"><!--label 태그로 고치기-->
-              <img src="icons/arrow_left.svg" height="39" width="39" alt="arrow"/>
-              </div>
+              <button class="icon_container">
+                <img src="{% static 'assets/icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </button>
               <p class="title">로그인</p>
               <div class="icon_container"></div>
             </div>
@@ -41,7 +41,7 @@
                 class="input"
                 placeholder="아이디를 입력하세요"
               />
-              <img src="icons/account_default.svg" height="24" width="24" alt="default"/>
+              <img src="{% static 'assets/icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
           </div>
 
@@ -56,13 +56,13 @@
                 placeholder="비밀번호를 입력하세요"
                 style="outline: none"
               />
-              <img src="icons/account_default.svg" height="24" width="24" alt="default"/>
+              <img src="{% static 'assets/icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
           </div>
 
           <button class="button" type="submit" disabled>로그인하기</button>
         </form>
-      </div>
-    </div>
+      </main>
+
   </body>
 </html>
