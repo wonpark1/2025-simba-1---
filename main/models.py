@@ -51,16 +51,13 @@ class LookItem(models.Model):
 class Comment(models.Model):
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     content = models.TextField()
-    image = models.ImageField(upload_to='post', blank=True, null=True)
+    image = models.ImageField(upload_to='comment_images/', blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     tags = models.ManyToManyField(Tag, related_name='tags', blank=True)
 
     like = models.ManyToManyField(User, related_name='likes', blank=True)
-    like_count = models.PositiveIntegerField(default=0)
-
     dislike = models.ManyToManyField(User, related_name='dislike', blank=True)
-    dislike_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.content[:20]} by {self.writer.username}"
