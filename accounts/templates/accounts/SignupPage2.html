@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    
       <main class="screen">
+
         <!----------top---------->
         <div>
           <div class="statusbar">statusbar</div>
@@ -36,7 +36,6 @@
         <!----------회원가입 form---------->
         <form class="form" action="{% url 'accounts:signup2' %}" method="post">
           {% csrf_token %}
-
           <!--▼ 닉네임-->
           <div class="input_container">
             <label class="label" for="nickname">닉네임</label>
@@ -51,12 +50,10 @@
               <img src="{% static 'icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
           </div>
-
           <!--▼ 버튼-->
           <button class="button" type="submit">완료</button> <!-- disabled 일단 뺐어용 JS추가하면 다시 넣으셔용-->
-        
         </form>
-      </main>
 
+      </main>
   </body>
 </html>

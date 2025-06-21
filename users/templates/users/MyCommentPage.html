@@ -12,6 +12,7 @@
 
 <body>
     <main class="screen">
+
         <!----------top---------->
         <div>
             <div class="statusbar">statusbar</div>
@@ -25,7 +26,6 @@
                 </div>
             </div>
         </div>
-
 
         <!----------내가 작성한 댓글---------->
         {% if comments %}
@@ -66,12 +66,10 @@
         <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
         {% endif %}
 
-
         <!----------footer---------->
         {% include "shared/_footer.html" with activate='mypage' %}
 
     </main>
-
 </body>
 
 </html>
