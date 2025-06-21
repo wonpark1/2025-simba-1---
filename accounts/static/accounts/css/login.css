@@ -22,7 +22,6 @@ body {
   padding-bottom: 70px;
   box-sizing: border-box; /*외곽 크기 고정!*/
   flex-shrink: 0;
-  border: 1px solid black;
 }
 
 
@@ -30,6 +29,7 @@ body {
 
 .statusbar {
   height: 47px;
+  text-align: center;
 }
 
 .topnav {
@@ -52,6 +52,11 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+}
+
+button {
+  border: none;
+  background: none;
 }
 
 .icon_container {
@@ -148,11 +153,12 @@ body {
 
 .input {
   display: flex;
-  width: auto;
+  width: 85%;
   height: 28px;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  border: none;
 
   color: var(--text-002, #757575);
   font-family: "Pretendard Variable";

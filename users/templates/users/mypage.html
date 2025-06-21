@@ -13,23 +13,30 @@
 
       <main class="screen">
 
+        <!----------프로필---------->
         <div class="top-banner"></div>
+        <!--▼ image-->
         <div class="profile-circle">
             <img src="{% static 'img/1.2raccoon.png' %}" width="117" height="117" flex-shrink="0" alt="프로필 이미지" />
         </div>
+        <!--▼ username-->
+        <div class="username">너굴</div><!--username 반복문 작업 필요-->
 
-        <div class="username">너굴</div>
-
+        
+        <!----------메뉴 버튼---------->
         <div class="menu">
-            <a href="{% url 'users:mycomment' %}" class="menu-item">
-              <img src="{% static 'icons/mycomment.svg' %}" width="24" height="24" alt="내 댓글" />
-              내가 쓴 댓글 보기
-            </a>
-            <a href="{% url 'users:logout' %}" class="menu-item">
-              <img src="{% static 'icons/logout.svg' %}" width="24" height="24" flex-shrink="0" alt="로그아웃" />
-              로그아웃</a>
+          <!--▼ 내가 쓴 댓글 보기-->
+          <a href="{% url 'users:mycomment' %}" class="menu-item">
+            <img src="{% static 'icons/mycomment.svg' %}" width="24" height="24" alt="내 댓글"/>내가 쓴 댓글 보기
+          </a>
+          <!--▼ 로그아웃-->
+          <a href="{% url 'users:logout' %}" class="menu-item">
+            <img src="{% static 'icons/logout.svg' %}" width="24" height="24" flex-shrink="0" alt="로그아웃"/>로그아웃
+          </a>
         </div>
 
+
+        <!----------footer---------->
         {% include 'shared/_footer.html' with activate='mypage' %}
 
       </main>

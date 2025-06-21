@@ -20,14 +20,14 @@ body {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  border: 1px solid black;
-  position: relative;
+  position: relative;/*용도??*/
 }
 
 /*top*/
 
 .statusbar {
   height: 47px;
+  text-align: center;
 }
 
 .topnav {
@@ -80,8 +80,8 @@ body {
   gap: 20px;
   padding: 5px;
   margin-top: 30px;
-  flex-grow: 1;
   overflow-y: scroll;
+  height: auto;
 }
 
 .comment_card {
@@ -90,9 +90,7 @@ body {
   box-sizing: border-box;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px;
   align-self: stretch;
-  height: 230px;
 
   border-radius: 10px;
   background: #fff;
@@ -148,10 +146,11 @@ body {
 
 .container2 {
   display: flex;
-  align-self: stretch;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 11px;
+  margin: 20px 0px 12px 0px;
 }
 
 .image {
@@ -169,8 +168,6 @@ body {
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
-  border: 1px solid gray;
 }
 
 .container3 {
