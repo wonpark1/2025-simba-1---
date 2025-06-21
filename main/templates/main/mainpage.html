@@ -13,10 +13,10 @@
       <!-- 상단 배너 -->
       <section class="top-banner">
         <section class="space">
-          <h1><strong>{{ profile.nickname }}</strong><br /></h1>
+          <h1><strong>{{ profile.nickname }}님</strong><br /></h1>
           <h2>
-            {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title
-            }}{% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
+            {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title }}
+            {% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
           </h2>
         </section>
       </section>

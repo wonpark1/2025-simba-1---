@@ -27,6 +27,7 @@ class LookCard(models.Model):
     is_recommend = models.TextField(blank=False)
     is_avoid = models.TextField(blank=False)
     avoid_reason = models.TextField(blank=False)
+    emoticon = models.ImageField(upload_to='emoticons/', blank=True, null=True)
 
     def __str__(self):
         return self.event.title
