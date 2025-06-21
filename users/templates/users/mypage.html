@@ -1,12 +1,38 @@
-{% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.0 마이페이지</title>
+    <link rel="stylesheet" href="{% static 'users/mypage.css' %}" />
+  </head>
 
-<!-- 여기는 로그인 하고 나서 위의 배너의 mypage 누르면 나오는 화면이에용!! -->
+  <body>
 
-<h1>마이페이지 입니다😎</h1>
-<img src="{{ user.profile.pfp.url }}" alt="프로필사진" width="100px" class="pfp"/>
-<h3>{{user.profile.nickname}} 님 안녕하세요</h3>
+      <main class="screen">
 
-{% endblock %}
+        <div class="top-banner"></div>
+        <div class="profile-circle">
+            <img src="{% static 'img/1.2raccoon.png' %}" width="117" height="117" flex-shrink="0" alt="프로필 이미지" />
+        </div>
+
+        <div class="username">너굴</div>
+
+        <div class="menu">
+            <button class="menu-item">
+              <img src="{% static 'icons/mycomment.svg' %}" width="24" height="24" alt="내 댓글" />
+              내가 쓴 댓글 보기
+            </button>
+            <button class="menu-item">
+              <img src="{% static 'icons/logout.svg' %}" width="24" height="24" flex-shrink="0" alt="로그아웃" />
+              로그아웃</button>
+        </div>
+
+        <div class="bottom-nav">하단바</div>
+
+      </main>
+
+  </body>
+</html>
