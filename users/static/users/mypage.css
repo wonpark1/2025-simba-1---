@@ -21,8 +21,7 @@ body {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  border: 1px solid black;
-  position: relative;
+  position: relative;/*용도??*/
 }
 
 /*mypage*/
@@ -80,6 +79,7 @@ body {
   display: flex;
   height: 44px;
   padding: 10px 23px;
+  box-sizing: border-box;
   gap: 20px;
   align-self: stretch;
   align-items: center;
@@ -99,7 +99,7 @@ body {
 }
 
 
-/*bottomnav*/
+/*bottomnav*/ /*확인 후 삭제 예정*/
 
 .bottom-nav {
     display: flex;

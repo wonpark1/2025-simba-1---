@@ -14,7 +14,7 @@
 
       <main class="screen">
 
-        <!--top-->
+        <!----------top---------->
         <div>
           <div class="statusbar">statusbar</div>
           <div class="topnav">
@@ -28,17 +28,30 @@
           </div>
         </div>
 
+        <!---------------------------------가이드 외곽 container 시작-------------------------------->
         <div class="container">
+
+          <!-----------container1---------->
           <div class="container1">
+            <!--▼ event 제목 및 멘트-->
             <div class="mention">
               <span id="mention1">{{ lookcard.event.title }}</span><!--p태그?-->
               <span id="mention2">{{ lookcard.description }}</span>
             </div>
+            <!--▼ lookcard-->
             <div class="lookcard_container">
               <div class="lookcard_inframe">
-                <div class="looktitle">{{ lookcard.sub_title }}</div>
-                
+                <!--▼▼ event 제목-->
+                <div class="looktitle">{{ lookcard.sub_title }}</div><!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
+                <!--▼▼ 룩가이드 제시-->
+                {% for item in lookcard.items.all %}
                 <div class="lookguide">
+                  <p style="font-size: 14px;">{{ item.category }}:{{ item.name }}</p>
+                  <p style="font-size: 11px;">{{ item.tags }}<br><span>{{ item.description }}</span></p>
+                </div>
+                {% endfor %}  
+
+                    <!--------------------------
                     <div id="lookguide1">
                       {% for item in lookcard.items.all %}
                       <span>{{ item.category }}:{{ item.name }}</span>
@@ -46,41 +59,50 @@
                     </div>
                     <div id="lookguide2">
                       {% for item in lookcard.items.all %}
-                      <span>{{ item.tags }}</span>
-                      <span>{{ item.description }}</span>
+                      <p>{{ item.tags }} <br> {{ item.description }}</p>
                       {% endfor %}
                     </div>
-                    
-                </div>
+                   -------------------------->
+                   <!--여기 구조 바꿨습니다! 이 부분에 있는 id 변수명들 폐기 예정인데, 그 전에 혹시 백엔드에서 처리할 내용 있으면 알려주세요-->
+
+
                 
+                <!--▼▼ 추천/비추천-->
                 <div class="lookmention_container">
-                <div class="lookmention">
-                    <img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />
-                    {{ lookcard.is_recommend }}
-                </div>
-                <div class="lookmention">
+                  <div class="lookmention">
+                    <img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />{{ lookcard.is_recommend }}
+                  </div>
+                  <div class="lookmention">
                     <img src="{% static 'icons/nonrecommend.svg' %}" height="28.33" width="28.33" alt="비추천" />
                     <div class="nonrecommend_container"><span id="nonrecommend1">{{ lookcard.is_avoid }}</span><span id="nonrecommend2">{{ lookcard.avoid_reason }}</span></div>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!----------container2---------->         
           <div class="container2">
+            <!--▼ 말풍선-->
             <div class="neoguri_comment">
-              <img src="{% static 'icons/Union.svg' %}" height="42.754" width="247.261" alt="말풍선" />
-              <div id="neoguri_comment">neoguri comment</div>
+              <img src="{% static 'icons/Union.svg' %}" height="42.754" width="247.261" alt="말풍선"/>
+              <div id="neoguri_comment">neoguri comment</div><!--여기에도 반복문 작업 필요합니다!-->
             </div>
-            <div class="neoguri">
-              <img src="{% static 'img/2.3raccoon.png' %}" height="42.754" width="247.261" alt="너구리" /></div>
+            <div class="neoguri"><img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" /></div>
           </div>
-        </div>
 
-          <a class="button" href="{% url 'main:comment_page' lookcard.id %}">
-            <img src="{% static 'icons/comment.svg' %}" height="42.754" width="247.261" alt="댓글" />의견 남기기
-          </a>
-        </main>
+        </div>
+        <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
+        <!--position 사용해서 container 코드들 수정 예정입니다-->
+        
+
+        <!----------버튼---------->
+        <a class="button" href="{% url 'main:comment_page' lookcard.id %}">
+          <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
+        </a>
+
+      </main>
 
   </body>
+
 </html>

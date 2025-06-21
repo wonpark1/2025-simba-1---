@@ -1,8 +1,8 @@
 /* 2.3look page - CSS */
 
-/*body * {
+body * {
   border: 1px solid black;
-}*/
+}
 
 body {
   display: flex;
@@ -20,13 +20,13 @@ body {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  border: 1px solid black;
 }
 
 /*top*/
 
 .statusbar {
   height: 47px;
+  text-align: center;
 }
 
 .topnav {
@@ -149,6 +149,40 @@ body {
   font-stretch: condensed;
 }
 
+
+.lookguide {
+  display: flex;
+  width: 100%;
+  gap: 25px;
+}
+
+.lookguide :nth-child(1) {
+  width: 72px;
+  line-height: 20px;
+}
+
+.lookguide :nth-child(2) {
+  flex-grow: 1;
+  line-height: 15px;
+}
+
+.lookguide p {
+  margin: 0px 0px 5px 0px;
+  color: var(--text-001, #212121);
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.lookguide p span {
+  color: var(--text-002, #757575);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/*백엔드 확인 후 폐기 예정*/
+/*
 .lookguide {
   display: flex;
   align-items: flex-start;
@@ -186,6 +220,7 @@ body {
   font-weight: 500;
   line-height: 15px;
 }
+  */
 
 .lookmention_container {
   display: flex;

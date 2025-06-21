@@ -12,26 +12,29 @@
 
   <body>
     <main class="screen">
+
+      <!----------안내멘트---------->
       <div class="mention">
         <img src="{% static 'img/1.2raccoon.png' %}" height="180" width="180" alt="너구리" />
         <span id="mention1">너굴선배가 알려주는</span>
         <span id="mention2">새내기들을 위한 룩 가이드</span>
       </div>
 
+      <!----------버튼---------->
       <div class="button_container">
 
+        <!--▼ 회원가입-->
         <form action="{% url 'accounts:signup1' %}" method="get">
-        <button class="button" id="signup_button" type="submit" > <!-- disabled 뺐으니 JS하고 다시 추가하세요-->
-          회원가입
-        </button>
+          <button class="button" id="signup_button" type="submit">회원가입</button><!-- disabled 뺐으니 JS하고 다시 추가하세요-->
         </form>
 
+        <!--▼ 로그인-->
         <form action="{% url 'accounts:login' %}" method="get">
-        <button class="button" id="signin_button" type="submit" > <!-- disabled 뺐으니 JS하고 다시 추가하세요-->
-          로그인
-        </button>
+          <button class="button" id="signin_button" type="submit">로그인</button><!-- disabled 뺐으니 JS하고 다시 추가하세요-->
         </form>
+
       </div>
+      
     </main>
   </body>
 </html>

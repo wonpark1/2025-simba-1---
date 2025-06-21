@@ -13,7 +13,7 @@
   <body>
     
       <main class="screen">
-        <!--top-->
+        <!----------top---------->
         <div>
           <div class="statusbar">statusbar</div>
           <div class="topnav">
@@ -27,14 +27,17 @@
           </div>
         </div>
 
+        <!----------안내멘트---------->
         <div class="mention">
           <span id="mention1">벌써 끝이에요! 곧 너굴선배를 만나요</span>
           <span id="mention2">닉네임을 입력해주세요 :D</span>
         </div>
 
+        <!----------회원가입 form---------->
         <form class="form" action="{% url 'accounts:signup2' %}" method="post">
           {% csrf_token %}
 
+          <!--▼ 닉네임-->
           <div class="input_container">
             <label class="label" for="nickname">닉네임</label>
             <div class="input_frame">
@@ -47,11 +50,11 @@
               />
               <img src="{% static 'icons/account_default.svg' %}" height="24" width="24" alt="default"/>
             </div>
-            <div id="username_textcontainer"></div>
-            <!--빈칸?-->
           </div>
 
+          <!--▼ 버튼-->
           <button class="button" type="submit">완료</button> <!-- disabled 일단 뺐어용 JS추가하면 다시 넣으셔용-->
+        
         </form>
       </main>
 

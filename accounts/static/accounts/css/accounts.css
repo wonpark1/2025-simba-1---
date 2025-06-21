@@ -25,11 +25,9 @@ body {
   gap: 10px;
   flex-shrink: 0;
   background: linear-gradient(180deg, #fff 9.59%, #ffddb7 100%);
-  border: 1px solid black;
 }
 
-
-/*mention*/
+/*main mention*/
 
 .mention {
   display: flex;
@@ -65,47 +63,38 @@ body {
 .button_container {
   display: flex;
   height: 106px;
+  width: 100%;
   flex-direction: column;
-  align-items: center;
   gap: 18px;
-  align-self: stretch;
 }
 
 .button {
   display: flex;
   height: 44px;
+  width: 100%;
+
+  border-radius: 10px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  align-self: stretch;
+
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
 }
 
 #signup_button {
-  border-radius: 10px;
   background: var(--primary-001, #ff5722);
-
   color: #fff;
-  text-align: center;
-
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  border: none; 
 }
 
 #signin_button {
-  border-radius: 10px;
   border: 1px solid var(--primary-001, #ff5722);
   background: var(--back-003, #f9f9f9);
-
   color: var(--primary-001, #ff5722);
-  text-align: center;
-
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 }
