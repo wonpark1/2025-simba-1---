@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ month }}월 홈 화면</title> 
+    <title>{{ month }}월 홈 화면</title>
     <link rel="stylesheet" href="{% static 'main/mainpage.css' %}" />
   </head>
   <body>
@@ -14,37 +14,40 @@
       <section class="top-banner">
         <section class="space">
           <h1><strong>{{ profile.nickname }}</strong><br /></h1>
-          <h2>{{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title }}{% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!</h2>
+          <h2>
+            {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title
+            }}{% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
+          </h2>
         </section>
       </section>
       <section class="container">
         <!-- 안내 문구 -->
         <section class="intro-text">
           <p>
-            {{ month }}월에 있는 행사의<br /><strong>룩 가이드를 소개해드릴게요!</strong>
+            {{ month }}월에 있는 행사의<br /><strong
+              >룩 가이드를 소개해드릴게요!</strong
+            >
           </p>
         </section>
 
         <!-- 카드 섹션 -->
         <section class="cards">
-          {% if event %}
-          {% for lookcard in event %}
+          {% if event %} {% for lookcard in event %}
           <div class="card">
             <p class="tag">{{ month }}월</p>
             <h2>{{ lookcard.event.title }}</h2>
-            <p class="desc">
-              {{ lookcard.description }}
-            </p>
-            <a href="{% url 'main:lookcard_detail' lookcard.id %}" class="guide-btn">
-              <img src="{% static 'img/1.0.png' %}" alt="icon" />룩 가이드 보러가기
+            <p class="desc">{{ lookcard.description }}</p>
+            <a
+              href="{% url 'main:lookcard_detail' lookcard.id %}"
+              class="guide-btn"
+            >
+              <img src="{% static 'img/1.0.png' %}" alt="icon" />룩 가이드
+              보러가기
             </a>
           </div>
-          {% endfor %}
-          {% else %}
+          {% endfor %} {% else %}
           <p class="no-event">이번 달에는 룩 가이드가 없어요.</p>
           {% endif %}
-
-
         </section>
         <section class="end-label">이번 달 룩 가이드는 여기서 끝이에요</section>
       </section>
