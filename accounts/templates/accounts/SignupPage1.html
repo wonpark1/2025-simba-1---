@@ -12,6 +12,7 @@
 
   <body>
       <main class="screen">
+
         <!----------top---------->
         <div>
           <div class="statusbar">statusbar</div>
@@ -35,7 +36,6 @@
         <!----------회원가입 form---------->
         <form class="form" action="{% url 'accounts:signup1' %}" method="post">
           {% csrf_token %}
-
           <!--▼ 아이디-->
           <div class="input_container"><!--js작업 필요-->
             <label class="label" for="username">아이디</label>
@@ -51,7 +51,6 @@
             </div>
             <div id="username_textcontainer">좋은 아이디네요!</div>
           </div>
-
           <!--▼ 비밀번호-->
           <div class="input_container">
             <label class="label" for="password">비밀번호</label>
@@ -68,7 +67,6 @@
             <span id="password_textcontainer">영어,숫자,특수문자로 8-20자 이내로 작성해주세요.</span>
             <span id="password_error">조건을 만족해주세요</span><!--멘트 확인받기-->
           </div>
-
           <!--▼ 비밀번호 확인-->
           <div class="input_container">
             <label class="label" for="confirm">비밀번호 확인</label>
@@ -84,11 +82,10 @@
             </div>
             <div id="confirm_error">비밀번호가 일치하지 않습니다</div><!--멘트 확인받기-->
           </div>
-
           <!--▼ 버튼-->
           <button class="button" type="submit">다음</button> <!-- disabled 일단 뺐어용 JS추가하면 다시 넣으셔용-->
-        
         </form>
+
       </main>
   </body>
 </html>

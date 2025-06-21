@@ -1,8 +1,9 @@
 /* 2.3look page - CSS */
 
-body * {
+/*body * {
   border: 1px solid black;
-}
+}*/
+
 
 body {
   display: flex;
