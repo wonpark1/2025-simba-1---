@@ -9,3 +9,16 @@ def mypage(request):
         'user':request.user,
     }
     return render(request, 'users/mypage.html', context)
+
+def logout(request):
+    auth.logout(request)
+    return redirect('accounts:login')
+
+def mycomment(request):
+    user = request.user
+    comments = user.comment_set.all()
+    context = {
+        'user': user,
+        'comments': comments,
+    }
+    return render(request, 'users/MyCommentPage.html', context)

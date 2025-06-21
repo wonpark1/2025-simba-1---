@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.1.1 내가 쓴 댓글 보기</title>
+    <link rel="stylesheet" href="{% static 'users/MyCommentPage.css' %}" />
+</head>
+
+<body>
+    <main class="screen">
+        <!--top-->
+        <div>
+            <div class="statusbar">statusbar</div>
+            <div class="topnav">
+                <div class="topnav_inframe">
+                    <a href="{% url 'users:mypage' %}" class="icon_container">
+                        <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+                    </a>
+                    <p class="title">내가 쓴 댓글 보기</p>
+                    <div class="icon_container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--bottom-->
+
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="comment_container">
+            <div class="comment_card">
+                <div class="container1">
+                    <div id="nickname">{{ profile.nickname }}</div>
+                    <div class="edit">
+                        <a href="{% url 'main:edit' comment.id %}" class="editbutton">수정</a>
+                        <a href="{% url 'main:delete' comment.id %}" class="editbutton">삭제</a>
+                    </div>
+                </div>
+                <div class="container2">
+                    {% if comment.image %}
+                    <img class="image" src="{{ comment.image.url }}" alt="Comment Image" />
+                    {% endif %}
+                    <div class="comment">{{ comment.content }}</div>
+                </div>
+                <div class="container3">
+                    <a href="{% url 'main:likes' comment.id %}" class="reactbutton">
+                        <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요
+                        {{comment.likes.count}}
+                    </a>
+                    <a href="{% url 'main:dislikes' comment.id %}" class="reactbutton">
+                        <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
+                        {{comment.dislikes.count}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
+        {% endif %}
+
+        {% include "shared/_footer.html" with activate='mypage' %}
+
+    </main>
+
+</body>
+
+</html>
