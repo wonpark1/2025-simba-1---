@@ -22,7 +22,7 @@ body {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  position: relative;/*용도??*/
+  position: relative;
 }
 
 /*mypage*/

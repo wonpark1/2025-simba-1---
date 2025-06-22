@@ -21,7 +21,7 @@
               <a href="{% url 'main:mainpage' %}" class="icon_container">
               <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left"/>
               </a>
-              <p class="title">{{ lookcard.event.title }}가이드</p>
+              <p class="title">{{ lookcard.event.title }} 가이드</p>
               <div class="icon_container"></div>
             </div>
           </div>
@@ -34,36 +34,42 @@
           <div class="container1">
             <!--▼ event 제목 및 멘트-->
             <div class="mention">
-              <span id="mention1">{{ lookcard.event.title }}</span><!--p태그?-->
-              <span id="mention2">{{ lookcard.description }}</span>
+              <span>{{ lookcard.event.title }}</span><!--h1?-->
+              <span>{{ lookcard.event.description_look }}</span>
             </div>
             <!--▼ lookcard-->
             <div class="lookcard_container">
               <div class="lookcard_inframe">
                 <!--▼▼ event 제목-->
-                <div class="looktitle">{{ lookcard.sub_title }}</div><!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
+                <div class="looktitle">{{ lookcard.id }}</div>
+                <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
                 <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
+                <!--여기 event제목에 해당하는 db 추가해야합니다 지금은 임의로 id로 해둠!-->
+                
                 <!--▼▼ 룩가이드 제시-->
-                <!-- {% for item in lookcard.items.all %}
+                
+                {% for item in lookcard.items.all %}
                 <div class="lookguide">
-                  <p style="font-size: 14px;">{{ item.category }}:{{ item.name }}</p>
-                  <p style="font-size: 11px;">{{ item.tags }}<br><span>{{ item.description }}</span></p>
+                  <p style="font-size: 14px;">{{ item.category }}{% if item.name %}: {{ item.name }}{% endif %}</p>
+                  <p style="font-size: 11px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description }}</span>{% endif %}</p>
                 </div>
                 {% endfor %}   
-                옛날 버전은 무조건 밑줄이 뜨는 거여서 이거 바로 밑에 있는 구조로 바꿨어요!-->
+                <!--옛날 버전은 무조건 밑줄이 뜨는 거여서 이거 바로 밑에 있는 구조로 바꿨어요!-->
 
                 <!-- 밑줄을 보여주는 태그가 뭔지 모르겠어서 일단 예시로 이렇게 적어뒀어요 -->
                 <!-- 이거 태그 class가 뭐가 뭔지 모르겠어서 한 번만 수정해주세요...! -->
-                {% for item in lookcard.items.all %}
+                <!--{% for item in lookcard.items.all %}
                   {% if forloop.last %}
-                    <div class="lookguide2">
+                    <div class="lookguide">
                   {% else %}
-                    <div class="lookguide1">
+                    <div class="lookguide">
                   {% endif %}
                       <p style="font-size: 14px">{{ item.category }}{% if item.name %}: {{ item.name }}{% endif %}</p>
-                      <p style="font-size: 14px">{{ item.tags }}{% if item.description %}<br><span>{{ item.description }}</span>{% endif %}</p>
+                      <p style="font-size: 11px">{{ item.tags }}{% if item.description %}<br><span>{{ item.description }}</span>{% endif %}</p>
                     </div>
-                {% endfor %}
+                {% endfor %}-->
+
+
                     <!--------------------------
                     <div id="lookguide1">
                       {% for item in lookcard.items.all %}
@@ -90,6 +96,7 @@
                     <div class="nonrecommend_container"><span id="nonrecommend1">{{ lookcard.is_avoid }}</span><span id="nonrecommend2">{{ lookcard.avoid_reason }}</span></div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
