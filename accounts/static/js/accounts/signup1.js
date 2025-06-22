@@ -1,4 +1,3 @@
-/* ===== 회원가입 1단계 : 클라이언트 검증 ===== */
 document.addEventListener("DOMContentLoaded", () => {
   const $ = (id) => document.getElementById(id);
   const idI = $("username");
