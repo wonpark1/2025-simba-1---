@@ -110,6 +110,9 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 12px;
 }
 .month-label {
   width: 32px;
@@ -117,11 +120,13 @@ body {
   color: #666;
   text-align: right;
   padding-top: 8px;
+  align-self: start;
 }
 .events {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px 16px;
+  gap: 12px 8px;
+  flex: 1 1 0;
 }
 
 a.pill {
