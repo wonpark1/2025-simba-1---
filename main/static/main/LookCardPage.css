@@ -1,8 +1,8 @@
 /* 2.3look page - CSS */
 
-/*body * {
+body * {
   border: 1px solid black;
-}*/
+}
 
 
 body {
@@ -97,24 +97,22 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  line-height: normal;
 }
 
-#mention1 {
+.mention :nth-child(1) {
   color: #000;
-  font-family: "Pretendard Variable";
   font-size: 20px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 }
 
-#mention2 {
+.mention :nth-child(2) {
   color: var(--text-002, #757575);
-  font-family: "Pretendard Variable";
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
 .lookcard_container {

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.4.3 댓글 수정</title>
+    <link rel="stylesheet" href="2.4.3edit.css" />
+  </head>
+
+  <body>
+      <main class="screen">
+
+        <!----------top---------->
+        <div>
+          <div class="statusbar">statusbar</div>
+          <div class="topnav">
+            <div class="topnav_inframe">
+              <a href="{% url 'main:lookcard_detail' lookcard.id%}" class="icon_container">
+              <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+              </a>
+              <p class="title">댓글 수정</p>
+              <div class="icon_container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!----------필터링 버튼---------->
+        <div class="button_container">
+          <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
+            최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
+          </button>
+        </div>
+
+        <!----------작성한 댓글---------->
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="comment_container"><!--이거 scroll용 외곽 container인데 수정 필요해보임 (월요일에 수정 예정)-->
+          <!-----댓글카드----->
+          <div class="comment_card">
+            <!--▼ 닉네임, 완료 버튼-->
+            <div class="container1">
+              <div id="nickname">{{ profile.nickname }}</div><!--닉네임이 안떠요 DB 확인? 필요해요-->
+              <a href="{% url 'main:delete' comment.id %}" class="editbutton">완료</a>
+            </div>
+            <!--▼ 이미지 삽입/삭제, 댓글 작성 수정란-->
+            <div class="container2">
+              {% if comment.image %}
+              <img class="image" src="{{ comment.image.url }}" alt="Comment Image" />
+              <button><img id="x" src="{ static 'icons/x.svg' %}" height="13" width="13" alt="x"></button>
+              {% endif %}
+              <div class="comment">{{ comment.content }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!--------댓글 없을 때 화면---------->   <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
+        {% endfor %}
+        {% else %}
+        <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
+        {% endif %} 
+
+        <!----------댓글 작성 form---------->
+        <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input_container">
+          <input type="file" id="image" name="image" accept="image/*" style="display: none;" />
+          <button class="input_button" type="button"><img src="{% static 'icons/img.svg' %}" height="15" width="15" alt="이미지" onclick="document.getElementById('image').click();" /></button>
+          <input type="text" id="message" name="content" placeholder="메시지를 입력하세요" />
+          <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15" alt="전송" /></button>
+        </div>
+        </form>
+        
+      </main>
+  </body>
+</html>
