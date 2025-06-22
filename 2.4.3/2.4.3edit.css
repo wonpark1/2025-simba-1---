@@ -1,8 +1,8 @@
 /* 2.4.3edit page - CSS */
 
-body * {
+/*body * {
   border: 1px solid black;
-}
+}*/
 
 body {
   display: flex;
@@ -151,7 +151,6 @@ form {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid red;
 }
 
 #nickname {
@@ -207,7 +206,6 @@ form {
   height: 100px;
   border-radius: 10px;
   position: relative;
-  border: 1px solid red;
 }
 
 #x {

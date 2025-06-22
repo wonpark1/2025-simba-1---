@@ -27,12 +27,11 @@
           </div>
         </div>
 
+        <section>
         <!----------필터링 버튼---------->
-        <div class="button_container">
-          <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
-            최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
-          </button>
-        </div>
+        <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
+          최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
+        </button>
 
         <!----------작성한 댓글---------->
         {% if comments %}
@@ -72,6 +71,7 @@
         {% else %}
         <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
         {% endif %} 
+        </section>
 
         <!----------댓글 작성 form---------->
         <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">

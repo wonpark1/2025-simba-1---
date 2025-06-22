@@ -1,0 +1,15 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/topnav.css' %}" />
+
+<div>
+  <div class="statusbar">statusbar</div>
+  <div class="topnav">
+    <div class="topnav_inframe">
+        <a href="{% url 'main:lookcard_detail' lookcard.id%}" class="icon_container">
+        <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+        </a>
+      <p class="title">댓글 쓰기</p><!--반복문으로 처리 가능한가요?-->
+      <div class="icon_container"></div>
+    </div>
+  </div>
+</div>
