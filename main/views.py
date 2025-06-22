@@ -155,4 +155,4 @@ def calendar(request):
         'events': events,
         'month_events': month_events,
         'active_semester': int(semester)
-    })
+    })  
