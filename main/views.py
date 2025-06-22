@@ -135,10 +135,10 @@ def calendar(request):
     month_events = []
     
     if semester == '1':
-        for i in range(1, 8):
+        for i in range(1, 9):
             months.append(i)
     else:
-        for i in range(9, 12):
+        for i in range(9, 13):
             months.append(i)
 
     for month in months:
