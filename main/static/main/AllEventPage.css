@@ -87,13 +87,13 @@ body {
   gap: 8px;
   padding: 10px 15px;
   border-radius: 40px;
-  font: 500 14px/1 "Pretendard Variable";
+  font: 500 17px/1 "Pretendard Variable";
   cursor: pointer;
   border: 2px solid var(--text-003, #bbb);
   background: #fff;
   box-shadow: 0px 1px 7.8px 0px rgba(63, 63, 63, 0.3);
   text-decoration: none;
-  color: black
+  color: black;
 }
 .pill img {
   width: 24px;
