@@ -30,6 +30,7 @@ class Event(models.Model):
 
 class LookCard(models.Model):
     event = models.ForeignKey(Event, related_name='lookcards', on_delete=models.CASCADE)
+    month = models.ForeignKey(Month, related_name='lookcards', on_delete=models.CASCADE, null=True, blank=True)
     is_recommend = models.TextField(blank=False)
     is_avoid = models.TextField(blank=False)
     avoid_reason = models.TextField(blank=False)
