@@ -275,3 +275,14 @@ button {
   color: #fff;
   cursor: pointer;
 }
+.button.active {
+  border: none;
+  background: #ff5722;
+  color: #fff;
+  cursor: pointer;
+}
+
+#password_error,
+#confirm_error {
+  display: none;
+}
