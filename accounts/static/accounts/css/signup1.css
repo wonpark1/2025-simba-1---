@@ -4,7 +4,6 @@
   border: 1px solid black;
 }*/
 
-
 body {
   display: flex;
   justify-content: center;
@@ -175,7 +174,6 @@ button {
   font-weight: 400;
   line-height: 28px; /* 200% */
   letter-spacing: -0.5px;
-
 }
 
 #username_textcontainer {
@@ -269,4 +267,11 @@ button {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.button.active {
+  border: none;
+  background: #ff5722;
+  color: #fff;
+  cursor: pointer;
 }
