@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=15)
-    month = models.ManyToManyField(Month, blank=True)
+    month = models.ManyToManyField(Month, related_name="month", blank=True)
     description_main = models.TextField(blank=False, null=False)
     description_look = models.TextField(blank=True, null=True)
     mention = models.TextField(blank=False, null=False)
@@ -25,7 +25,8 @@ class Event(models.Model):
     end = models.IntegerField()
 
     def __str__(self):
-        return f"{self.month}_{self.title}"
+        months = ", ".join([str(m) for m in self.month.all()])
+        return f"{months}_{self.title}"
 
 class LookCard(models.Model):
     event = models.ForeignKey(Event, related_name='lookcards', on_delete=models.CASCADE)
@@ -45,7 +46,7 @@ class LookItem(models.Model):
 
     look_card = models.ForeignKey(LookCard, related_name='items', on_delete=models.CASCADE)
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=True, null=True)
     tags = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
 
