@@ -17,27 +17,35 @@ class Tag(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=15)
     month = models.ManyToManyField(Month)
+    description = models.TextField(blank=False, null=False)
+    mention = models.TextField(blank=False, null=False)
+    emoticon = models.ImageField(upload_to='emoticons/', blank=True, null=True)
 
     def __str__(self):
         return self.title
+    
+class EventMonth(models.Model):
+    month = models.ForeignKey(Month, related_name='month', on_delete=models.CASCADE)
+    evnet = models.ForeignKey(Event, related_name='event', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.month}월_{self.evnet}"
 
 class LookCard(models.Model):
     event = models.ForeignKey(Event, related_name='lookcards', on_delete=models.CASCADE)
-    description = models.TextField(blank=True, null=True)
+    event_month = models.ForeignKey(EventMonth, related_name='event_month', on_delete=models.CASCADE)
     is_recommend = models.TextField(blank=False)
     is_avoid = models.TextField(blank=False)
     avoid_reason = models.TextField(blank=False)
-    emoticon = models.ImageField(upload_to='emoticons/', blank=True, null=True)
 
     def __str__(self):
         return self.event.title
     
 class LookItem(models.Model):
-
     CATEGORY_CHOICES = [
-        ('TOP', '상의'),
-        ('BOTTOM', '하의'),
-        ('ACC', '악세사리'),
+        ('상의', '상의'),
+        ('하의', '하의'),
+        ('악세서리', '악세서리'),
     ]
 
     look_card = models.ForeignKey(LookCard, related_name='items', on_delete=models.CASCADE)

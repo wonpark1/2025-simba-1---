@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import *
-import re
 from django.db.models import Count
 from datetime import datetime
 
@@ -156,4 +155,4 @@ def calendar(request):
         'events': events,
         'month_events': month_events,
         'active_semester': int(semester)
-    })
+    })  
