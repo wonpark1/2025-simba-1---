@@ -28,17 +28,14 @@
         </div>
 
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
-        <div class="container">
-
-          <!-----------container1---------->
-          <div class="container1">
+        <section class="guide_container">
+            
             <!--▼ event 제목 및 멘트-->
-            <div class="mention">
-              <span>{{ lookcard.event.title }}</span><!--h1?-->
-              <span>{{ lookcard.event.description_look }}</span>
-            </div>
+            <h1 class="mention">{{ lookcard.event.title }}</h1>
+            <h2 class="mention">{{ lookcard.event.description_look }}</h2>
+
             <!--▼ lookcard-->
-            <div class="lookcard_container">
+            <div class="lookcard">
               <div class="lookcard_inframe">
                 <!--▼▼ event 제목-->
                 <div class="looktitle">{{ lookcard.id }}</div>
@@ -53,9 +50,9 @@
                   <p style="font-size: 14px;">{{ item.category }}{% if item.name %}: {{ item.name }}{% endif %}</p>
                   <p style="font-size: 11px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description }}</span>{% endif %}</p>
                 </div>
-                {% endfor %}   
-                <!--옛날 버전은 무조건 밑줄이 뜨는 거여서 이거 바로 밑에 있는 구조로 바꿨어요!-->
+                {% endfor %}   <!--########수정중##########-->
 
+                <!--옛날 버전은 무조건 밑줄이 뜨는 거여서 이거 바로 밑에 있는 구조로 바꿨어요!-->              
                 <!-- 밑줄을 보여주는 태그가 뭔지 모르겠어서 일단 예시로 이렇게 적어뒀어요 -->
                 <!-- 이거 태그 class가 뭐가 뭔지 모르겠어서 한 번만 수정해주세요...! -->
                 <!--{% for item in lookcard.items.all %}
@@ -87,40 +84,38 @@
 
                 
                 <!--▼▼ 추천/비추천-->
-                <div class="lookmention_container">
-                  <div class="lookmention">
-                    <img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />{{ lookcard.is_recommend }}
-                  </div>
-                  <div class="lookmention">
-                    <img src="{% static 'icons/nonrecommend.svg' %}" height="28.33" width="28.33" alt="비추천" />
-                    <div class="nonrecommend_container"><span id="nonrecommend1">{{ lookcard.is_avoid }}</span><span id="nonrecommend2">{{ lookcard.avoid_reason }}</span></div>
-                  </div>
+                <div class="lookmention">
+                  <p id="recommend"><img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />{{ lookcard.is_recommend }}</p>
+                  <p id="nonrecommend"><img src="{% static 'icons/nonrecommend.svg' %}" height="28.33" width="28.33" alt="비추천" />
+                     <span>{{ lookcard.is_avoid }}<br><span style="color: #757575; font-size: 10px; font-weight: 400;">{{ lookcard.avoid_reason }}</span></span></p>
                 </div>
+
 
               </div>
             </div>
-          </div>
 
-          <!----------container2---------->         
-          <div class="container2">
+         <!----------article---------->         
+          <article>
             <!--▼ 말풍선-->
             <div class="neoguri_comment">
-              <img src="{% static 'icons/Union.svg' %}" height="42.754" width="247.261" alt="말풍선"/>
-              <div id="neoguri_comment">{{ lookcard.event.mention }}</div><!--여기에도 반복문 작업 필요합니다!-->
+              <img src="{% static 'icons/Union.svg' %}" alt="말풍선"/>
+              <p>{{ lookcard.event.mention }}</p>
             </div>
-            <div class="neoguri"><img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" /></div>
-          </div>
+            <img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" />
+          </article>
 
-        </div>
+        </section>
         <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
-        <!--position 사용해서 container 코드들 수정 예정입니다-->
-        
+
+
+
+
 
         <!----------버튼---------->
         <a class="button" href="{% url 'main:comment_page' lookcard.id %}">
           <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
         </a>
-
+        
       </main>
   </body>
 
