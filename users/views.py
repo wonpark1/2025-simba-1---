@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def mypage(request):
+    user = request.user
     context = {
-        'user':request.user,
+        'user':user,
+        'profile':user.profile,
     }
     return render(request, 'users/mypage.html', context)
 

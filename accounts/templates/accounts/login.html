@@ -18,9 +18,9 @@
           <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <button class="icon_container"><!--accounts 페이지들 간에 url 함수 작업 필요해요. 이후 a 태그로 수정해서 url 연결할 예정!-->
+              <a href="{% url 'accounts:accountpage' %}" class="icon_container"><!--accounts 페이지들 간에 url 함수 작업 필요해요. 이후 a 태그로 수정해서 url 연결할 예정!-->
                 <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
-              </button>
+              </a>
               <p class="title">로그인</p>
               <div class="icon_container"></div>
             </div>
