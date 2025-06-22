@@ -16,24 +16,19 @@ class Tag(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=15)
-    month = models.ManyToManyField(Month)
-    description = models.TextField(blank=False, null=False)
+    month = models.ManyToManyField(Month, blank=True)
+    description_main = models.TextField(blank=False, null=False)
+    description_look = models.TextField(blank=True, null=True)
     mention = models.TextField(blank=False, null=False)
     emoticon = models.ImageField(upload_to='emoticons/', blank=True, null=True)
+    start = models.IntegerField()
+    end = models.IntegerField()
 
     def __str__(self):
-        return self.title
-    
-class EventMonth(models.Model):
-    month = models.ForeignKey(Month, related_name='month', on_delete=models.CASCADE)
-    evnet = models.ForeignKey(Event, related_name='event', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.month}월_{self.evnet}"
+        return f"{self.month}_{self.title}"
 
 class LookCard(models.Model):
     event = models.ForeignKey(Event, related_name='lookcards', on_delete=models.CASCADE)
-    event_month = models.ForeignKey(EventMonth, related_name='event_month', on_delete=models.CASCADE)
     is_recommend = models.TextField(blank=False)
     is_avoid = models.TextField(blank=False)
     avoid_reason = models.TextField(blank=False)
