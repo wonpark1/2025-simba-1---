@@ -14,6 +14,7 @@ urlpatterns = [
     path('lookcard/<int:lookcard_id>/comments/', views.commentpage, name="comment_page"),
     path('lookcard/<int:lookcard_id>/create/', views.create, name="create_comment"),
     path('lookcard/<int:lookcard_id>/', views.lookcard, name="lookcard_detail"),
+    path('alllookcards/<str:topic>/', views.alllookcards, name="alllookcards"),
     path('allevents/', views.allevents, name="allevents"),
     path('calendar/', views.calendar, name="calendar"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

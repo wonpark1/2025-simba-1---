@@ -2,38 +2,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.4.1 댓글 리스트</title>
-    <link rel="stylesheet" href="{% static 'main/CommentPage.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/project.css' %}" />
-  </head>
 
-  <body>
-      <main class="screen">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.4.1 댓글 리스트</title>
+  <link rel="stylesheet" href="{% static 'main/CommentPage.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/project.css' %}" />
+</head>
 
-        <!----------top---------->
-        <div>
-          <div class="statusbar">statusbar</div>
-          <div class="topnav">
-            <div class="topnav_inframe">
-              <a href="{% url 'main:lookcard_detail' lookcard.id%}" class="icon_container">
-              <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
-              </a>
-              <p class="title">댓글 쓰기</p>
-              <div class="icon_container"></div>
-            </div>
-          </div>
+<body>
+  <main class="screen">
+
+    <!----------top---------->
+    <div>
+      <div class="statusbar">statusbar</div>
+      <div class="topnav">
+        <div class="topnav_inframe">
+          <a href="{% url 'main:lookcard_detail' lookcard.id%}" class="icon_container">
+            <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+          </a>
+          <p class="title">댓글 쓰기</p>
+          <div class="icon_container"></div>
         </div>
+      </div>
+    </div>
 
-        <section>
-        <!----------필터링 버튼---------->
-        <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
-          최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
-        </button>
+      <!----------필터링 버튼---------->
+      <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
+        최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
+      </button>
 
-        <!----------작성한 댓글---------->
+      <!----------작성한 댓글---------->
+      <div class="comment_section">
         {% if comments %}
         {% for comment in comments %}
         <div class="comment_container"><!--이거 scroll용 외곽 container인데 수정 필요해보임 (월요일에 수정 예정)-->
@@ -43,8 +44,8 @@
             <div class="container1">
               <div id="nickname">{{ profile.nickname }}</div><!--닉네임이 안떠요 DB 확인? 필요해요-->
               <div class="edit">
-              <a href="{% url 'main:edit' comment.id %}" class="editbutton">수정</a>
-              <a href="{% url 'main:delete' comment.id %}" class="editbutton">삭제</a>
+                <a href="{% url 'main:edit' comment.id %}" class="editbutton">수정</a>
+                <a href="{% url 'main:delete' comment.id %}" class="editbutton">삭제</a>
               </div>
             </div>
             <!--▼ 이미지 삽입, 댓글 작성 내용-->
@@ -54,36 +55,57 @@
               {% endif %}
               <div class="comment">{{ comment.content }}</div>
             </div>
+
+            <!-- 지금은 백엔드 함수 자체가 버튼 클릭시 아예 리랜더링이 일어나서 
+                비효율적인 구조임. JS로 개선 고민 중 시간 남으면 수정할게요!-->
             <!--▼ 좋아요/아쉬워요 버튼-->
             <div class="container3">
+              {% if user in comment.likes.all %}<!-- user가 좋아요를 눌렀는지 확인(이미 눌렀을 때) -->
               <a href="{% url 'main:likes' comment.id %}" class="reactbutton">
-                  <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
+                <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
               </a>
+              {% else %}<!-- user가 좋아요를 안 눌렀을 때 -->
+              <a href="{% url 'main:likes' comment.id %}" class="nonreactbutton">
+                <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
+              </a>
+              {% endif %}
+
+              {% if user in comment.dislikes.all %}<!-- user가 아쉬워요를 눌렀는지 확인(이미 눌렀을 때) -->
               <a href="{% url 'main:dislikes' comment.id %}" class="reactbutton">
-                 <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요 {{comment.dislikes.count}}
+                <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
+                {{comment.dislikes.count}}
               </a>
+              {% else %}<!-- user가 아쉬워요를 안 눌렀을 때 -->
+              <a href="{% url 'main:dislikes' comment.id %}" class="nonreactbutton">
+                <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
+                {{comment.dislikes.count}}
+              </a>
+              {% endif %}
             </div>
           </div>
         </div>
-
-        <!--------댓글 없을 때 화면---------->   <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
+        <!--------댓글 없을 때 화면----------> <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
         {% endfor %}
         {% else %}
         <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
-        {% endif %} 
-        </section>
+        {% endif %}
+      </div>
+      
 
-        <!----------댓글 작성 form---------->
-        <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
+      <!----------댓글 작성 form---------->
+      <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input_container">
           <input type="file" id="image" name="image" accept="image/*" style="display: none;" />
-          <button class="input_button" type="button"><img src="{% static 'icons/img.svg' %}" height="15" width="15" alt="이미지" onclick="document.getElementById('image').click();" /></button>
+          <button class="input_button" type="button"><img src="{% static 'icons/img.svg' %}" height="15" width="15"
+              alt="이미지" onclick="document.getElementById('image').click();" /></button>
           <input type="text" id="message" name="content" placeholder="메시지를 입력하세요" />
-          <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15" alt="전송" /></button>
+          <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15"
+              alt="전송" /></button>
         </div>
-        </form>
-        
-      </main>
-  </body>
+      </form>
+
+  </main>
+</body>
+
 </html>

@@ -26,8 +26,8 @@
       <!-- ───────── pill 버튼 영역 (배너 아래) ───────── -->
       <section class="pill-wrapper">
         <div class="pill-grid">
-          {% for event in events %}
-          <a class="pill" href="{% url 'main:lookcard_detail' event.id %}">
+          {% for event in unique_events %}
+          <a class="pill" href="{% url 'main:alllookcards' event.topic %}">
             <img src="{{ event.image_url }}" alt="{{ event.title }}" width="28" height="29" />
             {{ event.title }}
           </a>

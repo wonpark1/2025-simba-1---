@@ -26,7 +26,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const ok = idOK && pwOK && same;
     nxt.disabled = !ok;
     nxt.classList.toggle("active", ok);
+
   }
+
+  // 이런식으로 분기 처리하는 건 어때요??
+  // function validate() {
+  //   if (pw) {
+  //     if (pw.length < 8){
+  //       pwGuide.style.display = "block";
+  //       pwErr.stextContent = "비밀번호는 8자 이상이어야 합니다.";
+  //     } else if (pw.length > 20){
+  //       pwGuide.style.display = "block";
+  //       pwErr.textContent = "비밀번호는 20자 이하이어야 합니다.";
+  //     } else if (!/[^\w\s]/.test(pw)){
+  //       pwGuide.style.display = "block";
+  //       pwErr.textContent = "비밀번호는 특수문자를 포함해야 합니다.";
+  //     } else {
+  //       pwOK = true;
+  //     }
+  //   }
+  // }
 
   [idI, pwI, cfI].forEach((el) => el.addEventListener("input", validate));
   validate(); // 최초 1회

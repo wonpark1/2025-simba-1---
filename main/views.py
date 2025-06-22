@@ -115,17 +115,30 @@ def allevents(request):
     user = request.user
     profile = request.user.profile
     events = Event.objects.all()
-    now = datetime.now()
-    current_month = now.month
-    month_obj = Month.objects.get(number=current_month)
-    event_lookcards = LookCard.objects.filter(event__month=month_obj)
+    unique_events = []
+    event_dict = {}
+
+    for event in events:
+        if '_' in event.title:
+            topic = event.title.split('_')[1]
+        else:   
+            topic = event.title
+            event.lookcard = LookCard.objects.filter(event=event).first()
+
+        if topic not in event_dict:
+            event.topic = topic
+            event_dict[topic] = event
+            
+    unique_events = event_dict.values()
+
+    lookcards = LookCard.objects.filter(event__in=events).order_by('event__title')
 
     return render(request, 'main/AllEventPage.html', {
         'user': user,
         'profile': profile,
+        'unique_events': unique_events,
         'events': events,
-        'event_lookcards': event_lookcards,
-        'month': current_month
+        'lookcards': lookcards
     })
 
 def calendar(request):
@@ -155,4 +168,13 @@ def calendar(request):
         'events': events,
         'month_events': month_events,
         'active_semester': int(semester)
+    })
+
+def alllookcards(request, topic):
+    events = Event.objects.filter(title__icontains=topic)
+    lookcards = LookCard.objects.filter(event__in=events).order_by('event__month__number', 'event__title')
+
+    return render(request, 'main/AllLookCardPage.html', {
+        'topic': topic,
+        'lookcards': lookcards,
     })
