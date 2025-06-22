@@ -1,0 +1,46 @@
+/*top*/
+
+.statusbar {
+  height: 47px;
+  text-align: center;
+}
+
+.topnav {
+  display: flex;
+  height: 51px;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-bottom: 1px solid var(--primary-001, #ff5722);
+}
+
+.topnav_inframe {
+  display: flex;
+  width: 354px;
+  height: 39px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.icon_container {
+  display: flex;
+  width: 39px;
+  height: 39px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.title {
+  color: var(--primary-002, #e64a19);
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

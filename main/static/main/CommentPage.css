@@ -1,8 +1,8 @@
 /* 2.4.1comment page - CSS */
 
-/*body * {
+body * {
   border: 1px solid black;
-}*/
+}
 
 
 body {
@@ -12,6 +12,14 @@ body {
   min-height: 100vh;
   background: #fff;
   font-family: "Pretendard", sans-serif;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 button {
@@ -34,6 +42,7 @@ input {
   flex-shrink: 0;
   overflow: hidden;/*이래도 scroll 되나..?*/
 }
+
 
 /*top*/
 
@@ -82,13 +91,8 @@ input {
   line-height: normal;
 }
 
-/*button*/
 
-.button_container {
-  display: flex;
-  align-self: stretch;
-  padding: 25px 30px;
-}
+/*button*/
 
 #filterbutton {
   /*button*/
@@ -96,6 +100,7 @@ input {
   width: 53px;
   height: 19.054px;
   padding: 3px 5px;
+  margin: 25px 30px;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -103,6 +108,8 @@ input {
   border-radius: 12px;
   border: 1px solid var(--primary-001, #ff5722);
   background: var(--back-004, #fff);
+
+  position: absolute;
 
   /*text*/
   color: var(--primary-001, #ff5722);
@@ -299,6 +306,7 @@ a.reactbutton {
   font-weight: 400;
   line-height: normal;
 }
+
 /*가운데 정렬*/
 #mention {
   display: flex;
@@ -306,7 +314,11 @@ a.reactbutton {
   color: #000;
   text-align: center;
 
-  /* Body/18 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
