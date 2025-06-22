@@ -20,6 +20,7 @@ body {
 .wrapper {
   width: 375px;
   height: 812px;
+  padding: 68px 23px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -100,4 +101,5 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
 }
