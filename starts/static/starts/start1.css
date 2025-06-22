@@ -9,8 +9,8 @@ html {
 
 @font-face {
   font-family: "Jalnan2";
-  src: url("./fonts/Jalnan2.otf") format("opentype"),
-    url("./fonts/Jalnan2.ttf") format("truetype");
+  src: url("../fonts/Jalnan2.otf") format("opentype"),
+    url("../fonts/Jalnan2.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
