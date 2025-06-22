@@ -83,10 +83,9 @@
             />
           </div>
           <span id="password_textcontainer"
-            >영어,숫자,특수문자로 8-20자 이내로 작성해주세요.</span
+            >영어,숫자,특수문자를 포함하여 8-20자 이내로 작성해주세요.</span
           >
-          <span id="password_error">조건을 만족해주세요</span
-          ><!--멘트 확인받기-->
+          <span id="password_error">조건을 만족해주세요</span>
         </div>
         <!--▼ 비밀번호 확인-->
         <div class="input_container">
@@ -107,10 +106,7 @@
             />
           </div>
           <div id="confirm_error">비밀번호가 일치하지 않습니다</div>
-          <!--멘트 확인받기-->
         </div>
-        <!--▼ 버튼-->
-        <!-- disabled 일단 뺐어용 JS추가하면 다시 넣으셔용-->
 
         <!-- 버튼 -->
         <button id="nextBtn" class="button" type="submit" disabled>다음</button>
@@ -118,6 +114,5 @@
     </main>
 
     <script src="{% static 'js/accounts/signup1.js' %}"></script>
-    <!-- ★ 변경 : 경로 일치 확인 -->
   </body>
 </html>
