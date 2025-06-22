@@ -78,6 +78,7 @@ body {
   align-items: center;
   flex-shrink: 0;
   margin: 17px 26px 0px 26px;
+  border: 1px solid red;
 }
 
 /***container1***/
