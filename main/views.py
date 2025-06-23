@@ -16,8 +16,11 @@ def poppagestack(request):
     if stack:
         stack.pop()
         request.session['page_stack'] = stack
+        return redirect(stack[-1])
+    else:
+        print("에러가 발생했습니다. 다시 시도해주세요.")
+        return redirect('main:mainpage')
 
-    return redirect(stack[-1] if stack else 'main:mainpage')
 
 def previouspage(request):
     return poppagestack(request)
@@ -62,12 +65,15 @@ def mainpage(request):
         'event': event_lookcards,
         'scheduled_events': scheduled_events,
     })
+
 def commentpage(request, lookcard_id):
-    pushpagestack(request, request.path)
+    pushpagestack(request, request.get_full_path())
 
     sort = request.GET.get('sort','latest')
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
-    comments = lookcard.comments.all()
+    same_event_lookcards = LookCard.objects.filter(event__title=lookcard.event.title)
+    comments = Comment.objects.filter(look_card__in=same_event_lookcards).order_by('-create_at')
+    writers = comments.values_list('writer__username', flat=True)
 
     if sort == 'likes':
         comments = comments.annotate(like_count=Count('likes')).order_by('-like_count')
@@ -77,6 +83,9 @@ def commentpage(request, lookcard_id):
         comments = comments.annotate(dislike_count=Count('dislikes')).order_by('-dislike_count')
 
     return render(request, 'main/CommentPage.html', {
+        'user': request.user,
+        'profile': request.user.profile,
+        'writers': writers,
         'lookcard': lookcard,
         'comments': comments,
         'sort': sort
@@ -125,6 +134,7 @@ def delete(request, id):
 
 def likes(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
+    next_url = request.GET.get('next', '/')
 
     if request.user in comment.likes.all():
         comment.likes.remove(request.user)
@@ -133,10 +143,11 @@ def likes(request, comment_id):
         if request.user in comment.dislikes.all():
             comment.dislikes.remove(request.user)
 
-    return redirect('main:comment_page', lookcard_id=comment.look_card.id)
+    return redirect(next_url) if next_url else redirect('main:comment_page', lookcard_id=comment.look_card.id)
 
 def dislikes(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
+    next_url = request.GET.get('next', '/')
 
     if request.user in comment.dislikes.all():
         comment.dislikes.remove(request.user)
@@ -147,10 +158,10 @@ def dislikes(request, comment_id):
             comment.likes.remove(request.user)
 
     comment.save()
-    return redirect('main:comment_page', lookcard_id=comment.look_card.id)
+    return redirect(next_url) if next_url else redirect('main:comment_page', lookcard_id=comment.look_card.id)
 
 def lookcard(request, lookcard_id):
-    pushpagestack(request, request.path)
+    pushpagestack(request, request.get_full_path())
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     items = lookcard.items.all()
     comments = lookcard.comments.all()
@@ -170,7 +181,7 @@ def lookcard(request, lookcard_id):
     return render(request, 'main/LookCardPage.html', {'lookcard': lookcard, 'items': items, 'comments': comments})
 
 def allevents(request):
-    pushpagestack(request, request.path)
+    pushpagestack(request, request.get_full_path())
     user = request.user
     profile = request.user.profile
     events = Event.objects.all()
@@ -201,7 +212,7 @@ def allevents(request):
     })
 
 def calendar(request):
-    pushpagestack(request, request.path)
+    pushpagestack(request, request.get_full_path())
     semester = request.GET.get('semester', '1')
     months = []
     events = []
@@ -224,7 +235,7 @@ def calendar(request):
             })
 
     return render(request, 'main/CalendarPage.html', {
-        'months': months,
+        'months': months, 
         'events': events,
         'month_events': month_events,
         'active_semester': int(semester)

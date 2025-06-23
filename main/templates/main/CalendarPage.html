@@ -34,7 +34,7 @@
             <span class="month-label">{{ item.month }}</span>
             <div class="events">
               {% for event in item.events %}
-                <a href="{% url 'main:lookcard_detail' event.lookcards.all.first.id %}" class="pill">
+                <a href="{% url 'main:lookcard_detail' event.lookcards.all.first.id %}?semester={{ active_semester }}" class="pill">
                   <img src="{{ event.emoticon.url }}" alt="{{ event.title }}" width="29" height="29"/>{{ event.title }}
                 </a>
               {% endfor %}

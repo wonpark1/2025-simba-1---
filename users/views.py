@@ -14,7 +14,7 @@ def mypage(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('accounts:login')
+    return redirect('accounts:accountpage')
 
 def mycomment(request):
     user = request.user
