@@ -169,10 +169,17 @@ def calendar(request):
         'month_events': month_events,
         'active_semester': int(semester)
     })
-
+  
 def alllookcards(request, topic):
-    events = Event.objects.filter(title__icontains=topic)
-    lookcards = LookCard.objects.filter(event__in=events).order_by('event__month__number', 'event__title')
+    if topic == '시험기간':
+        events = Event.objects.filter(title__icontains='시험기간')
+        lookcards = LookCard.objects.filter(event__in=events, month__number__in=[4, 10]).order_by('event__month__number', 'event__title')
+        for lookcard in lookcards:
+            lookcard.semester = '1학기' if lookcard.month.number in [4] else '2학기'
+    
+    else:
+        events = Event.objects.filter(title__icontains=topic)
+        lookcards = LookCard.objects.filter(event__in=events).order_by('event__month__number', 'event__title')
 
     return render(request, 'main/AllLookCardPage.html', {
         'topic': topic,
