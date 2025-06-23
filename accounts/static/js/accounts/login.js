@@ -1,4 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+  
+  
+  // x 버튼 누르면 input 내용 삭제
+    document.querySelectorAll('.clear_btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const input = document.getElementById(targetId);
+        if (input) {
+          input.value = '';
+          input.dispatchEvent(new Event('input'));
+        }
+      });
+    });
+
+
+    // inputField 스타일 기본 제거
+    inputFields.forEach((field) => {
+      field.classList.remove('error', 'success');
+
+      const input = field.querySelector('input');
+      const img = field.querySelector('img');
+
+      if (img && input) {
+      const defaultIcon = input.dataset.defaultIcon;
+      img.src = defaultIcon || "/static/icons/account_default.svg";
+      }
+    });
+
+
+
+
   const idInp = document.getElementById("username");
   const pwInp = document.getElementById("password");
   const btn = document.getElementById("loginBtn");

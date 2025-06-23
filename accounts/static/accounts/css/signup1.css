@@ -138,7 +138,7 @@ button {
   letter-spacing: -0.5px;
 }
 
-.input_frame {
+.input_field {
   display: flex;
   width: 323px;
   height: 54px;
@@ -151,11 +151,14 @@ button {
   border-radius: 10px;
   border: 1px solid var(--text-002, #757575);
   background: #fff;
+}
 
-  /*활성화 시 css*/
-  /*border-radius: 10px;
+.error {
+  border: 1px solid var(--alert-red, #e7000b);
+}
+
+.success {
   border: 1px solid var(--alert-green, #096);
-  background: #fff;*/
 }
 
 .input {
@@ -166,6 +169,7 @@ button {
   align-items: center;
   flex-shrink: 0;
   border: none;
+  outline: none;
 
   color: var(--text-002, #757575);
   font-family: "Pretendard Variable";
