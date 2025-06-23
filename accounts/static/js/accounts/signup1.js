@@ -1,174 +1,157 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const $ = (id) => document.getElementById(id);
-  const idI = $("username");
-  const pwI = $("password");
-  const cfI = $("confirm");
-  const nxt = $("nextBtn");
 
-  const pwGuide = $("password_textcontainer");
-  const pwErr = $("password_error");
-  const cfErr = $("confirm_error");
+  const idI = $('username');
+  const idField = $('username_field');
+  const idErr = $('username_check');
+  const idOK = $('username_textcontainer');
 
-  const rule = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/;
+  const pwInput = $('password');
+  const cfInput = $('confirm');
+  const nextBtn = $('nextBtn');
+
+  const pwGuide = $('password_textcontainer');
+  const pwErr = $('password_error');
+  const cfErr = $('confirm_error');
+
   const inputFields = document.querySelectorAll('.input_field');
+  const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/;
 
-  function validate() {
-    const id = idI.value.trim();
-    const pw = pwI.value.trim();
-    const cf = cfI.value.trim();
+  let usernameValid = false;
+  let passwordValid = false;
+  let pwMatch = false;
+ 
+  // ID 중복 검사
+  let idTimer;
+  idI.addEventListener('input', () => {
+    clearTimeout(idTimer);
+    resetIdUI();
 
-    const idOK = id !== "";
+    const value = idI.value.trim();
+    if (!value) { usernameValid = false; updateSubmit(); return; }
 
-    let pwOK = false;
-    pwGuide.style.display = pw ? "none" : "block";
+    idTimer = setTimeout(() => {
+      fetch(`/accounts/checkid/?username=${encodeURIComponent(value)}`)
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(({ exists }) => {
+          usernameValid = !exists;
+          exists ? setIdError('이미 사용 중인 아이디입니다.')
+                 : setIdSuccess();
+          updateSubmit();
+        })
+        .catch(() => {
+          usernameValid = false;
+          setIdError('아이디 확인 실패');
+          updateSubmit();
+        });
+    }, 400);
+  });
 
-    // inputField 스타일 기본 제거
-    inputFields.forEach((field) => {
-      field.classList.remove('error', 'success');
+  function resetIdUI() {
+    idField.classList.remove('error', 'success');
+    idErr.style.display = 'none';
+    idOK.style.display  = 'none';
+  }
+  function setIdError(msg) {
+    idField.classList.add('error');
+    idErr.textContent = msg;
+    idErr.style.display = 'block';
+  }
+  function setIdSuccess() {
+    idField.classList.add('success');
+    idOK.style.display = 'block';
+  }
 
-      const input = field.querySelector('input');
-      const img = field.querySelector('img');
-
-      if (img && input) {
-      const defaultIcon = input.dataset.defaultIcon;
-      img.src = defaultIcon || "/static/icons/account_default.svg";
-      }
-    });
-
-
-    //------------아이디-------------//
-
-    // 아이디 입력 시
-    if (idOK) {
-      inputFields.forEach((field) => {
-        const input = field.querySelector('input');
-        if (input && input.id === "username") {
-          field.classList.add('success');
-          const img = field.querySelector('img');
-          if (img) img.src = "/static/icons/account_chdeck.svg";
-        }
-      });
-    }
-
-
-    //-----------비밀번호-------------//
-
-    // 비밀번호 유효성 검사
-    if (!pw) {
-      pwGuide.textContent = "영어,숫자,특수문자를 포함하여 8-20자 이내로 작성해주세요."
-      pwErr.style.display = "none";
-    } else if (pw.length < 8) {
-      pwErr.textContent = "비밀번호는 8자 이상이어야 합니다.";
-      //pwGuide.classList.add("error");
-      pwErr.style.display = "block";
-    } else if (pw.length > 20) {
-      pwErr.textContent = "비밀번호는 20자 이하이어야 합니다.";
-      //pwGuide.classList.add("error");
-      pwErr.style.display = "block";
-    } else if (!/[!@#$%^&*()_\-+={[}\]|\\:;"'<>,.?/]/.test(pw)) {
-      pwErr.textContent = "비밀번호는 특수문자를 포함해야 합니다.";
-      //pwGuide.classList.add("error");
-      pwErr.style.display = "block";
-    } else if (!rule.test(pw)) {
-      pwErr.textContent = "영문과 숫자를 모두 포함해야 합니다.";
-      //pwGuide.classList.add("error");
-      pwErr.style.display = "block";
-    } else {
-      pwOK = true;
-      pwGuide.textContent = "사용 가능한 비밀번호입니다.";
-      //pwGuide.classList.add("success");
-      pwErr.style.display = "none";
-    }
-
-    // 비밀번호가 유효하지 않을 경우
-    if (pw && !pwOK) {
-      inputFields.forEach((field) => {
-        const input = field.querySelector('input');
-        if (input && input.id === "password") {
-          field.classList.add('error');
-        }
-      });
-    }
-
-    // 비밀번호가 유효할 경우
-    if (pwOK) {
-      inputFields.forEach((field) => {
-        const input = field.querySelector('input');
-        if (input && input.id === "password") {
-          field.classList.add('success');
-          const img = field.querySelector("img");
-          if (img) img.src = "/static/icons/account_chdeck.svg";
-        }
-      });
-    }
-
-
-    // 비밀번호 eyeson eyesoff 기능
-    const toggleIcons = document.querySelectorAll('.toggle-icon');
-
-    toggleIcons.forEach((icon) => {
-      icon.addEventListener('click', () => {
-        const input = icon.previousElementSibling;
-
-        const defaultIcon = icon.dataset.defaultIcon;
-        const toggleIcon = icon.dataset.toggleIcon;
-
-        if (input.type === "password") {
-          input.type = "text";
-          icon.src = toggleIcon;
-        } else {
-          input.type = "password";
-          icon.src = defaultIcon;
-        }
-      });
-    });
-
-
-    //--------비밀번호 확인----------//
-
-    // 비밀번호 일치 여부 검사
-    const same = pwOK && cf && pw === cf;
-    cfErr.style.display = cf && !same ? "block" : "none";
-
-    const ok = idOK && pwOK && same;
-    nxt.disabled = !ok;
-    nxt.classList.toggle("active", ok);
-
-
-    // 비밀번호가 일치하지 않을 경우
-    if (cf && !same) {
-      inputFields.forEach((field) => {
-        const input = field.querySelector('input');
-        if (input && input.id === "confirm") {
-          field.classList.add('error');
-          const img = field.querySelector("img");
-          if (img) img.src = "/static/icons/account_alert.svg";
-        }
-      });
-    }
-
-    // 비밀번호가 일치할 경우
-    if (same) {
-      inputFields.forEach((field) => {
-        const input = field.querySelector('input');
-        if (input && input.id === "confirm") {
-          field.classList.add('success');
-          const img = field.querySelector("img");
-          if (img) img.src = "/static/icons/account_chdeck.svg";
-        }
-      });
-    }  
-    
-  }//validate 함수 끝
-
-
-
-
-
-  [idI, pwI, cfI].forEach((el) => el.addEventListener("input", validate));
+  // password 유효성 검사 + 비밀번호 확인 동일여부 점검
+  [pwInput, cfInput].forEach(el => el.addEventListener('input', validate));
   validate(); // 최초 1회
 
-  document.getElementById("signupForm").addEventListener("submit", (e) => {
-    if (nxt.disabled) e.preventDefault();
+  function validate() {
+    const pw = pwInput.value.trim();
+    const cf = cfInput.value.trim();
+
+    let pwOK = false;
+    pwGuide.style.display = pw ? 'none' : 'block';
+
+    // 모든 필드 초기화
+    inputFields.forEach(field => {
+      field.classList.remove('error', 'success');
+      const img = field.querySelector('img');
+      const input = field.querySelector('input');
+      if (img && input) img.src = input.dataset.defaultIcon || '/static/icons/account_default.svg';
+    });
+
+    // PW 유효성 검사
+    if (!pw) {
+      pwGuide.textContent = '영어,숫자,특수문자를 포함하여 8-20자 이내로 작성해주세요.';
+      pwErr.style.display = 'none';
+    } else if (pw.length < 8) {
+      pwErr.textContent = '비밀번호는 8자 이상이어야 합니다.';
+      pwErr.style.display = 'block';
+    } else if (pw.length > 20) {
+      pwErr.textContent = '비밀번호는 20자 이하이어야 합니다.';
+      pwErr.style.display = 'block';
+    } else if (!/[!@#$%^&*()_\-+={[}\]|\\:;"'<>,.?/]/.test(pw)) {
+      pwErr.textContent = '비밀번호는 특수문자를 포함해야 합니다.';
+      pwErr.style.display = 'block';
+    } else if (!pwRegex.test(pw)) {
+      pwErr.textContent = '영문과 숫자를 모두 포함해야 합니다.';
+      pwErr.style.display = 'block';
+    } else {
+      pwOK = true;
+      pwGuide.textContent = '사용 가능한 비밀번호입니다.';
+      pwErr.style.display = 'none';
+    }
+
+    if (pw && !pwOK) markField('password', 'error');
+    if (pwOK)          markField('password', 'success', '/static/icons/account_chdeck.svg');
+
+    // pw, Confirm 일치
+    const same = pwOK && cf && pw === cf;
+    cfErr.style.display = cf && !same ? 'block' : 'none';
+
+    if (cf && !same) markField('confirm', 'error',   '/static/icons/account_alert.svg');
+    if (same)         markField('confirm', 'success', '/static/icons/account_chdeck.svg');
+
+    passwordValid = pwOK;
+    pwMatch = same;
+    updateSubmit();
+  }
+
+  function markField(inputId, state, iconPath) {
+    inputFields.forEach(field => {
+      const input = field.querySelector('input');
+      if (input && input.id === inputId) {
+        field.classList.add(state);
+        if (iconPath) {
+          const img = field.querySelector('img');
+          if (img) img.src = iconPath;
+        }
+      }
+    });
+  }
+
+  // 비밀번호 표시 토글
+  document.querySelectorAll('.toggle-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+      const input = icon.previousElementSibling;
+      const def   = icon.dataset.defaultIcon;
+      const tog   = icon.dataset.toggleIcon;
+      if (input.type === 'password') { input.type = 'text'; icon.src = tog; }
+      else                           { input.type = 'password'; icon.src = def; }
+    });
+  });
+
+  // 제출 버튼 활성화
+  function updateSubmit() {
+    const ok = usernameValid && passwordValid && pwMatch;
+    nextBtn.disabled = !ok;
+    nextBtn.classList.toggle('active', ok);
+  }
+  updateSubmit();
+
+  // 제출 방지
+  $('signupForm').addEventListener('submit', e => {
+    if (nextBtn.disabled) e.preventDefault();
   });
 });
