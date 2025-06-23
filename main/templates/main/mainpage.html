@@ -34,7 +34,7 @@
         <section class="cards">
           {% if event %} {% for lookcard in event %}
           <div class="card">
-            <p class="tag">{{ month }}월</p>
+            <p class="tag">{{ month }}월 {{ lookcard.period }}</p>
             <h2>{{ lookcard.event.title }}</h2>
             <p class="desc">{{ lookcard.description }}</p>
             <a

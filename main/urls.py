@@ -17,4 +17,5 @@ urlpatterns = [
     path('alllookcards/<str:topic>/', views.alllookcards, name="alllookcards"),
     path('allevents/', views.allevents, name="allevents"),
     path('calendar/', views.calendar, name="calendar"),
+    path('previouspage/', views.previouspage, name="previouspage"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

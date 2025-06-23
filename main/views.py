@@ -5,17 +5,65 @@ from django.db.models import Count
 from datetime import datetime
 
 # Create your views here.
+def pushpagestack(request, current_page):
+    stack = request.session.get('page_stack', [])
+    stack.append(current_page)
+    request.session['page_stack'] = stack
+
+def poppagestack(request):
+    stack = request.session.get('page_stack', [])
+    if stack:
+        stack.pop()
+        request.session['page_stack'] = stack
+
+    return redirect(stack[-1] if stack else 'main:mainpage')
+
+def previouspage(request):
+    return poppagestack(request)
+    
 def mainpage(request):
+    pushpagestack(request, request.path)
+
     user = request.user
     profile = request.user.profile
     now = datetime.now()
+    today_date = now.day
     current_month = now.month
     month_obj = Month.objects.get(number=current_month)
-    event_lookcards = LookCard.objects.filter(event__month=month_obj).order_by('event__title')
 
-    return render(request, 'main/mainpage.html', {'month': current_month, 'user': user, 'profile': profile, 'event': event_lookcards})
+    event_lookcards = LookCard.objects.filter(
+        event__month=month_obj,
+        event__end__gte=today_date
+    ).order_by('event__title')
 
+    for event in event_lookcards:
+        if event.event.start == 1:
+            if event.event.end == 10:
+                event.period = '초'
+            elif event.event.end == 20:
+                event.period = '초중순'
+        elif event.event.start == 11 and event.event.end == 20:
+            event.period = '중'
+        elif event.event.start == 21 and event.event.end == 31:
+            event.period = '말'
+
+    scheduled_events = []
+
+    if not event_lookcards:
+        next_month_num = current_month + 1 if current_month < 12 else 1
+        next_month_obj = Month.objects.get(number=next_month_num)
+        scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
+
+    return render(request, 'main/mainpage.html', {
+        'month': current_month,
+        'user': user,
+        'profile': profile,
+        'event': event_lookcards,
+        'scheduled_events': scheduled_events,
+    })
 def commentpage(request, lookcard_id):
+    pushpagestack(request, request.path)
+
     sort = request.GET.get('sort','latest')
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     comments = lookcard.comments.all()
@@ -46,6 +94,8 @@ def create(request, lookcard_id):
         return redirect('accounts:login')
 
 def edit(request, id):
+    pushpagestack(request, request.path)
+
     edit_comment = get_object_or_404(Comment, pk=id)
 
     if request.user.is_authenticated and request.user == edit_comment.writer:
@@ -93,6 +143,7 @@ def dislikes(request, comment_id):
     return redirect('main:comment_page', lookcard_id=comment.look_card.id)
 
 def lookcard(request, lookcard_id):
+    pushpagestack(request, request.path)
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     items = lookcard.items.all()
     comments = lookcard.comments.all()
@@ -112,6 +163,7 @@ def lookcard(request, lookcard_id):
     return render(request, 'main/LookCardPage.html', {'lookcard': lookcard, 'items': items, 'comments': comments})
 
 def allevents(request):
+    pushpagestack(request, request.path)
     user = request.user
     profile = request.user.profile
     events = Event.objects.all()
@@ -142,6 +194,7 @@ def allevents(request):
     })
 
 def calendar(request):
+    pushpagestack(request, request.path)
     semester = request.GET.get('semester', '1')
     months = []
     events = []
@@ -171,6 +224,8 @@ def calendar(request):
     })
   
 def alllookcards(request, topic):
+    pushpagestack(request, request.path)
+
     if topic == '시험기간':
         events = Event.objects.filter(title__icontains='시험기간')
         lookcards = LookCard.objects.filter(event__in=events, month__number__in=[4, 10]).order_by('event__month__number', 'event__title')
