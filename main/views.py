@@ -235,7 +235,7 @@ def calendar(request):
             })
 
     return render(request, 'main/CalendarPage.html', {
-        'months': months,
+        'months': months, 
         'events': events,
         'month_events': month_events,
         'active_semester': int(semester)
