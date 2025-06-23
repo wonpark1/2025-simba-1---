@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        
+        <section>
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
         <div class="guide_container">
             
@@ -48,8 +48,8 @@
                 
                 {% for item in lookcard.items.all %}
                 <div class="lookguide">
-                  <p style="font-size: 15px;">{{ item.category }}{% if item.name != 'A' %}: {{ item.name }}{% endif %}</p>
-                  <p style="font-size: 11px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description|linebreaksbr }}</span>{% endif %}</p>
+                  <p style="font-size: 18px;">{{ item.category }}{% if item.name != 'A' %}: {{ item.name }}{% endif %}</p>
+                  <p style="font-size: 12px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description|linebreaksbr }}</span>{% endif %}</p>
                 </div>
                 {% endfor %}   <!--########수정중##########-->
 
@@ -93,21 +93,19 @@
 
 
               </div>
-            </div>
-            
-          <!----------article---------->         
+            </div>          
+        </div>
+        <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
+          
+        <!----------article---------->         
           <article>
             <!--▼ 말풍선-->
             <div class="neoguri_comment">
               <img src="{% static 'icons/Union.svg' %}" alt="말풍선"/>
               <p>{{ lookcard.event.mention|linebreaksbr }}</p>
             </div>
-            <img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" />
+            <img src="{% static 'img/2.3raccoon.png' %}" alt="너구리" class="neoguri_img"/>
           </article>
-          
-        </div>
-        <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
-
          
 
 
@@ -115,7 +113,7 @@
         <a class="button" href="{% url 'main:comment_page' lookcard.id %}?next={{ request.get_full_path }}">
           <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
         </a>
-        
+        </section>
       </main>
   </body>
 

@@ -69,8 +69,8 @@
                 
                 {% for item in lookcard.items.all %}
                 <div class="lookguide">
-                  <p style="font-size: 14px;">{{ item.category }}{% if item.name != 'A' %}: {{ item.name }}{% endif %}</p>
-                  <p style="font-size: 11px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description|linebreaksbr }}</span>{% endif %}</p>
+                  <p style="font-size: 18px;">{{ item.category }}{% if item.name != 'A' %}: {{ item.name }}{% endif %}</p>
+                  <p style="font-size: 12px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description|linebreaksbr }}</span>{% endif %}</p>
                 </div>
                 {% endfor %}   <!--########수정중##########-->
 
@@ -116,6 +116,10 @@
               {% endfor %}  <!--lookcards 반복문 시작-->
               <!--lookcards 반복문 끝-->
             </div>
+        </div>
+        <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
+      
+
           {% for lookcard in lookcards %}
           {% if forloop.last %}
          <!----------article---------->         
@@ -125,16 +129,10 @@
               <img src="{% static 'icons/Union.svg' %}" alt="말풍선"/>
               <p>{{ lookcard.event.mention|linebreaksbr }}</p>
             </div>
-            <img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" />
+            <img src="{% static 'img/2.3raccoon.png' %}" alt="너구리" class="neoguri_img"/>
           </article>
           {% endif %}
           {% endfor %} <!--lookcards 반복문 끝--> 
-
-        </div>
-        <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
-      
-
-
 
 
         <!----------버튼---------->
