@@ -25,7 +25,7 @@
               <div class="icon_container"></div>
             </div>
           </div>
-        </div>c
+        </div>
 
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
         <section class="guide_container">
@@ -36,9 +36,13 @@
 
             <!--▼ lookcard-->
             <div class="lookcard">
+              {% for lookcard in lookcards %}  
+              {% if forloop.last %}
+              <div class="lookcard_inframe_last">
+              {% else %}
               <div class="lookcard_inframe">
+              {% endif %}
                 <!--▼▼ event 제목-->
-                {% for lookcard in lookcards %}  
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
                 <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
                 <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
@@ -92,10 +96,12 @@
                      <span>{{ lookcard.is_avoid }}<br><span style="color: #757575; font-size: 10px; font-weight: 400;">{{ lookcard.avoid_reason }}</span></span></p>
                 </div>
 
-                {% endfor %} <!--lookcard 반복문 끝-->
               </div>
+              {% endfor %}  <!--lookcards 반복문 시작-->
+              <!--lookcards 반복문 끝-->
             </div>
-
+          {% for lookcard in lookcards %}
+          {% if forloop.last %}
          <!----------article---------->         
           <article>
             <!--▼ 말풍선-->
@@ -105,6 +111,8 @@
             </div>
             <img src="{% static 'img/2.3raccoon.png' %}" height="71" width="71" alt="너구리" />
           </article>
+          {% endif %}
+          {% endfor %} <!--lookcards 반복문 끝--> 
 
         </section>
         <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
