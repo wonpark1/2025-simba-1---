@@ -93,8 +93,8 @@ input {
 #filterbutton {
   /*button*/
   display: flex;
-  width: 53px;
-  height: 19.054px;
+  width: 75px;
+  height: 24.054px;
   padding: 3px 5px;
   margin: 25px 30px;
   justify-content: space-between;
