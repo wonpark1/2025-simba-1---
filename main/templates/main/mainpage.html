@@ -23,11 +23,13 @@
       <section class="container">
         <!-- 안내 문구 -->
         <section class="intro-text">
+          {% if event %}
           <p>
             {{ month }}월에 있는 행사의<br /><strong
               >룩 가이드를 소개해드릴게요!</strong
             >
           </p>
+          {% endif %}
         </section>
 
         <!-- 카드 섹션 -->
@@ -46,7 +48,7 @@
             </a>
           </div>
           {% endfor %} {% else %}
-          <p class="no-event">이번 달에는 룩 가이드가 없어요.</p>
+          <p class="no-event">이번 달에는 특별한 행사가 없어요.</p>
           {% endif %}
         </section>
         <section class="end-label">이번 달 룩 가이드는 여기서 끝이에요</section>

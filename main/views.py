@@ -35,10 +35,12 @@ def mainpage(request):
     current_month = now.month
     month_obj = Month.objects.get(number=current_month)
 
-    event_lookcards = LookCard.objects.filter(
-        event__month=month_obj,
-        event__end__gte=today_date
-    ).order_by('event__title')
+    # event_lookcards = LookCard.objects.filter(
+    #     event__month=month_obj,
+    #     event__end__gte=today_date
+    # ).order_by('event__title')
+
+    event_lookcards = LookCard.objects.filter(month__number=month_obj.number).order_by('event__title')
 
     for event in event_lookcards:
         if event.event.start == 1:
@@ -106,20 +108,19 @@ def create(request, lookcard_id):
         return redirect('accounts:login')
 
 def edit(request, id):
-    pushpagestack(request, request.path)
+    pushpagestack(request, request.get_full_path())
 
     edit_comment = get_object_or_404(Comment, pk=id)
 
     next_url = request.GET.get('next', '/')
 
-    if request.user.is_authenticated and request.user == edit_comment.writer:
-        if request.method == "POST":          
-            edit_comment.content = request.POST.get('content', '')
-            if 'image' in request.FILES:              
-                edit_comment.image = request.FILES['image']
-            edit_comment.create_at = timezone.now()
-            edit_comment.save()
-            return redirect(next_url)
+    if request.method == "POST":          
+        edit_comment.content = request.POST.get('content', '')
+        if 'image' in request.FILES:              
+            edit_comment.image = request.FILES['image']
+        edit_comment.create_at = timezone.now()
+        edit_comment.save()
+        return redirect(next_url)
         
     return render(request, 'main/CommentEditPage.html', {
         'comment': edit_comment,
