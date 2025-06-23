@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-!-Simbathon-Team1'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
