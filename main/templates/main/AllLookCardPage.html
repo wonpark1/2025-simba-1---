@@ -38,7 +38,7 @@
             <div class="lookcard">
               <div class="lookcard_inframe">
                 <!--▼▼ event 제목-->
-                {% for lookcard in lookcards %}
+                {% for lookcard in lookcards %}  
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
                 <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
                 <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
