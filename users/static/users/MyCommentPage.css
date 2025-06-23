@@ -178,7 +178,8 @@ body {
   gap: 15px;
 }
 
-.reactbutton {
+a.nonreactbutton,
+a.reactbutton {
   display: flex;
   padding: 4px 7px;
   box-sizing: border-box;
@@ -190,15 +191,27 @@ body {
   border: 0.5px solid var(--text-003, #bbb);
   background: var(--back-004, #fff);
 
-  color: var(--primary-001, #ff5722);
   text-align: center;
-
   /* Caption/10 */
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.reactbutton {
+  background: rgba(255, 87, 22, 0.5);
+  color: #fff;
+  border: 0.5px solid var(--primary-001, #ff5722);
+}
+
+a.nonreactbutton {
+  color: black;
+  background: var(--back-004, #fff);
 }
 
 /*mention*/
