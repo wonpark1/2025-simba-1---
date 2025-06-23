@@ -1,3 +1,7 @@
+/*body * {
+  border: 1px solid black;
+}*/
+
 body {
   display: flex;
   justify-content: center;
@@ -5,6 +9,10 @@ body {
   min-height: 100vh;
   background: #fff;
   font-family: "Pretendard", sans-serif;
+}
+
+input {
+  outline: none;
 }
 
 .screen {
@@ -123,7 +131,7 @@ button {
   letter-spacing: -0.5px;
 }
 
-.input_frame {
+.input_field {
   display: flex;
   width: 323px;
   height: 54px;
@@ -137,11 +145,10 @@ button {
   border-radius: 10px;
   border: 1px solid var(--text-002, #757575);
   background: #fff;
+}
 
-  /*활성화 시 css*/
-  /*border-radius: 10px;
-  border: 1px solid var(--alert-green, #096);
-  background: #fff;*/
+.error {
+  border: 1px solid var(--alert-red, #e7000b);
 }
 
 .input {
@@ -152,6 +159,7 @@ button {
   align-items: center;
   flex-shrink: 0;
   border: none;
+  outline: none;
 
   color: var(--text-002, #757575);
   font-family: "Pretendard Variable";
@@ -185,6 +193,7 @@ button {
   font-weight: 500;
   line-height: normal;
 }
+
 .button.active {
   background: #ff5722;
   color: #fff;
