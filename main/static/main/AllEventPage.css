@@ -1,3 +1,4 @@
+@import url("/static/css/project.css");
 * {
   margin: 0;
   padding: 0;
@@ -103,6 +104,10 @@ body {
   width: 24px;
   height: 24px;
   display: block;
+}
+.pill:hover,
+.pill:focus-visible {
+  border-color: #000000;
 }
 
 .bottom-nav {

@@ -149,6 +149,10 @@ a.pill:active {
   transform: scale(0.94); /
 
 }
+a.pill:hover,
+.pill:focus-visible {
+  border-color: #000000;
+}
 .pill img {
   width: 24px;
   height: 24px;
