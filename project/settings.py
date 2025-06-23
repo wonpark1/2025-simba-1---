@@ -26,7 +26,17 @@ SECRET_KEY = 'django-insecure-!-Simbathon-Team1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "72d0-210-94-220-230.ngrok-free.app",  # 현재 뜬 주소
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://72d0-210-94-220-230.ngrok-free.app",
+    # Django 4.1+면 와일드카드도 OK
+    # "https://*.ngrok-free.app",
+]
 
 # Application definition
 

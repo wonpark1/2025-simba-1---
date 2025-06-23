@@ -1,118 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.4.1 로그인</title>
 
-    {% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.4.1 로그인</title>
 
-    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
-  </head>
+  {% load static %}
 
-  <body>
-    <main class="screen">
-      <!----------top---------->
-      <div>
-        <div class="statusbar">statusbar</div>
-        <div class="topnav">
-          <div class="topnav_inframe">
-            <a href="{% url 'accounts:accountpage' %}" class="icon_container"
-              ><!--accounts 페이지들 간에 url 함수 작업 필요해요. 이후 a 태그로 수정해서 url 연결할 예정!-->
-              <img
-                src="{% static 'icons/arrow_left.svg' %}"
-                height="39"
-                width="39"
-                alt="arrow_left"
-              />
-            </a>
-            <p class="title">로그인</p>
-            <div class="icon_container"></div>
-          </div>
+  <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
+</head>
+
+<body>
+  <main class="screen">
+    <!----------top---------->
+    <div>
+      <div class="statusbar">statusbar</div>
+      <div class="topnav">
+        <div class="topnav_inframe">
+          <a href="{% url 'accounts:accountpage' %}"
+            class="icon_container"><!--accounts 페이지들 간에 url 함수 작업 필요해요. 이후 a 태그로 수정해서 url 연결할 예정!-->
+            <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left" />
+          </a>
+          <p class="title">로그인</p>
+          <div class="icon_container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!----------안내멘트---------->
+    <div class="mention">
+      <span id="mention">반가워요! 너굴선배와 만날 준비 되셨나요?</span>
+    </div>
+
+    <!----------로그인 form---------->
+    <form id="loginForm" class="form" action="{% url 'accounts:login' %}" method="post">
+      {% csrf_token %}
+      <!--▼ 아이디-->
+      <div class="input_container">
+        <label class="label" for="username">아이디</label>
+        <div class="input_field">
+          <input id="username" type="text" name="username" class="input" placeholder="아이디를 입력하세요" />
+          <img src="{% static 'icons/account_default.svg' %}" height="24" width="24" alt="default" class="clear_btn"
+            data-target="username" />
+        </div>
+      </div>
+      <!--▼ 비밀번호-->
+      <div class="input_container">
+        <label class="label" for="password">비밀번호</label>
+        <div class="input_field">
+          <input id="password" type="password" name="password" class="input" placeholder="비밀번호를 입력하세요" />
+          <img src="{% static 'icons/account_default.svg' %}" height="24" width="24" alt="default" class="clear_btn"
+            data-target="password" />
         </div>
       </div>
 
-      <!----------안내멘트---------->
-      <div class="mention">
-        <span id="mention">반가워요! 너굴선배와 만날 준비 되셨나요?</span>
-      </div>
+      <!-------아이디와 비밀번호가 올바르지 않을 경우------->
+      {% if error %}
+      <!--▼ 에러메세지-->
+      <!--▼ input_field 스타일 변경-->
+      <span style="color:red; font-size: 10px; letter-spacing: -0.5px;">{{ error }}</span>
+      {% endif %}
 
-      <!----------로그인 form---------->
-      <form
-        id="loginForm"
-        class="form"
-        action="{% url 'accounts:login' %}"
-        method="post"
-      >
-        {% csrf_token %}
-        <!--▼ 아이디-->
-        <div class="input_container">
-          <label class="label" for="username">아이디</label>
-          <div class="input_field">
-            <input
-              id="username"
-              type="text"
-              name="username"
-              class="input"
-              placeholder="아이디를 입력하세요"
-            />
-            <img
-              src="{% static 'icons/account_default.svg' %}"
-              height="24"
-              width="24"
-              alt="default"
-              class="clear_btn"
-              data-target="username"
-            />
-          </div>
-        </div>
-        <!--▼ 비밀번호-->
-        <div class="input_container">
-          <label class="label" for="password">비밀번호</label>
-          <div class="input_field">
-            <input
-              id="password"
-              type="password"
-              name="password"
-              class="input"
-              placeholder="비밀번호를 입력하세요"
-              
-            />
-            <img
-              src="{% static 'icons/account_default.svg' %}"
-              height="24"
-              width="24"
-              alt="default"
-              class="clear_btn"
-              data-target="password"
-            />
-          </div>
-        </div>
+      <!--▼ 버튼-->
+      <button id="loginBtn" class="button" type="submit">로그인하기</button>
+    </form>
 
-        <!-------아이디와 비밀번호가 올바르지 않을 경우------->
-        {% if error %}
-          <!--▼ 에러메세지--> 
-          <span style="color:red; font-size: 10px; letter-spacing: -0.5px;">{{ error }}</span>
-          <!--▼ input_field 스타일 변경-->
-          <script>
-            const inputFields = document.querySelectorAll('.input_field');
+    <script src="{% static 'js/accounts/login.js' %}"></script>
+    {% if error %}
+    <script>
+      const inputFields = document.querySelectorAll('.input_field');
 
-            inputFields.forEach((field) => {
-              field.classList.add('error');
+      inputFields.forEach((field) => {
+        field.classList.add('error');
 
-              const img = field.querySelector('img');
-              if (img) {
-                img.src = "{% static 'icons/account_alert.svg' %}"
-              }
-            });
-          </script>
-        {% endif %}
+        const img = field.querySelector('img');
+        if (img) {
+          img.src = "{% static 'icons/account_alert.svg' %}"
+        }
+      });
+    </script>
+    {% endif %}
+  </main>
+</body>
 
-        <!--▼ 버튼-->
-        <button id="loginBtn" class="button" type="submit">로그인하기</button>
-      </form>
-
-      <script src="{% static 'js/accounts/login.js' %}"></script>
-    </main>
-  </body>
 </html>
