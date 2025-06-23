@@ -30,10 +30,13 @@
         <section>
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
         <div class="guide_container">
-            
+            {% for lookcard in lookcards %}
+            {% if forloop.last %}
             <!--▼ event 제목 및 멘트-->
             <h1 class="mention">{{ lookcard.event.title }}</h1>
             <h2 class="mention">{{ lookcard.event.description_look }}</h2>
+            {% endif %}
+            {% endfor %} <!--lookcards 반복문 끝-->
 
             <!--▼ lookcard-->
             <div class="lookcard">
