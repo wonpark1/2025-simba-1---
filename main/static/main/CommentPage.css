@@ -126,10 +126,16 @@ input {
 .comment_container {
   flex: 1;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: overlay;
   padding: 5px 28px;
   box-sizing: border-box;
   height: auto;
+}
+
+/* 스크롤바 전체 영역 숨기기 */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 /*comment_card 동적 크기 조정*/
