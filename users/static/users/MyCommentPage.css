@@ -208,9 +208,12 @@ a.reactbutton {
 }
 
 a.reactbutton {
-  background: rgba(255, 87, 22, 0.5);
-  color: #fff;
+  background: var(--primary-001, #ff5722);
   border: 0.5px solid var(--primary-001, #ff5722);
+  color: #fff;
+}
+a.reactbutton img {
+  filter: brightness(0) invert(1);
 }
 
 a.nonreactbutton {
