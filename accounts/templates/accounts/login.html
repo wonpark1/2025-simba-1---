@@ -61,6 +61,8 @@
               height="24"
               width="24"
               alt="default"
+              class="clear_btn"
+              data-target="username"
             />
           </div>
         </div>
@@ -81,6 +83,8 @@
               height="24"
               width="24"
               alt="default"
+              class="clear_btn"
+              data-target="password"
             />
           </div>
         </div>
@@ -88,7 +92,7 @@
         <!-------아이디와 비밀번호가 올바르지 않을 경우------->
         {% if error %}
           <!--▼ 에러메세지--> 
-          <span style="color:red; font-size: 10px; letter-spacing: -0.5px; text-align: right;">{{ error }}</span>
+          <span style="color:red; font-size: 10px; letter-spacing: -0.5px;">{{ error }}</span>
           <!--▼ input_field 스타일 변경-->
           <script>
             const inputFields = document.querySelectorAll('.input_field');
@@ -112,7 +116,3 @@
     </main>
   </body>
 </html>
-
-<style>
-
-</style>
