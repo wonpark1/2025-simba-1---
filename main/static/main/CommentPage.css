@@ -235,7 +235,6 @@ input {
   margin-top: auto;
 }
 
-/* 이거 버튼 활성화 비활성화 스타일링은 다시 해주세요! */
 a.nonreactbutton,
 a.reactbutton {
   display: flex;
@@ -262,17 +261,18 @@ a.reactbutton {
 }
 
 a.reactbutton {
-  background: rgba(255, 87, 22, 0.5);
-  color: #fff;
+  background: var(--primary-001, #ff5722);
   border: 0.5px solid var(--primary-001, #ff5722);
+  color: #fff;
 }
 
-a.nonreactbutton {
-  color: black;
-  background: var(--back-004, #fff);
+a.reactbutton img {
+  filter: brightness(0) invert(1);
 }
 
-/*input*/
+a.reactbutton:hover {
+  filter: brightness(1.08);
+}
 
 .input_container {
   bottom: 0;
