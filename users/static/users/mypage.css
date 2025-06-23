@@ -3,7 +3,18 @@
 /*body * {
   border: 1px solid black;
 }*/
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a,
+a:visited,
+a.pill,
+a.pill:visited {
+  text-decoration: none;
+  color: inherit;
+}
 body {
   display: flex;
   justify-content: center;
@@ -19,9 +30,9 @@ body {
   height: 812px;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
   position: relative;
+  overflow: hidden;
 }
 
 /*mypage*/
@@ -94,4 +105,11 @@ body {
   line-height: normal;
 
   text-decoration: none;
+}
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+}
+.bottom-nav .nav-item {
+  flex: 1 0 0;
 }
