@@ -27,31 +27,40 @@ def mainpage(request):
     user = request.user
     profile = request.user.profile
     now = datetime.now()
+    today_date = now.day
     current_month = now.month
     month_obj = Month.objects.get(number=current_month)
-    event_lookcards = LookCard.objects.filter(event__month=month_obj, event__end__gt=now.date()).order_by('event__title')
+
+    event_lookcards = LookCard.objects.filter(
+        event__month=month_obj,
+        event__end__gte=today_date
+    ).order_by('event__title')
 
     for event in event_lookcards:
         if event.event.start == 1:
             if event.event.end == 10:
                 event.period = '초'
-
-            if event.event.end == 20:
+            elif event.event.end == 20:
                 event.period = '초중순'
+        elif event.event.start == 11 and event.event.end == 20:
+            event.period = '중'
+        elif event.event.start == 21 and event.event.end == 31:
+            event.period = '말'
 
-        elif event.event.start == 11:
-            if event.event.end == 20:
-                event.period = '중'
-
-        elif event.event.start == 21:
-            if event.event.end == 31:
-                event.period = '말'
+    scheduled_events = []
 
     if not event_lookcards:
-        scheduled_events = Event.objects.filter(month=month_obj+1).order_by('start')
+        next_month_num = current_month + 1 if current_month < 12 else 1
+        next_month_obj = Month.objects.get(number=next_month_num)
+        scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
 
-    return render(request, 'main/mainpage.html', {'month': current_month, 'user': user, 'profile': profile, 'event': event_lookcards, 'scheduled_events': scheduled_events})
-
+    return render(request, 'main/mainpage.html', {
+        'month': current_month,
+        'user': user,
+        'profile': profile,
+        'event': event_lookcards,
+        'scheduled_events': scheduled_events,
+    })
 def commentpage(request, lookcard_id):
     pushpagestack(request, request.path)
 
