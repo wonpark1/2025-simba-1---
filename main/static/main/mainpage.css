@@ -117,7 +117,7 @@ a.guide-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   font-family: "Pretendard Variable";
   font-size: 14px;
@@ -128,8 +128,8 @@ a.guide-btn {
 }
 
 .guide-btn img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .end-label {
