@@ -60,9 +60,14 @@ def Signup2(request):
 
         # User&Profile 생성
         user = User.objects.create_user(username=username, password=password)
-        Profile.objects.create(user=user, nickname=nickname)
+        profile = Profile.objects.create(user=user, nickname=nickname)
 
-        request.session.flush() # 세션 정리
+        user.save()
+        profile.save()
+        auth.login(request, user)
 
-        return redirect('accounts:login')
+        request.session.pop('signup_username', None) # 세션 정리
+        request.session.pop('signup_password', None) # 세션 정리
+
+        return redirect('main:mainpage')
     return render(request, 'accounts/SignupPage2.html')
