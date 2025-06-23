@@ -113,3 +113,48 @@ body {
 .bottom-nav .nav-item {
   flex: 1 0 0;
 }
+
+.menu-item {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, background 0.18s ease;
+  will-change: transform;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+}
+
+.menu-item:active {
+  transform: scale(0.94);
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6) 10%,
+    transparent 10%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(20);
+    opacity: 0;
+  }
+}
+
+.menu-item:active::after {
+  animation: ripple 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+}
