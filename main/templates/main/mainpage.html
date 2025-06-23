@@ -1,62 +1,86 @@
 {% load static %}
+{% csrf_token %}
 
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ month }}월 홈 화면</title>
-    <link rel="stylesheet" href="{% static 'main/mainpage.css' %}" />
-  </head>
-  <body>
-    <main class="wrapper">
-      <!-- 상단 배너 -->
-      <section class="top-banner">
-        <section class="space">
-          <h1>{{ profile.nickname }}님,<br /></h1>
-          <h2>
-            {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title}}
-            {% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
-          </h2>
-        </section>
-      </section>
-      <section class="container">
-        <!-- 안내 문구 -->
-        <section class="intro-text">
-          {% if event %}
-          <p>
-            {{ month }}월에 있는 행사의<br /><strong
-              >룩 가이드를 소개해드릴게요!</strong
-            >
-          </p>
-          {% endif %}
-        </section>
 
-        <!-- 카드 섹션 -->
-        <section class="cards">
-          {% if event %} {% for lookcard in event %}
-          <div class="card">
-            <p class="tag">{{ month }}월 {{ lookcard.period }}</p>
-            <h2>{{ lookcard.event.title }}</h2>
-            <p class="desc">{{ lookcard.description }}</p>
-            <a
-              href="{% url 'main:lookcard_detail' lookcard.id %}"
-              class="guide-btn"
-            >
-              <img src="{% static 'img/1.0.png' %}" alt="icon" />룩 가이드
-              보러가기
-            </a>
-          </div>
-          {% endfor %} {% else %}
-          <p class="no-event">이번 달에는 특별한 행사가 없어요.</p>
-          {% endif %}
-        </section>
-        <section class="end-label">이번 달 룩 가이드는 여기서 끝이에요</section>
-      </section>
-      <!-- 하단 안내 -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ month }}월 홈 화면</title>
+  <link rel="stylesheet" href="{% static 'main/mainpage.css' %}" />
+</head>
 
-      <!-- 하단 내비게이션 -->
-      {% include 'shared/_footer.html' with activate='mainpage' %}
-    </main>
-  </body>
+<body>
+  <main class="wrapper">
+    <!-- 상단 배너 -->
+    {% if event %}
+    <section class="top-banner">
+      <section class="space">
+        <h1>{{ profile.nickname }}님,<br /></h1>
+        <h2>
+          {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title}}
+          {% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
+        </h2>
+      </section>
+    </section>
+    {% else %}
+    <section class="top-banner">
+      <section class="space">
+        <h1><strong>너굴님,</strong><br /></h1>
+        <h2>{{ month }}월엔 아무 일정도 없어요!</h2>
+      </section>
+    </section>
+    {% endif %}
+    <section class="container">
+      <!-- 안내 문구 -->
+      <section class="intro-text">
+        {% if event %}
+        <p>
+          {{ month }}월에 있는 행사의<br /><strong>룩 가이드를 소개해드릴게요!</strong>
+        </p>
+        {% endif %}
+      </section>
+
+      <!-- 카드 섹션 -->
+      <section class="cards">
+        {% if event %} {% for lookcard in event %}
+        <div class="card">
+          <p class="tag">{{ month }}월 {{ lookcard.period }}</p>
+          <h2>{{ lookcard.event.title }}</h2>
+          <p class="desc">{{ lookcard.event.description_main }}</p>
+          <a href="{% url 'main:lookcard_detail' lookcard.id %}" class="guide-btn">
+            <img src="{% static 'img/1.0.png' %}" alt="icon" />룩 가이드
+            보러가기
+          </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <section class="container">
+          <!-- 안내 문구 -->
+          <section class="intro-text">
+            <p>
+              {{ month }}월에 있는 행사가 아무것도 없어요!<br />너굴팁이나 학사일정탭에
+              들어가볼까요?
+            </p>
+          </section>
+
+          <!-- 카드 섹션 -->
+          <section class="cards">
+            <img src="1.1.2.png" alt="너굴선배 캐릭터" class="mascot" />
+
+            </div>
+          </section>
+        </section>
+        {% endif %}
+      </section>
+      <section class="end-label">이번 달 룩 가이드는 여기서 끝이에요</section>
+    </section>
+    <!-- 하단 안내 -->
+
+    <!-- 하단 내비게이션 -->
+    {% include 'shared/_footer.html' with activate='mainpage' %}
+  </main>
+</body>
+
 </html>
