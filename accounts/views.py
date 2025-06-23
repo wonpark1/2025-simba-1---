@@ -35,10 +35,10 @@ def Signup1(request):
         confirm  = request.POST.get('confirm', '')
 
         if username in User.objects.values_list('username', flat=True):
-            return JsonResponse({'error': '이미 존재하는 아이디입니다'}, status=777)
+            return JsonResponse({'error': '이미 존재하는 아이디입니다'}, status=400)
         
         if password != confirm:
-            return JsonResponse({'error': '비밀번호가 일치하지 않습니다'}, status=777)
+            return JsonResponse({'error': '비밀번호가 일치하지 않습니다'}, status=400)
         
         #세션에 임시 보관
         request.session['signup_username'] = username     

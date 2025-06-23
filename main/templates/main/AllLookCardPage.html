@@ -43,8 +43,12 @@
               {% else %}
               <div class="lookcard_inframe">  
               {% endif %}
+                {% if lookcard.event.title == '시험기간' %}
                 <!--▼▼ event 제목-->
+                <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.semester }}</div>
+                {% else %}
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
+                {% endif %}
                 <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
                 <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
                 <!--여기 event제목에 해당하는 db 추가해야합니다 지금은 임의로 id로 해둠!-->
