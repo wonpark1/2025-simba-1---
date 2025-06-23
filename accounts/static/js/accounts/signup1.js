@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
  
   // ID 중복 검사
   let idTimer;
-  idI.addEventListener('input', () => {  
+  idI.addEventListener('input', () => {   
     clearTimeout(idTimer);
     resetIdUI();
 
