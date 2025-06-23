@@ -70,9 +70,11 @@ def commentpage(request, lookcard_id):
     comments = lookcard.comments.all()
 
     if sort == 'likes':
-        comments = comments.annotate(like_count=Count('like')).order_by('-like_count')
+        comments = comments.annotate(like_count=Count('likes')).order_by('-like_count')
     elif sort == 'latest':
         comments = comments.order_by('-create_at')
+    else:
+        comments = comments.annotate(dislike_count=Count('dislikes')).order_by('-dislike_count')
 
     return render(request, 'main/CommentPage.html', {
         'lookcard': lookcard,
@@ -99,6 +101,8 @@ def edit(request, id):
 
     edit_comment = get_object_or_404(Comment, pk=id)
 
+    next_url = request.GET.get('next', '/')
+
     if request.user.is_authenticated and request.user == edit_comment.writer:
         if request.method == "POST":          
             edit_comment.content = request.POST.get('content', '')
@@ -106,16 +110,18 @@ def edit(request, id):
                 edit_comment.image = request.FILES['image']
             edit_comment.create_at = timezone.now()
             edit_comment.save()
-            return redirect('main:comment_page', lookcard_id=edit_comment.look_card.id) 
+            return redirect(next_url)
         
-        return render(request, 'main/edit.html', {'comment': edit_comment})
-    else:
-        return redirect('accounts:login')
-    
+    return render(request, 'main/CommentEditPage.html', {
+        'comment': edit_comment,
+        'next_url': next_url
+    })
+
 def delete(request, id):
     delete_comment = Comment.objects.get(pk=id)
     delete_comment.delete()
-    return redirect('main:comment_page', lookcard_id=delete_comment.look_card.id)
+    next_url = request.GET.get('next', '/')
+    return redirect(next_url)
 
 def likes(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
