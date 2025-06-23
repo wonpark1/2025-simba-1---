@@ -31,22 +31,23 @@ def logout(request):
 def Signup1(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
-        password = request.POST.get('password', '')
+        password = request.POST.get('password', '').strip()
         confirm  = request.POST.get('confirm', '')
 
-        if username in User.objects.values_list('username', flat=True):
-            return JsonResponse({'error': '이미 존재하는 아이디입니다'}, status=400)
         
-        if password != confirm:
-            return JsonResponse({'error': '비밀번호가 일치하지 않습니다'}, status=400)
         
-        #세션에 임시 보관
+        # 세션에 임시 보관
         request.session['signup_username'] = username     
         request.session['signup_password'] = password     
         return redirect('accounts:signup2')
     
-    #GET
+    # GET
     return render(request, 'accounts/SignupPage1.html')
+
+def check_username(request):
+    username = request.GET.get('username', '').strip()
+    exist = User.objects.filter(username=username).exists()
+    return JsonResponse({'exists':exist})
 
 def Signup2(request):
     if request.method == 'POST':
