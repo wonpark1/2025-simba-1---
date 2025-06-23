@@ -7,8 +7,9 @@ from datetime import datetime
 # Create your views here.
 def pushpagestack(request, current_page):
     stack = request.session.get('page_stack', [])
-    stack.append(current_page)
-    request.session['page_stack'] = stack
+    if not stack or stack[-1] != current_page:
+        stack.append(current_page)
+        request.session['page_stack'] = stack
 
 def poppagestack(request):
     stack = request.session.get('page_stack', [])
