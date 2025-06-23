@@ -28,7 +28,7 @@
         <div class="pill-grid">
           {% for event in unique_events %}
           <a class="pill" href="{% url 'main:alllookcards' event.topic %}">
-            <img src="{{ event.image_url }}" alt="{{ event.title }}" width="28" height="29" />
+            <img src="{{ event.emoticon.url }}" alt="{{ event.title }}" width="28" height="29" />
             {{ event.title }}
           </a>
           {% endfor %}
@@ -38,6 +38,6 @@
 
       <!-- 하단 내비게이션 -->
       {% include 'shared/_footer.html' with activate='allevents' %}
-    </main>
+    </main> 
   </body>
 </html>

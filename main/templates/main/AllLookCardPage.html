@@ -25,7 +25,7 @@
               <div class="icon_container"></div>
             </div>
           </div>
-        </div>
+        </div>c
 
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
         <section class="guide_container">
@@ -38,12 +38,14 @@
             <div class="lookcard">
               <div class="lookcard_inframe">
                 <!--▼▼ event 제목-->
+                {% for lookcard in lookcards %}  
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
                 <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
                 <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
                 <!--여기 event제목에 해당하는 db 추가해야합니다 지금은 임의로 id로 해둠!-->
                 
                 <!--▼▼ 룩가이드 제시-->
+                
                 
                 {% for item in lookcard.items.all %}
                 <div class="lookguide">
@@ -90,7 +92,7 @@
                      <span>{{ lookcard.is_avoid }}<br><span style="color: #757575; font-size: 10px; font-weight: 400;">{{ lookcard.avoid_reason }}</span></span></p>
                 </div>
 
-
+                {% endfor %} <!--lookcard 반복문 끝-->
               </div>
             </div>
 
@@ -112,7 +114,7 @@
 
 
         <!----------버튼---------->
-        <a class="button" href="{% url 'main:comment_page' lookcard.id %}">
+        <a class="button" href="{% url 'main:comment_page' lookcards.first.id %}">
           <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
         </a>
         
