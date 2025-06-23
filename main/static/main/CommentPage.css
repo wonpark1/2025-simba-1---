@@ -182,11 +182,11 @@ input {
 
   border-radius: 10px;
   background: var(--text-002, #757575);
+  transition: background 0.2s ease;
 
   color: #fff;
   text-align: center;
 
-  /* Caption/10 */
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
@@ -194,6 +194,15 @@ input {
   line-height: normal;
 }
 
+.edit .editbutton:nth-child(1):hover,
+.edit .editbutton:nth-child(1):focus-visible {
+  background: #6cbdff;
+}
+
+.edit .editbutton:nth-child(2):hover,
+.edit .editbutton:nth-child(2):focus-visible {
+  background: #ff4d4f;
+}
 .container2 {
   display: flex;
   width: 100%;
