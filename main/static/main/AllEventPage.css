@@ -1,3 +1,4 @@
+@import url("/static/css/project.css");
 * {
   margin: 0;
   padding: 0;
@@ -97,8 +98,7 @@ body {
   transition: transform 0.15s ease;
 }
 .pill:active {
-  transform: scale(0.94); /* 6 % 정도 줄여서 “꾹” */
-  /* box-shadow: 0 0 0 rgba(0,0,0,.2);  ← 눌릴 때 그림자 축소 예시 */
+  transform: scale(0.94);
 }
 .pill img {
   width: 24px;
