@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth #logout을 위해 필요
 from django.contrib.auth.models import User #sign up을 위해 필요
 from .models import Profile
+from django.http import JsonResponse
 import random
 
 def accountpage(request):
@@ -19,7 +20,7 @@ def login(request):
             return redirect('main:mainpage')
         else:
             return render(request, 'accounts/login.html', {'error': '아이디 또는 비밀번호를 확인하세요.'})
-        
+
     elif request.method == 'GET':
         return render(request, 'accounts/login.html')
     
@@ -33,9 +34,11 @@ def Signup1(request):
         password = request.POST.get('password', '')
         confirm  = request.POST.get('confirm', '')
 
+        if username in User.objects.values_list('username', flat=True):
+            return JsonResponse({'error': '이미 존재하는 아이디입니다'}, status=777)
+        
         if password != confirm:
-            return render(request, 'accounts/SignupPage1.html',
-                        {'error': '비밀번호가 일치하지 않습니다.'})
+            return JsonResponse({'error': '비밀번호가 일치하지 않습니다'}, status=777)
         
         #세션에 임시 보관
         request.session['signup_username'] = username     
