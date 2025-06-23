@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const pwGuide = $("password_textcontainer");
   const pwErr = $("password_error");
   const cfErr = $("confirm_error");
+  const idErr = $("id_error");
 
   const rule = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/;
 
   function validate() {
     const idOK = idI.value.trim() !== "";
+    idErr.style.display = idOK && !idUnique ? "block" : "none";
 
     const pw = pwI.value.trim();
     const pwOK = rule.test(pw);
@@ -26,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const ok = idOK && pwOK && same;
     nxt.disabled = !ok;
     nxt.classList.toggle("active", ok);
-
   }
 
   // 이런식으로 분기 처리하는 건 어때요??
