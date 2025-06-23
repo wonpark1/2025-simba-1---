@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/;
 
   let usernameValid = false;
-  let passwordValid = false;
+  let passwordValid = false;  
   let pwMatch = false;
  
   // ID 중복 검사
