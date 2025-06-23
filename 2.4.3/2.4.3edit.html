@@ -24,18 +24,10 @@
           </div>
         </div>
 
-        <!----------필터링 버튼---------->
-        <div class="button_container">
-          <button id="filterbutton"><!--이 아니라 뭐가 있었는데....-->
-            최신순<img src="{% static 'icons/filter_down.svg' %}" height="12" width="12" flex-shrink="0" alt="필터" />
-          </button>
-        </div>
-
         <!----------작성한 댓글---------->
-        {% if comments %}
-        {% for comment in comments %}
-        <div class="comment_container"><!--이거 scroll용 외곽 container인데 수정 필요해보임 (월요일에 수정 예정)-->
+        <div class="comment_container">
           <!-----댓글카드----->
+          {% for comment in comments %}
           <div class="comment_card">
             <form action="{% url 'main:edit' comment.id %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -59,25 +51,7 @@
             </form>
           </div>
         </div>
-        <!--#####그리고 이 form 태그 내에서 수정이 다 되는거면, 기능 구현 완료 후에 하단 입력탭 없애도 되는지 기디님한테 물어볼 예정!!#####-->
-        
-
-        <!--------댓글 없을 때 화면---------->   <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
         {% endfor %}
-        {% else %}
-        <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
-        {% endif %} 
-
-        <!----------댓글 작성 form---------->
-        <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="input_container">
-          <input type="file" id="image" name="image" accept="image/*" style="display: none;" />
-          <button class="input_button" type="button"><img src="{% static 'icons/img.svg' %}" height="15" width="15" alt="이미지" onclick="document.getElementById('image').click();" /></button>
-          <input type="text" id="message" name="content" placeholder="메시지를 입력하세요" />
-          <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15" alt="전송" /></button>
-        </div>
-        </form>
         
       </main>
   </body>

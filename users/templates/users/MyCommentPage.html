@@ -26,11 +26,12 @@
                 </div>
             </div>
         </div>
-
-        <!----------내가 작성한 댓글---------->
+ 
+        <!--이거 scroll용 외곽 container인데 수정 필요해보임 (월요일에 수정 예정)-->
+            <!----------내가 작성한 댓글---------->
         {% if comments %}
-        {% for comment in comments %}
-        <div class="comment_container"><!--이거 scroll용 외곽 container인데 수정 필요해보임 (월요일에 수정 예정)-->
+        <div class="comment_container">
+            {% for comment in comments %}
             <!-----댓글카드----->
             <div class="comment_card">
                 <!--▼ 닉네임, 수정/삭제 버튼-->
@@ -58,14 +59,16 @@
                     </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
         <!--------댓글 없을 때 화면---------->   <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
-        {% endfor %}
+        
         {% else %}
         <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
         {% endif %} 
 
+    
     </main>
 </body>
 

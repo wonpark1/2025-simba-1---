@@ -1,8 +1,8 @@
 /* 2.4.3edit page - CSS */
 
-/*body * {
+body * {
   border: 1px solid black;
-}*/
+}
 
 body {
   display: flex;
@@ -117,15 +117,17 @@ input {
 
 /*comment*/
 
+/*comment*/
+/* 스크롤 */
 .comment_container {
-  display: flex;
-  flex-direction: column;
-  width: 318px;
-  padding: 5px;
-  overflow-y: scroll;
-  margin-bottom: 10px;
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  padding: 5px 28px;
+  box-sizing: border-box;
   height: auto;
 }
+
 
 /*comment_card 동적 크기 조정*/
 .comment_card {
@@ -136,10 +138,12 @@ input {
   align-items: flex-start;
   align-self: stretch;
   min-height: 100px;
+  margin: 30px auto 20px auto;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 }
+
 
 form {
   width: 100%;
@@ -235,6 +239,8 @@ form {
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
+
+  resize: vertical;
 }
 
 .container3 {
