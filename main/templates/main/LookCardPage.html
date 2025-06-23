@@ -18,7 +18,7 @@
           <div class="statusbar">statusbar</div>
           <div class="topnav">
             <div class="topnav_inframe">
-              <a href="{% url 'main:previouspage' %}" class="icon_container">
+              <a href="{% url 'main:previouspage' %}?next={{ request.get_full_path }}" class="icon_container">
               <img src="{% static 'icons/arrow_left.svg' %}" height="39" width="39" alt="arrow_left"/>
               </a>
               <p class="title">{{ lookcard.event.title }} 가이드</p>
@@ -112,7 +112,7 @@
 
 
         <!----------버튼---------->
-        <a class="button" href="{% url 'main:comment_page' lookcard.id %}">
+        <a class="button" href="{% url 'main:comment_page' lookcard.id %}?next={{ request.get_full_path }}">
           <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
         </a>
         
