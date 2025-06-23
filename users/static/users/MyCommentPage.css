@@ -182,7 +182,6 @@ body {
   display: flex;
   gap: 15px;
 }
-
 a.nonreactbutton,
 a.reactbutton {
   display: flex;
