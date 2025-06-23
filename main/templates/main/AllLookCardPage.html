@@ -27,8 +27,9 @@
           </div>
         </div>
 
+        <section>
         <!---------------------------------가이드 외곽 container 시작-------------------------------->
-        <section class="guide_container">
+        <div class="guide_container">
             
             <!--▼ event 제목 및 멘트-->
             <h1 class="mention">{{ lookcard.event.title }}</h1>
@@ -114,9 +115,9 @@
           {% endif %}
           {% endfor %} <!--lookcards 반복문 끝--> 
 
-        </section>
+        </div>
         <!-------------------------------▲ 가이드 외곽 container 끝---------------------------------------->
-
+      
 
 
 
@@ -125,7 +126,7 @@
         <a class="button" href="{% url 'main:comment_page' lookcards.first.id %}">
           <img src="{% static 'icons/comment.svg' %}" height="24" width="24" alt="댓글" />의견 남기기
         </a>
-        
+        </section>
       </main>
   </body>
 

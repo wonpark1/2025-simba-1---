@@ -13,6 +13,16 @@ body {
   font-family: "Pretendard", sans-serif;
 }
 
+section {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  align-items: center;
+}
+
+
 .screen {
   display: flex;
   width: 375px;
@@ -77,7 +87,7 @@ body {
   align-items: center;
   flex-shrink: 0;
   margin: 17px 26px;
-  gap: 16px;
+  gap: 0;
 }
 
 .mention {
@@ -85,7 +95,6 @@ body {
   width: 302px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
   margin: 0;
 
   font-family: "Pretendard Variable";
@@ -97,17 +106,22 @@ h1 {
   color: #000;
   font-size: 20px;
   font-weight: 600;
+  padding-bottom: 11px;
 }
 
 h2 {
   color: var(--text-002, #757575);
   font-size: 12px;
   font-weight: 400;
+  padding-bottom: 16px;
+  letter-spacing: -0.8px;
 }
 
 .lookcard {
   display: flex;
   width: 323px;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -119,7 +133,6 @@ h2 {
 
 .lookcard_inframe {
   display: flex;
-  width: 303px;
   padding: 20px;
   box-sizing: border-box;
   flex-direction: column;
@@ -130,7 +143,6 @@ h2 {
 
 .lookcard_inframe_last {
   display: flex;
-  width: 303px;
   padding: 20px;
   box-sizing: border-box;
   flex-direction: column;
@@ -152,12 +164,13 @@ h2 {
 .lookguide {
   display: flex;
   width: 100%;
-  gap: 25px;
+  gap: 22px;
 }
 
 .lookguide :nth-child(1) {
-  width: 72px;
+  width: 80px;
   line-height: 20px;
+  letter-spacing: -0.6px;
 }
 
 .lookguide :nth-child(2) {
@@ -180,46 +193,6 @@ h2 {
   line-height: normal;
 }
 
-/*백엔드 확인 후 폐기 예정*/
-/*
-.lookguide {
-  display: flex;
-  align-items: flex-start;
-  gap: 25px;
-  align-self: stretch;
-  padding-bottom: 5px;
-}
-
-#lookguide1 {
-  display: flex;
-  width: 87px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-
-  color: var(--text-001, #212121);
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-#lookguide2 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
-  gap: 20px;
-
-  color: var(--text-001, #212121);
-  font-family: "Pretendard Variable";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 15px;
-}
-  */
 
 .lookmention {
   display: flex;
@@ -231,12 +204,13 @@ h2 {
 .lookmention p {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin: 0%;
 
   font-family: "Pretendard Variable";
   font-style: normal;
   line-height: normal;
+  letter-spacing: -0.8px;
 }
 
 #recommend {
@@ -249,7 +223,6 @@ h2 {
   color: var(--alarm-001, #ff4d4f);
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: -0.6px;
 }
 
 /***article***/
@@ -257,6 +230,7 @@ h2 {
 article {
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 .neoguri_comment {
@@ -275,6 +249,7 @@ article {
   line-height: normal;
   margin: 12px 39px 16px 20px;
   position: absolute;
+  letter-spacing: -0.8px;
 }
 
 /*button*/
@@ -287,9 +262,9 @@ article {
   box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
+
   margin-top: auto;
   margin-bottom: 26px;
-
   border-radius: 10px;
   background: var(--primary-001, #ff5722);
 
