@@ -56,6 +56,11 @@ body {
   text-decoration: none;
   white-space: nowrap;
 }
+.skip:hover,
+.skip:focus {
+  color: #ff5722;
+  transform: translateY(-1px);
+}
 
 .content {
   display: flex;
@@ -101,4 +106,58 @@ body {
   align-items: center;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.nextbtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nextbtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 30%,
+    transparent 60%
+  );
+  transform: skewX(-25deg);
+}
+.nextbtn:hover::before {
+  animation: shine 0.6s forwards;
+}
+
+.nextbtn:active {
+  animation: press 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes shine {
+  to {
+    left: 200%;
+  }
+}
+
+@keyframes press {
+  0% {
+    transform: translateY(-3px) scale(1);
+  }
+  30% {
+    transform: translateY(0) scale(0.95);
+  }
+  60% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
