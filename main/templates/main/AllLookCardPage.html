@@ -39,8 +39,7 @@
             {% for lookcard in lookcards %}
             {% if forloop.last %}
             <!--▼ event 제목 및 멘트-->
-            <h1 class="mention">{{ lookcard.event.title }}</h1>
-            <h2 class="mention">{{ lookcard.event.description_look }}</h2>
+            <h1>{{ lookcard.event.title }}<span>{{ lookcard.event.description_look }}</span></h1>
             {% endif %}
             {% endfor %} <!--lookcards 반복문 끝-->
 
