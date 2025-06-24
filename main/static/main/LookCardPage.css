@@ -98,31 +98,28 @@ section {
   gap: 0;
 }
 
-.mention {
+
+h1 {
   display: flex;
-  width: 302px;
   flex-direction: column;
-  align-items: flex-start;
-  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0;
+  width: 302px;
+  margin: 0 0 16px 0;
+  gap: 10px;
 
   font-family: "Pretendard Variable";
   font-style: normal;
   line-height: normal;
 }
 
-h1 {
-  color: #000;
-  font-size: 20px;
-  font-weight: 600;
-  padding-bottom: 11px;
-}
-
-h2 {
+h1 span {
   color: var(--text-002, #757575);
   font-size: 12px;
   font-weight: 400;
-  padding-bottom: 16px;
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
 }
 
 .lookcard {
