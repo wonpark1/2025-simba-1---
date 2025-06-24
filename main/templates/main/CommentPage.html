@@ -28,6 +28,8 @@
       </div>
     </div>
 
+    
+
     <!----------필터링 버튼---------->
     <select id="filterbutton" onchange="handleFilterChange()">
       <option value="{% url 'main:comment_page' lookcard.id %}?sort=latest" {% if sort == 'latest' %}selected{% endif %}>
@@ -48,6 +50,7 @@
 
     <!----------작성한 댓글---------->
     <div class="comment_container">
+
       {% if comments %}
       {% for comment in comments %}
       <!-----댓글카드----->
@@ -69,7 +72,9 @@
           <img class="image" src="{{ comment.image.url }}" alt="Comment Image" />
           {% endif %}
           <div class="comment">{{ comment.content }}</div>
+          
         </div>
+        
 
         <!-- 지금은 백엔드 함수 자체가 버튼 클릭시 아예 리랜더링이 일어나서 
                 비효율적인 구조임. JS로 개선 고민 중 시간 남으면 수정할게요!-->
@@ -97,21 +102,26 @@
           </a>
           {% endif %}
         </div>
+        
       </div>
 
-      <!--------댓글 없을 때 화면----------> <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
+      <!--------댓글 없을 때 화면---------->
       {% endfor %}
       {% else %}
       <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
       {% endif %}
     </div>
-
-
+    
     <!----------댓글 작성 form---------->
     <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
+
       {% csrf_token %}
+      <!--삽입한 이미지 표시란-->
+      <div id="preview">
+      <div id="preview_img_wrapper" data-xicon="{% static 'icons/x.svg' %}"></div>
+      </div>
+      
       <div class="input_container">
-        <div id="preview_img_wrapper" data-xicon="{% static 'icons/x.svg' %}"></div>
         <input type="file" id="comment_image" name="image" accept="image/*" style="display: none;" />
         <button class="input_button" type="button" onclick="document.getElementById('comment_image').click();">
           <img src="{% static 'icons/img.svg' %}" height="15" width="15" alt="이미지" />
@@ -122,13 +132,16 @@
             alt="전송" /></button>
       </div>
     </form>
+    
   </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       /* ▼ 댓글 작성창 썸네일 */
       const fileInput = document.getElementById('comment_image');
+      const preview = document.getElementById('preview');
       const previewBox = document.getElementById('preview_img_wrapper');
+      
       if (!fileInput || !previewBox) return;
 
       const xIconURL = previewBox.dataset.xicon || '/static/icons/x.svg';
@@ -140,6 +153,8 @@
         const reader = new FileReader();
         reader.onload = (ev) => {
           previewBox.innerHTML = '';
+          preview.style.display = "flex";
+
           const thumb = document.createElement('img');
           thumb.className = 'preview-thumb';
           thumb.src = ev.target.result;
@@ -149,14 +164,18 @@
           xBtn.type = 'button';
           xBtn.className = 'preview-del';
           xBtn.innerHTML = `<img src="${xIconURL}" width="12" height="12" alt="삭제">`;
+          xBtn.style.backgroundColor = 'rgb(66, 62, 62)';
           previewBox.appendChild(xBtn);
 
           xBtn.addEventListener('click', () => {
             fileInput.value = '';         // 파일 선택 해제
             previewBox.innerHTML = '';    // 썸네일/X 제거
+            preview.style.display = 'none'; // 미리보기 창 닫음
           });
         };
         reader.readAsDataURL(file);
+
+
       });
     });
   </script>

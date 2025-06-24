@@ -13,14 +13,6 @@ body {
   font-family: "Pretendard", sans-serif;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
 button {
   border: none;
   background: none;
@@ -125,6 +117,7 @@ input {
 .comment_container {
   flex: 1;
   width: 100%;
+  height: 200px;
   overflow-y: overlay;
   padding: 5px 28px;
   box-sizing: border-box;
@@ -279,6 +272,24 @@ a.reactbutton:hover {
   filter: brightness(1.08);
 }
 
+/* 메시지 입력창 */
+#preview {
+  display: none;
+  position: absolute;
+  bottom: 75px;
+  right: 9px;
+
+  width: 160px;
+  height: 130px;
+
+  border-radius: 20px;
+  background: rgba(103, 96, 96, 0.5);
+}
+
+form {
+  position: relative;
+}
+
 .input_container {
   bottom: 0;
   left: 0;
@@ -297,6 +308,9 @@ a.reactbutton:hover {
   border-radius: 20px 20px 0px 0px;
   background: #fff;
   box-shadow: 0px -4px 10.8px 0px rgba(115, 115, 115, 0.25);
+  position: absolute;
+  left: -187.5px;
+  bottom: -1px;
 }
 
 .input_button {
@@ -376,9 +390,9 @@ a.reactbutton:hover {
 
 #preview_img_wrapper {
   position: relative;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
+  width: 95px;
+  height: 95px;
+  margin: auto;
 }
 
 .preview-thumb {
