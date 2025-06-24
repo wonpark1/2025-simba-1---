@@ -70,6 +70,18 @@ body {
   right: 26px;
   top: 110px;
   width: 110px;
+  animation: float 3.2s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  } /* 위로 12px */
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .pill-grid {
