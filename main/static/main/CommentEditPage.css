@@ -32,7 +32,7 @@ input {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  overflow: hidden; /*이래도 scroll 되나..?*/
+  overflow: hidden;
 }
 
 /*top*/
@@ -224,8 +224,30 @@ textarea {
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  resize: vertical;
   border: 1px solid;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  background: #fafafa;
+  color: #212121;
+  line-height: 1.4;
+
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-weight: 400;
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+textarea:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+  outline: none;
 }
 
 .image-wrapper .image {
@@ -298,12 +320,12 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]:hover::file-selector-button {
-  background: #6cbdff; /* 파란색 채움 */
-  color: #fff; /* 글자 흰색 */
+  background: #6cbdff;
+  color: #fff;
 }
 
 input[type="file"]:active::file-selector-button {
-  background: #55a9f0; /* 더 진한 파랑 */
+  background: #55a9f0;
   color: #fff;
 }
 
