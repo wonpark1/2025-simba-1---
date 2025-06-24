@@ -108,6 +108,7 @@ def create(request, lookcard_id):
         return redirect('accounts:login')
 
 def edit(request, id):
+    pushpagestack(request, request.get_full_path())
     edit_comment = get_object_or_404(Comment, pk=id)
 
     next_url = request.GET.get('next', '/')
@@ -118,6 +119,7 @@ def edit(request, id):
             edit_comment.image = request.FILES['image']
         edit_comment.create_at = timezone.now()
         edit_comment.save()
+        poppagestack(request)  # 페이지 스택에서 현재 페이지 제거
         return redirect(next_url)
         
     return render(request, 'main/CommentEditPage.html', {

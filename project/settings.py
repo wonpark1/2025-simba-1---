@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!-Simbathon-Team1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # Allow all hosts for development; change in production
+
 
 # Application definition
 
