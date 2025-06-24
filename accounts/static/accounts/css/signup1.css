@@ -232,42 +232,90 @@ button {
   letter-spacing: -0.5px;
   margin-top: 0;
 }
-
 .button {
   display: flex;
   height: 44px;
   width: 100%;
   padding: 15px 134px;
-  box-sizing: border-box; /*외곽 크기 고정!*/
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+
   border-radius: 10px;
   border: 1px solid var(--text-002, #757575);
   background: var(--back-003, #f9f9f9);
-  margin-top: auto;
 
   color: var(--text-002, #757575);
   text-align: center;
   font-family: "Pretendard Variable";
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
+
+  position: relative;
+  overflow: hidden;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out,
+    transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 30%,
+    transparent 60%
+  );
+  transform: skewX(-25deg);
+}
+
+.button:hover::before {
+  animation: btn-shine 0.6s forwards;
+}
+
+.button:active {
+  animation: btn-press 0.26s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button.active {
-  border: none;
   background: #ff5722;
-  color: #fff;
-  cursor: pointer;
-}
-.button.active {
   border: none;
-  background: #ff5722;
   color: #fff;
   cursor: pointer;
 }
 
+@keyframes btn-shine {
+  /* ★추가 */
+  to {
+    left: 200%;
+  }
+}
+
+@keyframes btn-press {
+  0% {
+    transform: translateY(-3px) scale(1);
+  }
+  30% {
+    transform: translateY(0) scale(0.95);
+  }
+  60% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
 #password_error,
 #confirm_error {
   display: none;
