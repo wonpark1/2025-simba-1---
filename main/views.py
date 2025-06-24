@@ -108,8 +108,6 @@ def create(request, lookcard_id):
         return redirect('accounts:login')
 
 def edit(request, id):
-    pushpagestack(request, request.get_full_path())
-
     edit_comment = get_object_or_404(Comment, pk=id)
 
     next_url = request.GET.get('next', '/')

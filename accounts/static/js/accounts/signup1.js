@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const idField = $('username_field');
   const idErr = $('username_check');
   const idOK = $('username_textcontainer');
+  const IdClear = $('id_clear');
 
   const pwInput = $('password');
   const cfInput = $('confirm');
@@ -18,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/;
 
   let usernameValid = false;
-  let passwordValid = false;  
+  let passwordValid = false;
   let pwMatch = false;
- 
+
   // ID 중복 검사
   let idTimer;
-  idI.addEventListener('input', () => {   
+  idI.addEventListener('input', () => {
     clearTimeout(idTimer);
     resetIdUI();
 
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(({ exists }) => {
           usernameValid = !exists;
           exists ? setIdError('이미 사용 중인 아이디입니다.')
-                 : setIdSuccess();
+            : setIdSuccess();
           updateSubmit();
         })
         .catch(() => {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetIdUI() {
     idField.classList.remove('error', 'success');
     idErr.style.display = 'none';
-    idOK.style.display  = 'none';
+    idOK.style.display = 'none';
   }
   function setIdError(msg) {
     idField.classList.add('error');
@@ -61,6 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
     idField.classList.add('success');
     idOK.style.display = 'block';
   }
+
+  // ID 입력창 X 버튼
+  IdClear.addEventListener('click', () => {
+    idI.value = '';
+    resetIdUI();
+    usernameValid = false;
+    updateSubmit();
+    idI.focus();
+  });
 
   // password 유효성 검사 + 비밀번호 확인 동일여부 점검
   [pwInput, cfInput].forEach(el => el.addEventListener('input', validate));
@@ -104,14 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (pw && !pwOK) markField('password', 'error');
-    if (pwOK)          markField('password', 'success', '/static/icons/account_chdeck.svg');
+    if (pwOK) markField('password', 'success', '/static/icons/account_chdeck.svg');
 
     // pw, Confirm 일치
     const same = pwOK && cf && pw === cf;
     cfErr.style.display = cf && !same ? 'block' : 'none';
 
-    if (cf && !same) markField('confirm', 'error',   '/static/icons/account_alert.svg');
-    if (same)         markField('confirm', 'success', '/static/icons/account_chdeck.svg');
+    if (cf && !same) markField('confirm', 'error', '/static/icons/account_alert.svg');
+    if (same) markField('confirm', 'success', '/static/icons/account_chdeck.svg');
 
     passwordValid = pwOK;
     pwMatch = same;
@@ -135,10 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.toggle-icon').forEach(icon => {
     icon.addEventListener('click', () => {
       const input = icon.previousElementSibling;
-      const def   = icon.dataset.defaultIcon;
-      const tog   = icon.dataset.toggleIcon;
+      const def = icon.dataset.defaultIcon;
+      const tog = icon.dataset.toggleIcon;
       if (input.type === 'password') { input.type = 'text'; icon.src = tog; }
-      else                           { input.type = 'password'; icon.src = def; }
+      else { input.type = 'password'; icon.src = def; }
     });
   });
 
@@ -154,4 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
   $('signupForm').addEventListener('submit', e => {
     if (nextBtn.disabled) e.preventDefault();
   });
+
 });
+
