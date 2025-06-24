@@ -284,3 +284,31 @@ textarea {
   background: #000000;
   transform: translate(50%, -50%) scale(1.05);
 }
+
+input[type="file"]::file-selector-button {
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid #6cbdff;
+  background: #fff;
+  color: #6cbdff;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+input[type="file"]:hover::file-selector-button {
+  background: #6cbdff; /* 파란색 채움 */
+  color: #fff; /* 글자 흰색 */
+}
+
+input[type="file"]:active::file-selector-button {
+  background: #55a9f0; /* 더 진한 파랑 */
+  color: #fff;
+}
+
+input[type="file"] {
+  font-family: "Pretendard Variable";
+  font-size: 10px;
+  color: #757575;
+}
