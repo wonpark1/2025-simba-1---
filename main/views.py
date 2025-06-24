@@ -5,6 +5,8 @@ from django.db.models import Count
 from datetime import datetime
 
 # Create your views here.
+# 스택 함수 -> 경로 추적, GoBack 버튼 구현을 위한 기본 함수
+# push : 현재 경로를 스택에 추가
 def pushpagestack(request, current_page):
     if request.user.is_authenticated:
         stack = request.session.get('page_stack', [])
@@ -12,18 +14,19 @@ def pushpagestack(request, current_page):
             stack.append(current_page)
             request.session['page_stack'] = stack
 
+# pop : 마지막 경로를 스택에서 제거, 해당 경로로 리다이렉트
 def poppagestack(request):
     if request.user.is_authenticated:
-        stack = request.session.get('page_stack', [])
+        stack = request.session.get('page_stack', []) # 스택에서 현재 페이지를 가져옴
         if stack:
             stack.pop()
-            request.session['page_stack'] = stack
-            return redirect(stack[-1])
+            request.session['page_stack'] = stack # 스택에서 마지막 페이지를 제거
+            return redirect(stack[-1]) # 스택의 마지막 경로로 이동
         else:
             print("에러가 발생했습니다. 다시 시도해주세요.")
             return redirect('main:mainpage')
 
-
+# GoBack 버튼을 누르면 이전 페이지로 이동 -> stack.pop과 연결됨
 def previouspage(request):
     return poppagestack(request)
     
@@ -44,23 +47,25 @@ def mainpage(request):
 
     event_lookcards = LookCard.objects.filter(month__number=month_obj.number).order_by('event__title')
 
-    for event in event_lookcards:
-        if event.event.start == 1:
-            if event.event.end == 10:
-                event.period = '초'
-            elif event.event.end == 20:
-                event.period = '초중순'
-        elif event.event.start == 11 and event.event.end == 20:
-            event.period = '중'
-        elif event.event.start == 21 and event.event.end == 31:
-            event.period = '말'
+    # for event in event_lookcards:
+    #     if event.event.start == 1:
+    #         if event.event.end == 10:
+    #             event.period = '초'
+    #         elif event.event.end == 20:
+    #             event.period = '초중순'
+    #     elif event.event.start == 11 and event.event.end == 20:
+    #         event.period = '중'
+    #     elif event.event.start == 21 and event.event.end == 31:
+    #         event.period = '말'
 
-    scheduled_events = []
+    # scheduled_events = []
 
-    if not event_lookcards:
-        next_month_num = current_month + 1 if current_month < 12 else 1
-        next_month_obj = Month.objects.get(number=next_month_num)
-        scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
+    # if not event_lookcards:
+    #     next_month_num = current_month + 1 if current_month < 12 else 1
+    #     next_month_obj = Month.objects.get(number=next_month_num)
+    #     scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
+    # 행사 진행 일자에 따른 홈페이지 표시
+    # But, 폐기...
 
     return render(request, 'main/mainpage.html', {
         'month': current_month,
@@ -133,7 +138,7 @@ def edit(request, id):
         edit_comment.create_at = timezone.now()
         edit_comment.save()
         
-        poppagestack(request)  # 페이지 스택에서 현재 페이지 제거
+        poppagestack(request)
         return redirect(next_url)
         
     return render(request, 'main/CommentEditPage.html', {
