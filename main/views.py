@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import *
@@ -29,14 +30,35 @@ def poppagestack(request):
 # GoBack 버튼을 누르면 이전 페이지로 이동 -> stack.pop과 연결됨
 def previouspage(request):
     return poppagestack(request)
-    
+
+def eventperiod(event):
+    if event.start == 1:
+        if event.end < 15:
+            return '초'
+        elif event.end < 21:
+            return '초중순'
+        else:
+            return '내내'
+    elif event.start == 11:
+        if event.end < 22:
+            return '중순'
+        else:
+            return '하순'
+
+    elif event.start == 21:
+        if event.end < 31:
+            return '말'
+    else:
+        return ''
+
+
 def mainpage(request):
     pushpagestack(request, request.path)
 
     user = request.user
     profile = request.user.profile
     now = datetime.now()
-    today_date = now.day
+    today_date = now.day 
     current_month = now.month
     month_obj = Month.objects.get(number=current_month)
 
@@ -47,23 +69,15 @@ def mainpage(request):
 
     event_lookcards = LookCard.objects.filter(month__number=month_obj.number).order_by('event__title')
 
-    for event in event_lookcards:
-        if event.event.start == 1:
-            if event.event.end == 10:
-                event.period = '초'
-            elif event.event.end == 20:
-                event.period = '초중순'
-        elif event.event.start == 11 and event.event.end == 20:
-            event.period = '중'
-        elif event.event.start == 21 and event.event.end == 31:
-            event.period = '말'
+    for lookcard in event_lookcards:
+        lookcard.period = eventperiod(lookcard.event)
 
-    scheduled_events = []
+    # scheduled_events = []
 
-    if not event_lookcards:
-        next_month_num = current_month + 1 if current_month < 12 else 1
-        next_month_obj = Month.objects.get(number=next_month_num)
-        scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
+    # if not event_lookcards:
+    #     next_month_num = current_month + 1 if current_month < 12 else 1
+    #     next_month_obj = Month.objects.get(number=next_month_num)
+    #     scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
     # 행사 진행 일자에 따른 홈페이지 표시
     # But, 폐기...
 
@@ -71,8 +85,10 @@ def mainpage(request):
         'month': current_month,
         'user': user,
         'profile': profile,
-        'event': event_lookcards,
-        'scheduled_events': scheduled_events,
+        'lookcards': event_lookcards,
+        # 'scheduled_events': scheduled_events,
+        # 이번 달 행사가 없거나, 이미 행사가 지난 경우 다음달 행사로 대체
+        # 시연을 위해 주석처리해 이번 달_6월 행사를 표시할 수 있도록 하였음.
     })
 
 def commentpage(request, lookcard_id):
@@ -86,12 +102,28 @@ def commentpage(request, lookcard_id):
     comments = Comment.objects.filter(look_card__in=same_event_lookcards).order_by('-create_at')
     writers = comments.values_list('writer__username', flat=True)
 
-    if sort == 'likes':# 좋아요 
+    # 이미지가 있는지, url이 깨지지 않았는지 확인.
+    for comment in comments:
+        if comment.image:
+            img_path = os.path.join('media', str(comment.image)) # comment.image와 media 폴더를 합쳐 실제 경로 설정
+            if os.path.exists(img_path):
+                comment.has_img = True # 이미지의 경로가 존재하는 경우
+            else:
+                comment.has_img = False # 이미지 경로가 잘못된 경우
+        else:
+            comment.has_img = False # 이미지가 없는 경우
+
+    if sort == 'likes':# 좋아요 정렬 
+        # 좋아요 개수가 같은 경우 싫어요 개수가 적은 순서로 정렬
+        # Best Look이 위로...!
         comments = comments.annotate(like_count=Count('likes'), dislike_count=Count('dislikes')).order_by('-like_count', 'dislike_count')
 
-    elif sort == 'latest':
+    elif sort == 'latest':# 최신순 정렬
         comments = comments.order_by('-create_at')
-    else:
+        
+    else: # 아쉬워요 정렬
+        # 아쉬워요 개수가 같은 경우 좋아요 개수가 적은 순서로 정렬
+        # Worst Look이 위로...! 이것만큼은 피하자!
         comments = comments.annotate(dislike_count=Count('dislikes'), like_count=Count('likes')).order_by('-dislike_count', 'like_count')
 
     return render(request, 'main/CommentPage.html', {
@@ -186,6 +218,7 @@ def lookcard(request, lookcard_id):
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     items = lookcard.items.all()
     comments = lookcard.comments.all()
+    lookcard.period = eventperiod(lookcard.event)
 
     if request.method == 'POST':
         comment_content = request.POST.get('comment_content', '')

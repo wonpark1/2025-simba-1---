@@ -14,12 +14,12 @@
 <body>
   <main class="wrapper">
     <!-- 상단 배너 -->
-    {% if event %}
+    {% if lookcards %}
     <section class="top-banner">
       <section class="space">
         <h1>{{ profile.nickname }}님,<br /></h1>
         <h2>
-          {{ month }}월엔 {% for lookcard in event %}{{ lookcard.event.title}}
+          {{ month }}월엔 {% for lookcard in lookcards %}{{ lookcard.event.title}}
           {% if not forloop.last %}, {% endif %}{% endfor %}(이)가 있어요!
         </h2>
       </section>
@@ -35,7 +35,7 @@
     <section class="container">
       <!-- 안내 문구 -->
       <section class="intro-text">
-        {% if event %}
+        {% if lookcards %}
         <p>
           {{ month }}월에 있는 행사의<br /><strong>룩 가이드를 소개해드릴게요!</strong>
         </p>
@@ -44,7 +44,7 @@
 
       <!-- 카드 섹션 -->
       <section class="cards">
-        {% if event %} {% for lookcard in event %}
+        {% if lookcards %} {% for lookcard in lookcards %}
         <div class="card">
           <p class="tag">{{ month }}월 {{ lookcard.period }}</p>
           <h2>{{ lookcard.event.title }}</h2>
