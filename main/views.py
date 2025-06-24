@@ -47,23 +47,23 @@ def mainpage(request):
 
     event_lookcards = LookCard.objects.filter(month__number=month_obj.number).order_by('event__title')
 
-    # for event in event_lookcards:
-    #     if event.event.start == 1:
-    #         if event.event.end == 10:
-    #             event.period = '초'
-    #         elif event.event.end == 20:
-    #             event.period = '초중순'
-    #     elif event.event.start == 11 and event.event.end == 20:
-    #         event.period = '중'
-    #     elif event.event.start == 21 and event.event.end == 31:
-    #         event.period = '말'
+    for event in event_lookcards:
+        if event.event.start == 1:
+            if event.event.end == 10:
+                event.period = '초'
+            elif event.event.end == 20:
+                event.period = '초중순'
+        elif event.event.start == 11 and event.event.end == 20:
+            event.period = '중'
+        elif event.event.start == 21 and event.event.end == 31:
+            event.period = '말'
 
-    # scheduled_events = []
+    scheduled_events = []
 
-    # if not event_lookcards:
-    #     next_month_num = current_month + 1 if current_month < 12 else 1
-    #     next_month_obj = Month.objects.get(number=next_month_num)
-    #     scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
+    if not event_lookcards:
+        next_month_num = current_month + 1 if current_month < 12 else 1
+        next_month_obj = Month.objects.get(number=next_month_num)
+        scheduled_events = Event.objects.filter(month=next_month_obj).order_by('start')
     # 행사 진행 일자에 따른 홈페이지 표시
     # But, 폐기...
 
@@ -86,12 +86,13 @@ def commentpage(request, lookcard_id):
     comments = Comment.objects.filter(look_card__in=same_event_lookcards).order_by('-create_at')
     writers = comments.values_list('writer__username', flat=True)
 
-    if sort == 'likes':
-        comments = comments.annotate(like_count=Count('likes')).order_by('-like_count')
+    if sort == 'likes':# 좋아요 
+        comments = comments.annotate(like_count=Count('likes'), dislike_count=Count('dislikes')).order_by('-like_count', 'dislike_count')
+
     elif sort == 'latest':
         comments = comments.order_by('-create_at')
     else:
-        comments = comments.annotate(dislike_count=Count('dislikes')).order_by('-dislike_count')
+        comments = comments.annotate(dislike_count=Count('dislikes'), like_count=Count('likes')).order_by('-dislike_count', 'like_count')
 
     return render(request, 'main/CommentPage.html', {
         'user': request.user,
