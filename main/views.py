@@ -6,20 +6,22 @@ from datetime import datetime
 
 # Create your views here.
 def pushpagestack(request, current_page):
-    stack = request.session.get('page_stack', [])
-    if not stack or stack[-1] != current_page:
-        stack.append(current_page)
-        request.session['page_stack'] = stack
+    if request.user.is_authenticated:
+        stack = request.session.get('page_stack', [])
+        if not stack or stack[-1] != current_page:
+            stack.append(current_page)
+            request.session['page_stack'] = stack
 
 def poppagestack(request):
-    stack = request.session.get('page_stack', [])
-    if stack:
-        stack.pop()
-        request.session['page_stack'] = stack
-        return redirect(stack[-1])
-    else:
-        print("에러가 발생했습니다. 다시 시도해주세요.")
-        return redirect('main:mainpage')
+    if request.user.is_authenticated:
+        stack = request.session.get('page_stack', [])
+        if stack:
+            stack.pop()
+            request.session['page_stack'] = stack
+            return redirect(stack[-1])
+        else:
+            print("에러가 발생했습니다. 다시 시도해주세요.")
+            return redirect('main:mainpage')
 
 
 def previouspage(request):
