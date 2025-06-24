@@ -15,7 +15,7 @@
 
         <!----------top---------->
         <div>
-          <div class="statusbar">statusbar</div>
+          <div class="statusbar"></div>
           <div class="topnav">
             <div class="topnav_inframe">
               <a href="{% url 'main:previouspage' %}?next={{ next_url }}" class="icon_container">
@@ -27,18 +27,18 @@
           </div>
         </div>
 
+        <section>
         <!----------작성한 댓글---------->
-        <div class="comment_container">
+        
           <!-----댓글카드----->
           <div class="comment_card">
             <form action="{% url 'main:edit' comment.id %}?next={{ next_url }}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
               <!--▼ 닉네임, 완료 버튼-->
               <div class="container1">
-                <div id="nickname">{{ user.profile.nickname }}</div><!--닉네임이 안떠요 DB 확인? 필요해요-->
+                <span class="nickname">{{ user.profile.nickname }}</span><!--닉네임이 안떠요 DB 확인? 필요해요-->
                 <button class="editbutton" type="submit">완료</button>
               </div>
-            
               <!--▼ 이미지 삽입/삭제, 댓글 작성 수정란-->
               <div class="container2">
               {% if comment.image %}
@@ -46,13 +46,14 @@
                 <button><img id="x" src="{% static 'icons/x.svg' %}" height="13" width="13" alt="x"></button>
               {% endif %}
                 <input type="file" name="image">
-                <textarea type="text" name="content" class="comment">{{ comment.content }}</textarea>
+                <textarea type="text" name="content">{{ comment.content }}</textarea>
                 <!-- 임의로 input으로 이미지 삽입, textarea로 텍스트 수정하게 칸 만들어뒀는데 백엔드에서 수정 필요해 보입니다 -->
                 <!-- 은지가 edit 페이지에 처음에 만들어뒀던 형식 참고했음!!-->
               </div>
             </form>
           </div>
         </div>
+        </section>
           
       </main>
   </body>
