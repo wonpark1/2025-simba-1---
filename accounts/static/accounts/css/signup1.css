@@ -259,7 +259,7 @@ button {
   will-change: transform;
 }
 
-.button:hover {
+.button:not(:disabled):hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -280,11 +280,11 @@ button {
   transform: skewX(-25deg);
 }
 
-.button:hover::before {
+.button:not(:disabled):hover::before {
   animation: btn-shine 0.6s forwards;
 }
 
-.button:active {
+.button:not(:disabled):active {
   animation: btn-press 0.26s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
