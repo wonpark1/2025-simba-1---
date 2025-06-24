@@ -115,8 +115,6 @@ input {
   letter-spacing: -0.5px;
 }
 
-
-
 /*comment*/
 /* 스크롤 */
 section {
@@ -218,20 +216,6 @@ form {
   position: relative;
 }
 
-#x {
-  display: flex;
-  width: 13px;
-  height: 13px;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--text-001, #212121);
-  position: relative;
-  top: -116px;
-  right: -69px;
-}
-
 textarea {
   align-self: stretch;
 
@@ -248,5 +232,55 @@ textarea {
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;   /* 필요하면 */
+  object-fit: contain;
+}
+
+#current-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#current-image-wrapper > .image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+#x {
+  display: flex;
+  width: 13px;
+  height: 13px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--text-001, #212121);
+  width: 12px;
+  height: 12px;
+}
+#delete-image-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #000;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background 0.2s, transform 0.2s;
+}
+
+#delete-image-btn:hover {
+  background: #000000;
+  transform: translate(50%, -50%) scale(1.05);
 }
