@@ -55,7 +55,7 @@
                 {% if lookcard.event.title == '시험기간' %}
                 <!--▼▼ event 제목-->
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.semester }}</div>
-                {% elif lookcard.event.title == '발표' %}
+                {% elif lookcard.event.title == '발표' or lookcard.event.title == '과팅 | 미팅' %}
                 <div class="looktitle">{{ lookcard.event.title }}</div>
                 {% else %}
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
