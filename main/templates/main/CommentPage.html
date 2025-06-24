@@ -28,95 +28,139 @@
       </div>
     </div>
 
-      <!----------필터링 버튼---------->
-      <select id="filterbutton" onchange="handleFilterChange()">
-        <option value="{% url 'main:comment_page' lookcard.id %}?sort=latest" {% if sort == 'latest' %}selected{% endif %}>최신순</option>
-        <option value="{% url 'main:comment_page' lookcard.id %}?sort=likes" {% if sort == 'likes' %}selected{% endif %}>좋아요순</option>
-        <option value="{% url 'main:comment_page' lookcard.id %}?sort=dislikes" {% if sort == 'dislikes' %}selected{% endif %}>아쉬워요순</option>
-      </select>
+    <!----------필터링 버튼---------->
+    <select id="filterbutton" onchange="handleFilterChange()">
+      <option value="{% url 'main:comment_page' lookcard.id %}?sort=latest" {% if sort == 'latest' %}selected{% endif %}>
+        최신순</option>
+      <option value="{% url 'main:comment_page' lookcard.id %}?sort=likes" {% if sort == 'likes' %}selected{% endif %}>
+        좋아요순</option>
+      <option value="{% url 'main:comment_page' lookcard.id %}?sort=dislikes" {% if sort == 'dislikes' %}selected{% endif %}>
+        아쉬워요순</option>
+    </select>
 
-      <script>
-        function handleFilterChange() {
-          const filterButton = document.getElementById('filterbutton');
-          const selectedValue = filterButton.value;
-          window.location.href = selectedValue; // 선택된 URL로 이동
-        }
-      </script>
+    <script>
+      function handleFilterChange() {
+        const filterButton = document.getElementById('filterbutton');
+        const selectedValue = filterButton.value;
+        window.location.href = selectedValue; // 선택된 URL로 이동
+      }
+    </script>
 
-      <!----------작성한 댓글---------->
-      <div class="comment_container">
-        {% if comments %}
-        {% for comment in comments %}
-          <!-----댓글카드----->
-          <div class="comment_card">
-            <!--▼ 닉네임, 수정/삭제 버튼-->
-            <div class="container1">
-              <div id="nickname">{{ comment.writer.profile.nickname }}</div><!--닉네임이 안떠요 DB 확인? 필요해요-->
-              {% if request.user == comment.writer %}
-              <div class="edit">
-                <a href="{% url 'main:edit' comment.id %}?next={{ request.get_full_path }}" class="editbutton">수정</a>
-                <a href="{% url 'main:delete' comment.id %}?next={{ request.get_full_path }}" method="POST" class="editbutton">삭제</a>
-              </div>
-              {% endif %}
-            </div>
-            <!--▼ 이미지 삽입, 댓글 작성 내용-->
-            <div class="container2">
-              {% if comment.image %}
-              <img class="image" src="{{ comment.image.url }}" alt="Comment Image" />
-              {% endif %}
-              <div class="comment">{{ comment.content }}</div>
-            </div>
-
-            <!-- 지금은 백엔드 함수 자체가 버튼 클릭시 아예 리랜더링이 일어나서 
-                비효율적인 구조임. JS로 개선 고민 중 시간 남으면 수정할게요!-->
-            <!--▼ 좋아요/아쉬워요 버튼-->
-            <div class="container3">
-              {% if user in comment.likes.all %}<!-- user가 좋아요를 눌렀는지 확인(이미 눌렀을 때) -->
-              <a href="{% url 'main:likes' comment.id %}?next={{ request.get_full_path }}" class="reactbutton">
-                <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
-              </a>
-              {% else %}<!-- user가 좋아요를 안 눌렀을 때 -->
-              <a href="{% url 'main:likes' comment.id %}?next={{ request.get_full_path }}" class="nonreactbutton">
-                <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
-              </a>
-              {% endif %}
-
-              {% if user in comment.dislikes.all %}<!-- user가 아쉬워요를 눌렀는지 확인(이미 눌렀을 때) -->
-              <a href="{% url 'main:dislikes' comment.id %}?next={{ request.get_full_path }}" class="reactbutton">
-                <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
-                {{comment.dislikes.count}}
-              </a>
-              {% else %}<!-- user가 아쉬워요를 안 눌렀을 때 -->
-              <a href="{% url 'main:dislikes' comment.id %}?next={{ request.get_full_path }}" class="nonreactbutton">
-                <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
-                {{comment.dislikes.count}}
-              </a>
-              {% endif %}
-            </div>
+    <!----------작성한 댓글---------->
+    <div class="comment_container">
+      {% if comments %}
+      {% for comment in comments %}
+      <!-----댓글카드----->
+      <div class="comment_card">
+        <!--▼ 닉네임, 수정/삭제 버튼-->
+        <div class="container1">
+          <div id="nickname">{{ comment.writer.profile.nickname }}</div><!--닉네임이 안떠요 DB 확인? 필요해요-->
+          {% if request.user == comment.writer %}
+          <div class="edit">
+            <a href="{% url 'main:edit' comment.id %}?next={{ request.get_full_path }}" class="editbutton">수정</a>
+            <a href="{% url 'main:delete' comment.id %}?next={{ request.get_full_path }}" method="POST"
+              class="editbutton">삭제</a>
           </div>
-        
-        <!--------댓글 없을 때 화면----------> <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
-        {% endfor %}
-        {% else %}
-        <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
-        {% endif %}
-      </div>
-      
-
-      <!----------댓글 작성 form---------->
-      <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="input_container">
-          <input type="file" id="image" name="image" accept="image/*" style="display: none;" />
-          <button class="input_button" type="button"><img src="{% static 'icons/img.svg' %}" height="15" width="15"
-              alt="이미지" onclick="document.getElementById('image').click();" /></button>
-          <input type="text" id="message" name="content" placeholder="메시지를 입력하세요" />
-          <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15"
-              alt="전송" /></button>
+          {% endif %}
         </div>
-      </form>
+        <!--▼ 이미지 삽입, 댓글 작성 내용-->
+        <div class="container2">
+          {% if comment.image %}
+          <img class="image" src="{{ comment.image.url }}" alt="Comment Image" />
+          {% endif %}
+          <div class="comment">{{ comment.content }}</div>
+        </div>
 
+        <!-- 지금은 백엔드 함수 자체가 버튼 클릭시 아예 리랜더링이 일어나서 
+                비효율적인 구조임. JS로 개선 고민 중 시간 남으면 수정할게요!-->
+        <!--▼ 좋아요/아쉬워요 버튼-->
+        <div class="container3">
+          {% if user in comment.likes.all %}<!-- user가 좋아요를 눌렀는지 확인(이미 눌렀을 때) -->
+          <a href="{% url 'main:likes' comment.id %}?next={{ request.get_full_path }}" class="reactbutton">
+            <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
+          </a>
+          {% else %}<!-- user가 좋아요를 안 눌렀을 때 -->
+          <a href="{% url 'main:likes' comment.id %}?next={{ request.get_full_path }}" class="nonreactbutton">
+            <img src="{% static 'icons/good.svg' %}" height="10" width="10" alt="좋아요" />좋아요 {{comment.likes.count}}
+          </a>
+          {% endif %}
+
+          {% if user in comment.dislikes.all %}<!-- user가 아쉬워요를 눌렀는지 확인(이미 눌렀을 때) -->
+          <a href="{% url 'main:dislikes' comment.id %}?next={{ request.get_full_path }}" class="reactbutton">
+            <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
+            {{comment.dislikes.count}}
+          </a>
+          {% else %}<!-- user가 아쉬워요를 안 눌렀을 때 -->
+          <a href="{% url 'main:dislikes' comment.id %}?next={{ request.get_full_path }}" class="nonreactbutton">
+            <img src="{% static 'icons/bad.svg' %}" height="10" width="10" alt="아쉬워요" />아쉬워요
+            {{comment.dislikes.count}}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!--------댓글 없을 때 화면----------> <!--이거 순서 위랑 바꿔도 되나요? 사실 사소해요 꼭 안 바꿔도 됨-->
+      {% endfor %}
+      {% else %}
+      <span id="mention">아직 댓글이 없어요! <br> 댓글을 남겨보세요</span>
+      {% endif %}
+    </div>
+
+
+    <!----------댓글 작성 form---------->
+    <form action="{% url 'main:create_comment' lookcard.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="input_container">
+        <div id="preview_img_wrapper" data-xicon="{% static 'icons/x.svg' %}"></div>
+        <input type="file" id="comment_image" name="image" accept="image/*" style="display: none;" />
+        <button class="input_button" type="button" onclick="document.getElementById('comment_image').click();">
+          <img src="{% static 'icons/img.svg' %}" height="15" width="15" alt="이미지" />
+        </button>
+
+        <input type="text" id="message" name="content" placeholder="메시지를 입력하세요" />
+        <button class="input_button" type="submit"><img src="{% static 'icons/send.svg' %}" height="15" width="15"
+            alt="전송" /></button>
+      </div>
+    </form>
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ▼ 댓글 작성창 썸네일 */
+      const fileInput = document.getElementById('comment_image');
+      const previewBox = document.getElementById('preview_img_wrapper');
+      if (!fileInput || !previewBox) return;
+
+      const xIconURL = previewBox.dataset.xicon || '/static/icons/x.svg';
+
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) { previewBox.innerHTML = ''; return; }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          previewBox.innerHTML = '';
+          const thumb = document.createElement('img');
+          thumb.className = 'preview-thumb';
+          thumb.src = ev.target.result;
+          previewBox.appendChild(thumb);
+
+          const xBtn = document.createElement('button');
+          xBtn.type = 'button';
+          xBtn.className = 'preview-del';
+          xBtn.innerHTML = `<img src="${xIconURL}" width="12" height="12" alt="삭제">`;
+          previewBox.appendChild(xBtn);
+
+          xBtn.addEventListener('click', () => {
+            fileInput.value = '';         // 파일 선택 해제
+            previewBox.innerHTML = '';    // 썸네일/X 제거
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+
 </body>
 
 </html>
