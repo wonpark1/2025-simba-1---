@@ -69,9 +69,11 @@ def mainpage(request):
     })
 
 def commentpage(request, lookcard_id):
-    pushpagestack(request, request.get_full_path())
-
     sort = request.GET.get('sort','latest')
+
+    if 'sort' not in request.GET:
+        pushpagestack(request, request.get_full_path())
+
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     same_event_lookcards = LookCard.objects.filter(event__title=lookcard.event.title)
     comments = Comment.objects.filter(look_card__in=same_event_lookcards).order_by('-create_at')

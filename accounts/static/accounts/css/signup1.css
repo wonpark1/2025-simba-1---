@@ -120,7 +120,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 8px;
+  margin-top: 6px;
 }
 
 .label {
@@ -147,6 +147,7 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: 6px;
 
   border-radius: 10px;
   border: 1px solid var(--text-002, #757575);
@@ -213,43 +214,24 @@ button {
   letter-spacing: -0.5px;
 }
 
-#password_error {
-  display: flex;
-  height: 9.785px;
-  flex-direction: column;
-  justify-content: center;
-  align-self: stretch;
-  color: red;
-
-  /* R/10 */
-  font-family: "Pretendard Variable";
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 28px; /* 280% */
-  letter-spacing: -0.5px;
-
-  margin-top: 0;
-}
-
+#username_check,
+#password_error,
 #confirm_error {
   display: flex;
   height: 9.785px;
   flex-direction: column;
   justify-content: center;
   align-self: stretch;
-  color: red;
 
-  /* R/10 */
+  color: red;
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
   line-height: 28px; /* 280% */
   letter-spacing: -0.5px;
+  margin-top: 0;
 }
-
-/*button*/
 
 .button {
   display: flex;
