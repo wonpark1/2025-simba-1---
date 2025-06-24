@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let pwMatch = false;
 
   // ID 중복 검사
+  idOK.style.display = "none";
+
   let idTimer;
   idI.addEventListener("input", () => {
     clearTimeout(idTimer);
@@ -61,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
     idField.classList.add("error");
     idErr.textContent = msg;
     idErr.style.display = "block";
+    idOK.style.display = "none";
     IdClear.src = IdClear.dataset.errorIcon || IdClear.dataset.defaultIcon;
   }
   function setIdSuccess() {
     idField.classList.add("success");
+    idOK.textContent = "좋은 아이디네요!";
     idOK.style.display = "block";
     IdClear.src = IdClear.dataset.successIcon;
   }
@@ -151,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 비밀번호 표시 토글
+  // 비밀번호 표시 토글 아이콘
   document.querySelectorAll(".toggle-icon").forEach((icon) => {
     icon.addEventListener("click", () => {
       const input = icon.previousElementSibling;
