@@ -115,10 +115,20 @@ def edit(request, id):
 
     if request.method == "POST":          
         edit_comment.content = request.POST.get('content', '')
-        if 'image' in request.FILES:              
+
+        if request.POST.get("delete_image") == "true":
+            if edit_comment.image:
+                edit_comment.image.delete(save=False)
+            edit_comment.image = None
+
+        elif 'image' in request.FILES and request.FILES['image']:    
+            if edit_comment.image:
+                edit_comment.image.delete(save=False)          
             edit_comment.image = request.FILES['image']
+
         edit_comment.create_at = timezone.now()
         edit_comment.save()
+        
         poppagestack(request)  # 페이지 스택에서 현재 페이지 제거
         return redirect(next_url)
         

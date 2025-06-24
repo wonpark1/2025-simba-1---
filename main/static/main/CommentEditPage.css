@@ -243,3 +243,10 @@ textarea {
   resize: vertical;
   border: 1px solid;
 }
+
+.image-wrapper .image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;   /* 필요하면 */
+}
