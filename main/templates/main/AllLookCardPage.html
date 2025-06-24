@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.3 룩가이드 노출</title>
+  <title>2.3 이벤트별 전체 룩가이드</title>
   <link rel="stylesheet" href="{% static 'main/LookCardPage.css' %}" />
   <link rel="stylesheet" href="{% static 'css/project.css' %}" />
 </head>
@@ -46,8 +46,10 @@
             <!--▼ lookcard-->
             <div class="lookcard">
               {% for lookcard in lookcards %}  
-              {% if forloop.last %}
+              <!-- 가장 마지막 룩카드면 밑줄이 뜨지 않도록 설정 -->
+              {% if forloop.last %} 
               <div class="lookcard_inframe_last">
+              <!-- 마지막 룩카드가 아니라면 밑줄로 룩카드를 구분 -->
               {% else %}
               <div class="lookcard_inframe">  
               {% endif %}
@@ -59,51 +61,16 @@
                 {% else %}
                 <div class="looktitle">{{ lookcard.event.title }} | {{ lookcard.month }}</div>
                 {% endif %}
-                <!--subtitle이 안 뜸(?) DB 확인해야 할 것 같아요-->
-                <!-- 이거 {{ lookcard.event.description_look }}으로 수정했어요! -->
-                <!--여기 event제목에 해당하는 db 추가해야합니다 지금은 임의로 id로 해둠!-->
                 
                 <!--▼▼ 룩가이드 제시-->
-                
                 
                 {% for item in lookcard.items.all %}
                 <div class="lookguide">
                   <p style="font-size: 18px;">{{ item.category }}{% if item.name != 'A' %}: {{ item.name }}{% endif %}</p>
                   <p style="font-size: 12px;">{{ item.tags }}{% if item.description %}<br><span>{{ item.description|linebreaksbr }}</span>{% endif %}</p>
                 </div>
-                {% endfor %}   <!--########수정중##########-->
+                {% endfor %}
 
-                <!--옛날 버전은 무조건 밑줄이 뜨는 거여서 이거 바로 밑에 있는 구조로 바꿨어요!-->              
-                <!-- 밑줄을 보여주는 태그가 뭔지 모르겠어서 일단 예시로 이렇게 적어뒀어요 -->
-                <!-- 이거 태그 class가 뭐가 뭔지 모르겠어서 한 번만 수정해주세요...! -->
-                <!--{% for item in lookcard.items.all %}
-                  {% if forloop.last %}
-                    <div class="lookguide">
-                  {% else %}
-                    <div class="lookguide">
-                  {% endif %}
-                      <p style="font-size: 14px">{{ item.category }}{% if item.name %}: {{ item.name }}{% endif %}</p>
-                      <p style="font-size: 11px">{{ item.tags }}{% if item.description %}<br><span>{{ item.description }}</span>{% endif %}</p>
-                    </div>
-                {% endfor %}-->
-
-
-                    <!--------------------------
-                    <div id="lookguide1">
-                      {% for item in lookcard.items.all %}
-                      <span>{{ item.category }}:{{ item.name }}</span>
-                      {% endfor %}
-                    </div>
-                    <div id="lookguide2">
-                      {% for item in lookcard.items.all %}
-                      <p>{{ item.tags }} <br> {{ item.description }}</p>
-                      {% endfor %}
-                    </div>
-                   -------------------------->
-                   <!--여기 구조 바꿨습니다! 이 부분에 있는 id 변수명들 폐기 예정인데, 그 전에 혹시 백엔드에서 처리할 내용 있으면 알려주세요-->
-                  
-
-                
                 <!--▼▼ 추천/비추천-->
                 <div class="lookmention">
                   <p id="recommend"><img src="{% static 'icons/recommend.svg' %}" height="28.331" width="28.342" alt="추천" />{{ lookcard.is_recommend }}</p>
@@ -112,7 +79,7 @@
                 </div>
 
               </div>
-              {% endfor %}  <!--lookcards 반복문 시작-->
+              {% endfor %}
               <!--lookcards 반복문 끝-->
             </div>
         </div>
@@ -131,8 +98,8 @@
             <img src="{% static 'img/2.3raccoon.png' %}" alt="너구리" class="neoguri_img"/>
           </article>
           {% endif %}
-          {% endfor %} <!--lookcards 반복문 끝--> 
-
+          {% endfor %}
+          <!-- 너굴선배가 알려주는 룩 가이드 멘션 -->
 
         <!----------버튼---------->
         <a class="button" href="{% url 'main:comment_page' lookcards.first.id %}">
@@ -151,4 +118,5 @@ h1 span {
   font-weight: 400;
   letter-spacing: -1px;
 }
+
 </style>
