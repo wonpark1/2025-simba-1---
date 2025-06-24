@@ -69,9 +69,11 @@ def mainpage(request):
     })
 
 def commentpage(request, lookcard_id):
-    pushpagestack(request, request.get_full_path())
-
     sort = request.GET.get('sort','latest')
+
+    if 'sort' not in request.GET:
+        pushpagestack(request, request.get_full_path())
+
     lookcard = get_object_or_404(LookCard, id=lookcard_id)
     same_event_lookcards = LookCard.objects.filter(event__title=lookcard.event.title)
     comments = Comment.objects.filter(look_card__in=same_event_lookcards).order_by('-create_at')
@@ -115,10 +117,20 @@ def edit(request, id):
 
     if request.method == "POST":          
         edit_comment.content = request.POST.get('content', '')
-        if 'image' in request.FILES:              
+
+        if request.POST.get("delete_image") == "true":
+            if edit_comment.image:
+                edit_comment.image.delete(save=False)
+            edit_comment.image = None
+
+        elif 'image' in request.FILES and request.FILES['image']:    
+            if edit_comment.image:
+                edit_comment.image.delete(save=False)          
             edit_comment.image = request.FILES['image']
+
         edit_comment.create_at = timezone.now()
         edit_comment.save()
+        
         poppagestack(request)  # 페이지 스택에서 현재 페이지 제거
         return redirect(next_url)
         
