@@ -43,7 +43,7 @@ body {
 .space h1 {
   font-family: "Pretendard";
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
   color: #fff;
 }
@@ -51,7 +51,7 @@ body {
 .space h2 {
   font-family: "Pretendard";
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
   color: #fff;
 }
