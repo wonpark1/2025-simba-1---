@@ -16,18 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = [
-    "67ad-210-94-220-230.ngrok-free.app",
-    "localhost",
-    "127.0.0.1"
-]
+ALLOWED_HOSTS = ['*']  # Allow all hosts for development purposes
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://67ad-210-94-220-230.ngrok-free.app"
-]
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-!-Simbathon-Team1'
