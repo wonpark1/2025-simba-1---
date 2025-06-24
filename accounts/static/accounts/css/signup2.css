@@ -164,6 +164,7 @@ button {
   align-items: center;
   flex-shrink: 0;
   border: none;
+  outline: none;
 
   color: var(--text-002, #757575);
   font-family: "Pretendard Variable";
