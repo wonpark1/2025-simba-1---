@@ -140,7 +140,6 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
 
   border-radius: 10px;
   border: 1px solid var(--text-002, #757575);
@@ -158,8 +157,8 @@ button {
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
-  border: none;
   outline: none;
+  border: none;
 
   color: var(--text-002, #757575);
   font-family: "Pretendard Variable";
