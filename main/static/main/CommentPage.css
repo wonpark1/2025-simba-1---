@@ -207,9 +207,10 @@ input {
 }
 
 .image {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
+  display: block;
 }
 
 .comment {
