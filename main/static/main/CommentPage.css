@@ -35,11 +35,6 @@ input {
 
 /*top*/
 
-.statusbar {
-  height: 47px;
-  text-align: center;
-}
-
 .topnav {
   display: flex;
   height: 51px;
@@ -51,6 +46,7 @@ input {
   flex-shrink: 0;
   align-self: stretch;
   border-bottom: 1px solid var(--primary-001, #ff5722);
+  margin-top: 47px;
 }
 
 .topnav_inframe {
