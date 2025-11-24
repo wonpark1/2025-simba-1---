@@ -27,7 +27,7 @@
     {% else %}
     <section class="top-banner">
       <section class="space">
-        <h1><strong>너굴님,</strong><br /></h1>
+        <h1><strong>{{ profile.nickname }}님,</strong><br /></h1>
         <h2>{{ month }}월엔 아무 일정도 없어요!</h2>
       </section>
     </section>
@@ -60,14 +60,14 @@
           <!-- 안내 문구 -->
           <section class="intro-text">
             <p>
-              {{ month }}월에 있는 행사가 아무것도 없어요!<br />너굴팁이나 학사일정탭에
+              {{ month }}월에 있는 행사가 <br/>아무것도 없어요!<br/><br/>너굴팁이나 학사일정탭에<br/>
               들어가볼까요?
             </p>
           </section>
 
           <!-- 카드 섹션 -->
           <section class="cards">
-            <img src="1.1.2.png" alt="너굴선배 캐릭터" class="mascot" />
+            <img src="{% static 'img/1.1.2.png' %}" alt="너굴선배 캐릭터" class="mascot" />
 
             </div>
           </section>
